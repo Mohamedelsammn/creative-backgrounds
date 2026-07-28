@@ -1,6 +1,13 @@
 # Creative Backgrounds
 
-A Flutter app for browsing, customizing, and applying creative wallpapers and live backgrounds.
+A premium Android wallpaper app built with Flutter. Users can explore and search a wallpaper catalog, preview and apply wallpapers, and customize them with live clock overlays, depth effects, and a transparent live wallpaper mode that renders the rear camera feed in real time.
+
+**Key features:**
+- Explore, search, and view-all browsing of the wallpaper catalog
+- Wallpaper details, favorites, and apply-to-device flow
+- Customization: live clock overlay, depth-based parallax effects
+- Transparent live wallpaper (real-time rear-camera background)
+- Offline-aware (connectivity handling) with local caching
 
 ## Repository structure
 
