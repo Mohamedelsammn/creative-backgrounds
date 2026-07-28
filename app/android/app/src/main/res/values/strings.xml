@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="live_wallpaper_description">Creative Backgrounds live clock wallpaper</string>
+    <string name="transparent_wallpaper_description">Transparent live wallpaper — shows the rear camera behind your icons</string>
+    <string name="transparent_camera_notification_title">Transparent wallpaper active</string>
+    <string name="transparent_camera_notification_text">The rear camera is being used for your live wallpaper</string>
+</resources>

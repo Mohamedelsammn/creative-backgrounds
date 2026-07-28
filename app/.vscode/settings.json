@@ -1,0 +1,14 @@
+{
+  "// note": "Stops the VS Code Java/Gradle extensions from importing the native android/ Gradle project, which memory-maps build/.../R.jar and blocks command-line `flutter build` / `./gradlew`. Reload the window for this to take effect.",
+  "java.import.gradle.enabled": false,
+  "java.import.maven.enabled": false,
+  "java.import.exclusions": [
+    "**/android/**",
+    "**/node_modules/**",
+    "**/.metadata/**",
+    "**/archetype-resources/**",
+    "**/META-INF/maven/**"
+  ],
+  "gradle.nestedProjects": false,
+  "java.configuration.updateBuildConfiguration": "disabled"
+}

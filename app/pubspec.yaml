@@ -1,0 +1,100 @@
+name: creativebackground
+description: "Creative Backgrounds — a premium Android wallpaper app with live clock and depth effects."
+publish_to: 'none'
+version: 1.0.0+1
+
+environment:
+  sdk: ^3.10.1
+
+dependencies:
+  flutter:
+    sdk: flutter
+  flutter_localizations:
+    sdk: flutter
+
+  # State management
+  flutter_bloc: ^8.1.6
+  bloc: ^8.1.4
+  equatable: ^2.0.7
+
+  # Dependency injection
+  get_it: ^7.7.0
+
+  # Networking
+  dio: ^5.7.0
+
+  # Serialization / immutability
+  freezed_annotation: ^2.4.4
+  json_annotation: ^4.9.0
+
+  # Routing
+  go_router: ^13.2.5
+
+  # Image loading
+  cached_network_image: ^3.4.1
+
+  # Local storage
+  hive: ^2.2.3
+  hive_flutter: ^1.1.0
+
+  # Connectivity
+  connectivity_plus: ^6.1.0
+
+  # Environment config
+  flutter_dotenv: ^5.2.1
+
+  # Functional error handling
+  dartz: ^0.10.1
+
+  # Formatting / i18n
+  intl: ^0.20.2
+
+  # Reactive (search debounce)
+  rxdart: ^0.28.0
+
+  # Sharing / platform info / webview
+  share_plus: ^10.1.4
+  package_info_plus: ^8.1.2
+  webview_flutter: ^4.10.0
+
+  # UI helpers
+  flutter_staggered_grid_view: ^0.7.0
+  shimmer: ^3.0.0
+
+  # Filesystem (apply-flow file payloads, cache sizing)
+  path_provider: ^2.1.5
+
+  cupertino_icons: ^1.0.8
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^6.0.0
+  build_runner: ^2.4.13
+  freezed: ^2.5.7
+  json_serializable: ^6.8.0
+
+flutter:
+  uses-material-design: true
+  generate: true
+
+  assets:
+    - .env
+    - assets/fixtures/
+    - assets/fixtures/images/
+    - assets/images/
+
+  # Variable fonts (weight axis honored at runtime via TextStyle.fontWeight).
+  # Native ClockRenderer bundles matching TTFs under android assets in Phase 14.
+  fonts:
+    - family: Inter
+      fonts:
+        - asset: assets/fonts/Inter-Variable.ttf
+    - family: PlayfairDisplay
+      fonts:
+        - asset: assets/fonts/PlayfairDisplay-Variable.ttf
+        - asset: assets/fonts/PlayfairDisplay-Italic-Variable.ttf
+          style: italic
+    - family: JetBrainsMono
+      fonts:
+        - asset: assets/fonts/JetBrainsMono-Variable.ttf

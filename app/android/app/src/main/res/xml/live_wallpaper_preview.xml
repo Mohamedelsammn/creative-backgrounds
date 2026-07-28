@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Optional preview metadata for the live wallpaper picker.
+  Referenced by tooling / future settings-activity previews; the active
+  service metadata lives in live_wallpaper.xml.
+-->
+<wallpaper xmlns:android="http://schemas.android.com/apk/res/android"
+    android:description="@string/live_wallpaper_description"
+    android:thumbnail="@mipmap/ic_launcher" />
