@@ -19,9 +19,11 @@ class AdBlockingDetectedScreen extends StatefulWidget {
   const AdBlockingDetectedScreen({
     super.key,
     required this.onRetrySucceeded,
+    @visibleForTesting this.service,
   });
 
   final VoidCallback onRetrySucceeded;
+  final AdIntegrityService? service;
 
   @override
   State<AdBlockingDetectedScreen> createState() =>
@@ -30,7 +32,8 @@ class AdBlockingDetectedScreen extends StatefulWidget {
 
 class _AdBlockingDetectedScreenState extends State<AdBlockingDetectedScreen>
     with WidgetsBindingObserver {
-  final _service = AdIntegrityService();
+  late final AdIntegrityService _service =
+      widget.service ?? AdIntegrityService();
   bool _isRetrying = false;
 
   @override

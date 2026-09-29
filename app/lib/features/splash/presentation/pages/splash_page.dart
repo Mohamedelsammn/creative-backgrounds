@@ -6,7 +6,7 @@ import '../../../../core/ads/ad_manager.dart';
 import '../../../../core/l10n/l10n.dart';
 import '../../../../core/router/route_names.dart';
 import '../../../../injection.dart';
-import '../../../adblock/presentation/pages/ad_blocking_detected_screen.dart';
+import '../../../adblock/presentation/ad_integrity_gate.dart';
 import '../../../update/data/services/app_update_service.dart';
 import '../../../update/presentation/pages/update_required_screen.dart';
 import '../bloc/splash_bloc.dart';
@@ -60,12 +60,15 @@ class _SplashViewState extends State<_SplashView> {
           } else if (state is SplashError) {
             _showErrorDialog(context, state.message);
           } else if (state is SplashAdsBlocked) {
-            Navigator.of(context).push(
-              MaterialPageRoute<void>(
-                builder: (_) => AdBlockingDetectedScreen(
-                  onRetrySucceeded: () => context.go(RouteNames.explore),
-                ),
-              ),
+            AdIntegrityGate.instance.present(
+              Navigator.of(context),
+              onCleared: () {
+                // Enter the app exactly like a clean Splash does.
+                context.go(RouteNames.explore);
+                WidgetsBinding.instance.addPostFrameCallback(
+                  (_) => AdManager.instance.onHomeReady(),
+                );
+              },
             );
           } else if (state is SplashUpdateRequired) {
             Navigator.of(context).push(

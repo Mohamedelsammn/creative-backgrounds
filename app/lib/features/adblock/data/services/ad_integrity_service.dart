@@ -17,7 +17,7 @@ import 'ad_block_detection_service.dart';
 /// Mobile Ads `AdError.code`:
 ///   0 = internal error, 1 = invalid request, 2 = network error, 3 = no fill.
 /// See https://developers.google.com/admob/android/reference/com/google/android/gms/ads/AdRequest
-enum _AdFailureKind {
+enum AdFailureKind {
   /// No error observed (ad loaded, or probe never ran).
   none,
 
@@ -37,28 +37,28 @@ enum _AdFailureKind {
   other,
 }
 
-_AdFailureKind _classifyErrorCode(int? code) {
+AdFailureKind classifyAdErrorCode(int? code) {
   switch (code) {
     case null:
-      return _AdFailureKind.none;
+      return AdFailureKind.none;
     case 3:
-      return _AdFailureKind.noFill;
+      return AdFailureKind.noFill;
     case 2:
-      return _AdFailureKind.networkError;
+      return AdFailureKind.networkError;
     default:
-      return _AdFailureKind.other;
+      return AdFailureKind.other;
   }
 }
 
-String _kindLabel(_AdFailureKind kind) {
+String _kindLabel(AdFailureKind kind) {
   switch (kind) {
-    case _AdFailureKind.none:
+    case AdFailureKind.none:
       return 'none';
-    case _AdFailureKind.noFill:
+    case AdFailureKind.noFill:
       return 'NO_FILL — normal, not blocking-eligible';
-    case _AdFailureKind.networkError:
+    case AdFailureKind.networkError:
       return 'NETWORK_ERROR';
-    case _AdFailureKind.other:
+    case AdFailureKind.other:
       return 'other/ambiguous — not blocking-eligible';
   }
 }
@@ -74,7 +74,7 @@ String _kindLabel(_AdFailureKind kind) {
 /// invalid-request, internal, and other ambiguous AdMob errors are normal,
 /// everyday outcomes (new AdMob account, low-inventory region, temporary
 /// shortage, emulator, first-ever app launch) and never gate access on their
-/// own. See [_AdFailureKind] for the full classification.
+/// own. See [AdFailureKind] for the full classification.
 ///
 /// VPN/private-DNS signals are read via [AdBlockDetectionService] (this
 /// app's existing, already-wired native channel), not re-implemented here -
@@ -91,11 +91,22 @@ class AdIntegrityService {
   AdIntegrityService({
     AdBlockDetectionService? adBlockService,
     HiveStorage? storage,
+    @visibleForTesting Future<AdProbeOutcome> Function()? probe,
+    @visibleForTesting Future<bool> Function()? connectivityCheck,
   }) : _adBlockService = adBlockService ?? AdBlockDetectionService(),
-       _storage = storage ?? HiveStorage();
+       _storage = storage ?? HiveStorage(),
+       _probeOverride = probe,
+       _connectivityOverride = connectivityCheck;
 
   final AdBlockDetectionService _adBlockService;
   final HiveStorage _storage;
+  final Future<AdProbeOutcome> Function()? _probeOverride;
+  final Future<bool> Function()? _connectivityOverride;
+
+  Future<AdProbeOutcome> _runProbe() => (_probeOverride ?? _probeAds)();
+
+  Future<bool> _connectivity() =>
+      (_connectivityOverride ?? _hasHealthyConnectivity)();
 
   static const Duration _checkTimeout = Duration(seconds: 10);
   static const Duration _connectivityCheckTimeout = Duration(seconds: 4);
@@ -105,44 +116,40 @@ class AdIntegrityService {
   /// ad-blocking rather than a one-off network blip.
   static const int _networkBlockStreakThreshold = 3;
 
-  static const _AdProbeOutcome _timedOutProbeOutcome = _AdProbeOutcome(
+  static const AdProbeOutcome _timedOutProbeOutcome = AdProbeOutcome(
     sdkInitialized: false,
     bannerLoaded: false,
     interstitialLoaded: false,
     appOpenLoaded: false,
-    bannerFailureKind: _AdFailureKind.other,
-    interstitialFailureKind: _AdFailureKind.other,
-    appOpenFailureKind: _AdFailureKind.other,
+    bannerFailureKind: AdFailureKind.other,
+    interstitialFailureKind: AdFailureKind.other,
+    appOpenFailureKind: AdFailureKind.other,
   );
 
-  static const _AdProbeOutcome _consentNotGrantedProbeOutcome = _AdProbeOutcome(
+  static const AdProbeOutcome _consentNotGrantedProbeOutcome = AdProbeOutcome(
     sdkInitialized: true,
     bannerLoaded: false,
     interstitialLoaded: false,
     appOpenLoaded: false,
-    bannerFailureKind: _AdFailureKind.other,
-    interstitialFailureKind: _AdFailureKind.other,
-    appOpenFailureKind: _AdFailureKind.other,
+    bannerFailureKind: AdFailureKind.other,
+    interstitialFailureKind: AdFailureKind.other,
+    appOpenFailureKind: AdFailureKind.other,
     diagnostics: ['[AD_CHECK] Ads not requested - consent does not permit'],
   );
 
   /// Case-insensitive substrings matched against the device's configured
   /// Private DNS hostname to identify known ad-blocking DNS providers.
-  /// Deliberately the same list `NetworkInterferenceProbe.kt` already
-  /// checks natively, kept here too since `AdBlockDetectionService.detect()`
-  /// applies its own matching only inside its combined report - this
-  /// service needs the raw hostname to classify independently of that
-  /// report's reachability-probe-driven verdict.
-  static const List<String> _knownAdBlockDnsPatterns = [
+  /// Exactly the reference (Prompt AI) list. Malware/family resolvers such
+  /// as Quad9 or CleanBrowsing are deliberately absent: they do not block
+  /// ads, so naming them would lock out users whose ads serve normally.
+  @visibleForTesting
+  static const List<String> knownAdBlockDnsPatterns = [
     'adguard',
     'nextdns',
     'controld',
     'mullvad',
     'blahdns',
     'rethinkdns',
-    'pi-hole',
-    'cleanbrowsing',
-    'quad9',
   ];
 
   Future<AdIntegrityResult> runIntegrityCheck() async {
@@ -154,7 +161,7 @@ class AdIntegrityService {
     // this overlaps the near-instant native VPN/DNS read with it instead of
     // adding their time on top.
     final signalsFuture = _safeSignals(_adBlockService.readVpnAndDnsSignals);
-    final probeFuture = _probeAds().timeout(
+    final probeFuture = _runProbe().timeout(
       _checkTimeout,
       onTimeout: () => _timedOutProbeOutcome,
     );
@@ -188,7 +195,7 @@ class AdIntegrityService {
       final isFirstRun = await _isFirstIntegrityRun();
       if (isFirstRun) {
         diagnostics.add('[AD_CHECK] First run — retrying ad probe once');
-        probe = await _probeAds().timeout(
+        probe = await _runProbe().timeout(
           _checkTimeout,
           onTimeout: () => _timedOutProbeOutcome,
         );
@@ -209,12 +216,12 @@ class AdIntegrityService {
     if (!dnsFilterDetected) {
       final allNetworkError =
           allAdsFailed &&
-          probe.bannerFailureKind == _AdFailureKind.networkError &&
-          probe.interstitialFailureKind == _AdFailureKind.networkError &&
-          probe.appOpenFailureKind == _AdFailureKind.networkError;
+          probe.bannerFailureKind == AdFailureKind.networkError &&
+          probe.interstitialFailureKind == AdFailureKind.networkError &&
+          probe.appOpenFailureKind == AdFailureKind.networkError;
 
       if (allNetworkError) {
-        final connectivityHealthy = await _hasHealthyConnectivity();
+        final connectivityHealthy = await _connectivity();
         if (connectivityHealthy) {
           final streak = _readStreak() + 1;
           await _writeStreak(streak);
@@ -256,9 +263,9 @@ class AdIntegrityService {
     final vpnFilteringCorroborated =
         vpnDetected &&
         allAdsFailed &&
-        probe.bannerFailureKind == _AdFailureKind.networkError &&
-        probe.interstitialFailureKind == _AdFailureKind.networkError &&
-        probe.appOpenFailureKind == _AdFailureKind.networkError;
+        probe.bannerFailureKind == AdFailureKind.networkError &&
+        probe.interstitialFailureKind == AdFailureKind.networkError &&
+        probe.appOpenFailureKind == AdFailureKind.networkError;
     if (vpnDetected && !vpnFilteringCorroborated) {
       diagnostics.add(
         '[AD_CHECK] VPN present but ads are not network-blocked — treated as '
@@ -325,7 +332,7 @@ class AdIntegrityService {
 
   bool _matchesKnownAdBlockDns(String hostname) {
     final lower = hostname.toLowerCase();
-    return _knownAdBlockDnsPatterns.any(lower.contains);
+    return knownAdBlockDnsPatterns.any(lower.contains);
   }
 
   Future<({bool? vpnActive, String? dnsHost, bool? dnsFiltering})> _safeSignals(
@@ -381,7 +388,7 @@ class AdIntegrityService {
     }
   }
 
-  Future<_AdProbeOutcome> _probeAds() async {
+  Future<AdProbeOutcome> _probeAds() async {
     bool sdkInitialized = false;
     try {
       // Awaits the same memoized consent + SDK init main() started, so the
@@ -398,7 +405,7 @@ class AdIntegrityService {
       sdkInitialized = false;
     }
 
-    final results = await Future.wait<({bool loaded, _AdFailureKind kind})>([
+    final results = await Future.wait<({bool loaded, AdFailureKind kind})>([
       _probeBanner(),
       _waitForAdManagerSignal(
         isReady: () => AdManager.instance.isInterstitialReady,
@@ -407,8 +414,8 @@ class AdIntegrityService {
         (loaded) => (
           loaded: loaded,
           kind: loaded
-              ? _AdFailureKind.none
-              : _classifyErrorCode(
+              ? AdFailureKind.none
+              : classifyAdErrorCode(
                   AdManager.instance.lastInterstitialErrorCode,
                 ),
         ),
@@ -420,8 +427,8 @@ class AdIntegrityService {
         (loaded) => (
           loaded: loaded,
           kind: loaded
-              ? _AdFailureKind.none
-              : _classifyErrorCode(AdManager.instance.lastAppOpenErrorCode),
+              ? AdFailureKind.none
+              : classifyAdErrorCode(AdManager.instance.lastAppOpenErrorCode),
         ),
       ),
     ]);
@@ -430,7 +437,7 @@ class AdIntegrityService {
     final interstitial = results[1];
     final appOpen = results[2];
 
-    return _AdProbeOutcome(
+    return AdProbeOutcome(
       sdkInitialized: sdkInitialized,
       bannerLoaded: banner.loaded,
       interstitialLoaded: interstitial.loaded,
@@ -452,8 +459,8 @@ class AdIntegrityService {
     );
   }
 
-  Future<({bool loaded, _AdFailureKind kind})> _probeBanner() {
-    final completer = Completer<({bool loaded, _AdFailureKind kind})>();
+  Future<({bool loaded, AdFailureKind kind})> _probeBanner() {
+    final completer = Completer<({bool loaded, AdFailureKind kind})>();
     try {
       final ad = BannerAd(
         adUnitId: AdConstants.bottomBannerAdUnitId,
@@ -463,7 +470,7 @@ class AdIntegrityService {
           onAdLoaded: (ad) {
             ad.dispose();
             if (!completer.isCompleted) {
-              completer.complete((loaded: true, kind: _AdFailureKind.none));
+              completer.complete((loaded: true, kind: AdFailureKind.none));
             }
           },
           onAdFailedToLoad: (ad, error) {
@@ -471,7 +478,7 @@ class AdIntegrityService {
             if (!completer.isCompleted) {
               completer.complete((
                 loaded: false,
-                kind: _classifyErrorCode(error.code),
+                kind: classifyAdErrorCode(error.code),
               ));
             }
           },
@@ -480,7 +487,7 @@ class AdIntegrityService {
       ad.load();
     } catch (_) {
       if (!completer.isCompleted) {
-        completer.complete((loaded: false, kind: _AdFailureKind.other));
+        completer.complete((loaded: false, kind: AdFailureKind.other));
       }
     }
     return completer.future;
@@ -502,15 +509,15 @@ class AdIntegrityService {
   }
 }
 
-class _AdProbeOutcome {
-  const _AdProbeOutcome({
+class AdProbeOutcome {
+  const AdProbeOutcome({
     required this.sdkInitialized,
     required this.bannerLoaded,
     required this.interstitialLoaded,
     required this.appOpenLoaded,
-    this.bannerFailureKind = _AdFailureKind.none,
-    this.interstitialFailureKind = _AdFailureKind.none,
-    this.appOpenFailureKind = _AdFailureKind.none,
+    this.bannerFailureKind = AdFailureKind.none,
+    this.interstitialFailureKind = AdFailureKind.none,
+    this.appOpenFailureKind = AdFailureKind.none,
     this.diagnostics = const [],
   });
 
@@ -518,8 +525,8 @@ class _AdProbeOutcome {
   final bool bannerLoaded;
   final bool interstitialLoaded;
   final bool appOpenLoaded;
-  final _AdFailureKind bannerFailureKind;
-  final _AdFailureKind interstitialFailureKind;
-  final _AdFailureKind appOpenFailureKind;
+  final AdFailureKind bannerFailureKind;
+  final AdFailureKind interstitialFailureKind;
+  final AdFailureKind appOpenFailureKind;
   final List<String> diagnostics;
 }

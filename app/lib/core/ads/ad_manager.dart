@@ -201,6 +201,19 @@ class AdManager {
   /// Whether any full-screen ad currently owns the screen.
   bool get isShowingFullScreenAd => _gate.isShowing;
 
+  bool _fullScreenSuppressed = false;
+
+  /// While the ads-blocked screen is up, no App Open, Interstitial or
+  /// Rewarded may show over it (e.g. a resume after the user went to turn
+  /// Private DNS off). Preloading is unaffected.
+  void setFullScreenAdsSuppressed(bool suppressed) {
+    if (_fullScreenSuppressed == suppressed) return;
+    _fullScreenSuppressed = suppressed;
+    _log('Gate', 'fullScreenSuppressed', {'value': suppressed});
+  }
+
+  bool get isFullScreenSuppressed => _fullScreenSuppressed;
+
   // ── App lifecycle / App Open ────────────────────────────────────────
 
   /// Called when the app goes to the background. A pause caused by our own
@@ -315,6 +328,10 @@ class AdManager {
       unawaited(preloadAppOpenAd());
       return false;
     }
+    if (_fullScreenSuppressed) {
+      _log('AppOpen', 'suppressed');
+      return false;
+    }
     if (!_gate.tryAcquire(FullScreenAdFormat.appOpen)) {
       _log('AppOpen', 'blocked', {'showing': _gate.showing?.name});
       return false;
@@ -417,6 +434,10 @@ class AdManager {
       unawaited(_preloadInterstitial());
       return;
     }
+    if (_fullScreenSuppressed) {
+      _log('Interstitial', 'suppressed');
+      return;
+    }
     if (!_gate.tryAcquire(FullScreenAdFormat.interstitial)) {
       _log('Interstitial', 'blocked', {'showing': _gate.showing?.name});
       return;
@@ -497,6 +518,10 @@ class AdManager {
     final ad = _rewardedAd;
     if (ad == null) {
       _log('Rewarded', 'notReady');
+      return false;
+    }
+    if (_fullScreenSuppressed) {
+      _log('Rewarded', 'suppressed');
       return false;
     }
     if (!_gate.tryAcquire(FullScreenAdFormat.rewarded)) {

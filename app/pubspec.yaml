@@ -1,7 +1,7 @@
 name: creativebackground
 description: "Creative Backgrounds — a premium Android wallpaper app with live clock and depth effects."
 publish_to: 'none'
-version: 5.0.3+47
+version: 5.0.4+48
 
 environment:
   sdk: ^3.10.1

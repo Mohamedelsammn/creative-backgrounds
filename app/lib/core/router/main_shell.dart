@@ -3,6 +3,7 @@ import 'package:go_router/go_router.dart';
 import '../ads/ad_manager.dart';
 
 import '../../channels/wallpaper_channel.dart';
+import '../../features/adblock/presentation/ad_integrity_gate.dart';
 import '../../injection.dart';
 import '../l10n/l10n.dart';
 import '../theme/app_spacing.dart';
@@ -29,6 +30,11 @@ class _MainShellState extends State<MainShell> with WidgetsBindingObserver {
   void initState() {
     super.initState();
     WidgetsBinding.instance.addObserver(this);
+    // Full ad-blocking check, once per launch, after Home is on screen -
+    // never on Splash's critical path.
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (mounted) AdIntegrityGate.instance.runPostHomeCheck(context);
+    });
   }
 
   @override
