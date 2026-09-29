@@ -200,6 +200,42 @@ abstract class AppLocalizations {
   /// **'Clearing…'**
   String get clearingLabel;
 
+  /// No description provided for @rateApp.
+  ///
+  /// In en, this message translates to:
+  /// **'Rate the app'**
+  String get rateApp;
+
+  /// No description provided for @rateAppSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Enjoying Creative Backgrounds?'**
+  String get rateAppSubtitle;
+
+  /// No description provided for @shareApp.
+  ///
+  /// In en, this message translates to:
+  /// **'Share app'**
+  String get shareApp;
+
+  /// No description provided for @shareAppSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Tell a friend about Creative Backgrounds'**
+  String get shareAppSubtitle;
+
+  /// No description provided for @shareAppMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'Check out Creative Backgrounds - beautiful wallpapers for your phone: {url}'**
+  String shareAppMessage(String url);
+
+  /// No description provided for @storeUnavailable.
+  ///
+  /// In en, this message translates to:
+  /// **'Could not open the Play Store.'**
+  String get storeUnavailable;
+
   /// No description provided for @about.
   ///
   /// In en, this message translates to:
@@ -211,6 +247,18 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Version & credits'**
   String get aboutSubtitle;
+
+  /// No description provided for @privacyOptions.
+  ///
+  /// In en, this message translates to:
+  /// **'Privacy Options'**
+  String get privacyOptions;
+
+  /// No description provided for @privacyOptionsSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Manage your ad consent choices'**
+  String get privacyOptionsSubtitle;
 
   /// No description provided for @searchWallpapers.
   ///
@@ -254,10 +302,16 @@ abstract class AppLocalizations {
   /// **'By using Creative Backgrounds you agree to use the wallpapers for personal, non-commercial purposes. Wallpaper content remains the property of its respective creators.\n\nThe app is provided \"as is\" without warranties of any kind. We are not liable for any device-specific issues that arise from applying wallpapers.\n\nThis is placeholder content. Replace it with your finalized terms before release.'**
   String get termsBody;
 
+  /// No description provided for @setAsWallpaperTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Set as Wallpaper'**
+  String get setAsWallpaperTitle;
+
   /// No description provided for @applyTo.
   ///
   /// In en, this message translates to:
-  /// **'Apply to…'**
+  /// **'Choose where you want to apply this wallpaper'**
   String get applyTo;
 
   /// No description provided for @homeScreen.
@@ -272,6 +326,12 @@ abstract class AppLocalizations {
   /// **'Lock Screen'**
   String get lockScreen;
 
+  /// No description provided for @bothScreens.
+  ///
+  /// In en, this message translates to:
+  /// **'Both'**
+  String get bothScreens;
+
   /// No description provided for @homeAndLockScreen.
   ///
   /// In en, this message translates to:
@@ -283,6 +343,18 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Set as live wallpaper'**
   String get setAsLiveWallpaper;
+
+  /// No description provided for @withDesign.
+  ///
+  /// In en, this message translates to:
+  /// **'With Design'**
+  String get withDesign;
+
+  /// No description provided for @wallpaperOnly.
+  ///
+  /// In en, this message translates to:
+  /// **'Wallpaper Only'**
+  String get wallpaperOnly;
 
   /// No description provided for @cancel.
   ///
@@ -319,6 +391,18 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Your wallpaper has been set successfully.'**
   String get wallpaperAppliedSubtitle;
+
+  /// No description provided for @liveWallpaperAppliedToast.
+  ///
+  /// In en, this message translates to:
+  /// **'Live wallpaper applied'**
+  String get liveWallpaperAppliedToast;
+
+  /// No description provided for @liveWallpaperNotAppliedToast.
+  ///
+  /// In en, this message translates to:
+  /// **'Wallpaper was not applied'**
+  String get liveWallpaperNotAppliedToast;
 
   /// No description provided for @done.
   ///
@@ -361,6 +445,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Size'**
   String get size;
+
+  /// No description provided for @clockHeight.
+  ///
+  /// In en, this message translates to:
+  /// **'Stretch'**
+  String get clockHeight;
 
   /// No description provided for @opacity.
   ///
@@ -439,6 +529,24 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Try again'**
   String get tryAgain;
+
+  /// No description provided for @retry.
+  ///
+  /// In en, this message translates to:
+  /// **'Retry'**
+  String get retry;
+
+  /// No description provided for @sortBy.
+  ///
+  /// In en, this message translates to:
+  /// **'Sort by'**
+  String get sortBy;
+
+  /// No description provided for @customColor.
+  ///
+  /// In en, this message translates to:
+  /// **'Custom Color'**
+  String get customColor;
 
   /// No description provided for @specialFeatures.
   ///
@@ -697,6 +805,186 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Restore previous wallpaper'**
   String get twRestoreWallpaper;
+
+  /// No description provided for @twMsgIncompatible.
+  ///
+  /// In en, this message translates to:
+  /// **'Your device can’t run the transparent wallpaper.'**
+  String get twMsgIncompatible;
+
+  /// No description provided for @twMsgStopping.
+  ///
+  /// In en, this message translates to:
+  /// **'Turning off…'**
+  String get twMsgStopping;
+
+  /// No description provided for @twMsgRecovering.
+  ///
+  /// In en, this message translates to:
+  /// **'Reconnecting to the camera…'**
+  String get twMsgRecovering;
+
+  /// No description provided for @twMsgPaused.
+  ///
+  /// In en, this message translates to:
+  /// **'Paused while the screen is off.'**
+  String get twMsgPaused;
+
+  /// No description provided for @liveWallpapers.
+  ///
+  /// In en, this message translates to:
+  /// **'Live Wallpapers'**
+  String get liveWallpapers;
+
+  /// No description provided for @depthsAndWallpapers.
+  ///
+  /// In en, this message translates to:
+  /// **'Depths & Wallpapers'**
+  String get depthsAndWallpapers;
+
+  /// No description provided for @newWallpapers.
+  ///
+  /// In en, this message translates to:
+  /// **'New Wallpapers'**
+  String get newWallpapers;
+
+  /// No description provided for @allWallpapers.
+  ///
+  /// In en, this message translates to:
+  /// **'All'**
+  String get allWallpapers;
+
+  /// No description provided for @wallpapers.
+  ///
+  /// In en, this message translates to:
+  /// **'Wallpapers'**
+  String get wallpapers;
+
+  /// No description provided for @adBlockClear.
+  ///
+  /// In en, this message translates to:
+  /// **'No network filtering detected.'**
+  String get adBlockClear;
+
+  /// No description provided for @adBlockVpnDetected.
+  ///
+  /// In en, this message translates to:
+  /// **'A VPN is active. This may affect some content.'**
+  String get adBlockVpnDetected;
+
+  /// No description provided for @adBlockDnsSuspicious.
+  ///
+  /// In en, this message translates to:
+  /// **'A filtering DNS service is configured on this device.'**
+  String get adBlockDnsSuspicious;
+
+  /// No description provided for @adBlockRequestsBlocked.
+  ///
+  /// In en, this message translates to:
+  /// **'Some network requests appear to be blocked.'**
+  String get adBlockRequestsBlocked;
+
+  /// No description provided for @adBlockUnknown.
+  ///
+  /// In en, this message translates to:
+  /// **'Unable to determine your network status.'**
+  String get adBlockUnknown;
+
+  /// No description provided for @removeFromFavorites.
+  ///
+  /// In en, this message translates to:
+  /// **'Remove from favorites'**
+  String get removeFromFavorites;
+
+  /// No description provided for @filter.
+  ///
+  /// In en, this message translates to:
+  /// **'Filter'**
+  String get filter;
+
+  /// No description provided for @filters.
+  ///
+  /// In en, this message translates to:
+  /// **'Filters'**
+  String get filters;
+
+  /// No description provided for @categories.
+  ///
+  /// In en, this message translates to:
+  /// **'CATEGORIES'**
+  String get categories;
+
+  /// No description provided for @reset.
+  ///
+  /// In en, this message translates to:
+  /// **'Reset'**
+  String get reset;
+
+  /// No description provided for @adsBlockedTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Ads are required to use this app'**
+  String get adsBlockedTitle;
+
+  /// No description provided for @adsBlockedBody.
+  ///
+  /// In en, this message translates to:
+  /// **'It looks like an ad blocker, VPN, or DNS filter is preventing ads from loading. Please disable it and try again.'**
+  String get adsBlockedBody;
+
+  /// No description provided for @adsBlockedRetry.
+  ///
+  /// In en, this message translates to:
+  /// **'Retry'**
+  String get adsBlockedRetry;
+
+  /// No description provided for @watchAdToApplyTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Watch an ad to apply'**
+  String get watchAdToApplyTitle;
+
+  /// No description provided for @watchAdToApplyBody.
+  ///
+  /// In en, this message translates to:
+  /// **'This is a PRO wallpaper. Watch a short ad to apply it.'**
+  String get watchAdToApplyBody;
+
+  /// No description provided for @watchAd.
+  ///
+  /// In en, this message translates to:
+  /// **'Watch Ad'**
+  String get watchAd;
+
+  /// No description provided for @rewardedAdUnavailable.
+  ///
+  /// In en, this message translates to:
+  /// **'The ad isn\'t ready yet. Please try again in a moment.'**
+  String get rewardedAdUnavailable;
+
+  /// No description provided for @updateRequiredTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Update Required'**
+  String get updateRequiredTitle;
+
+  /// No description provided for @updateRequiredBody.
+  ///
+  /// In en, this message translates to:
+  /// **'A new version of Creative Backgrounds is available. Please update to continue.'**
+  String get updateRequiredBody;
+
+  /// No description provided for @updateNow.
+  ///
+  /// In en, this message translates to:
+  /// **'Update Now'**
+  String get updateNow;
+
+  /// No description provided for @couldNotOpenStore.
+  ///
+  /// In en, this message translates to:
+  /// **'Could not open the Play Store.'**
+  String get couldNotOpenStore;
 }
 
 class _AppLocalizationsDelegate

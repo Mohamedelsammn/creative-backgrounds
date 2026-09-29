@@ -13,6 +13,8 @@ class ApplyWallpaperRequested extends ApplyWallpaperEvent {
     required this.destination,
     this.clockConfig,
     this.depthConfig,
+    this.widgets = const [],
+    this.dateWidget,
   });
 
   final WallpaperEntity wallpaper;
@@ -20,6 +22,13 @@ class ApplyWallpaperRequested extends ApplyWallpaperEvent {
   final ClockConfigEntity? clockConfig;
   final DepthConfigEntity? depthConfig;
 
+  /// Authored studio widgets to apply. Empty for "Wallpaper Only".
+  final List<StudioWidget> widgets;
+
+  /// The independently-positioned date element. Null for "Wallpaper Only".
+  final StudioDateWidget? dateWidget;
+
   @override
-  List<Object?> get props => [wallpaper, destination, clockConfig, depthConfig];
+  List<Object?> get props =>
+      [wallpaper, destination, clockConfig, depthConfig, widgets, dateWidget];
 }

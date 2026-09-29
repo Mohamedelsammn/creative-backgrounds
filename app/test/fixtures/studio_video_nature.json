@@ -1,0 +1,181 @@
+{
+  "id": "a49a9727-31b5-4ec4-bd7e-b3155cc7f226",
+  "slug": "nature-ua1ub9",
+  "title": "🌴🌴Tropical coastline 🌊",
+  "description": null,
+  "type": "video",
+  "width": 720,
+  "height": 1280,
+  "resolutionLabel": "720x1280",
+  "dominantColor": "#081848",
+  "isPremium": false,
+  "isFeatured": false,
+  "language": "en",
+  "category": {
+    "slug": "nature",
+    "nameEn": "Nature",
+    "nameAr": "طبيعة"
+  },
+  "tags": [],
+  "assets": {
+    "VIDEO_SOURCE": {
+      "url": "https://creative-backgrounds.arabplus4tech.com/cb-public/wallpapers/a49a9727-31b5-4ec4-bd7e-b3155cc7f226/source.mp4",
+      "mime": "video/mp4",
+      "width": 720,
+      "height": 1280,
+      "bytes": 4612843
+    },
+    "VIDEO_LOOP": {
+      "url": "https://creative-backgrounds.arabplus4tech.com/cb-public/wallpapers/a49a9727-31b5-4ec4-bd7e-b3155cc7f226/v1/loop.mp4",
+      "mime": "video/mp4",
+      "width": 720,
+      "height": 1280,
+      "bytes": 2620172
+    },
+    "POSTER": {
+      "url": "https://creative-backgrounds.arabplus4tech.com/cb-public/wallpapers/a49a9727-31b5-4ec4-bd7e-b3155cc7f226/v1/poster.webp",
+      "mime": "image/webp",
+      "width": 720,
+      "height": 1280,
+      "bytes": 186250
+    },
+    "THUMBNAIL": {
+      "url": "https://creative-backgrounds.arabplus4tech.com/cb-public/wallpapers/a49a9727-31b5-4ec4-bd7e-b3155cc7f226/v1/thumbnail.webp",
+      "mime": "image/webp",
+      "width": 360,
+      "height": 640,
+      "bytes": 54284
+    }
+  },
+  "thumbnail": "https://creative-backgrounds.arabplus4tech.com/cb-public/wallpapers/a49a9727-31b5-4ec4-bd7e-b3155cc7f226/v1/thumbnail.webp",
+  "background": null,
+  "foreground": null,
+  "clockConfig": null,
+  "depthConfig": null,
+  "video": {
+    "mime": "video/mp4",
+    "width": 720,
+    "height": 1280,
+    "durationMs": 7534,
+    "fps": 30,
+    "sizeBytes": 2620172,
+    "codec": "h264",
+    "url": "https://creative-backgrounds.arabplus4tech.com/cb-public/wallpapers/a49a9727-31b5-4ec4-bd7e-b3155cc7f226/v1/loop.mp4"
+  },
+  "studio": {
+    "scene": {
+      "brightness": 0,
+      "contrast": 0,
+      "saturation": 0,
+      "warmth": 0,
+      "exposure": 0,
+      "sharpen": 0,
+      "blur": 0,
+      "vignette": {
+        "amount": 0,
+        "softness": 0.5
+      },
+      "grain": {
+        "amount": 0,
+        "size": 1
+      },
+      "gradientOverlay": {
+        "enabled": false,
+        "from": "#00000000",
+        "to": "#000000FF",
+        "angleDeg": 180,
+        "opacity": 0.5,
+        "blendMode": "normal"
+      },
+      "tint": {
+        "enabled": false,
+        "color": "#000000FF",
+        "opacity": 0.2,
+        "blendMode": "soft-light"
+      },
+      "duotone": {
+        "enabled": false,
+        "shadow": "#000000FF",
+        "highlight": "#FFFFFFFF"
+      }
+    },
+    "clock": {
+      "enabled": true,
+      "style": "thin",
+      "position": "custom",
+      "customX": 0.5,
+      "customY": 0.17,
+      "font": "Inter",
+      "weight": 300,
+      "scale": 1.5,
+      "rotation": 0,
+      "color": "#FFFFFFFF",
+      "opacity": 1,
+      "depth": 0,
+      "shadow": {
+        "enabled": false,
+        "strength": 0
+      },
+      "date": {
+        "enabled": false,
+        "position": "below",
+        "color": "#FFFFFFFF"
+      },
+      "sizePx": 65,
+      "horizontalScale": 1,
+      "stretchY": 1,
+      "fontWeightPreset": "regular",
+      "colorMode": "single",
+      "hoursColor": null,
+      "minutesColor": null,
+      "colonColor": "hours",
+      "colonColorCustom": null,
+      "timeLayout": "inline",
+      "showColon": true,
+      "lineSpacing": 1,
+      "minuteOffsetX": 0,
+      "is24Hour": false,
+      "showSeconds": false,
+      "showAmPm": true,
+      "dateScale": 1,
+      "showGlow": false,
+      "showStroke": false,
+      "strokeWidth": 2,
+      "gradientFrom": null,
+      "gradientTo": null,
+      "gradientAngleDeg": 180,
+      "hoursFont": null,
+      "minutesFont": null,
+      "strokeColor": "#000000FF",
+      "strokeOrder": "behind",
+      "fillOpacity": 1,
+      "fadeAmount": 0,
+      "fadeDirection": "bottom",
+      "blur": 0,
+      "hourFormat": "auto",
+      "separatorBlink": false
+    },
+    "dateWidget": {
+      "enabled": true,
+      "format": "long",
+      "pattern": null,
+      "locale": "en",
+      "position": "custom",
+      "customX": 0.5,
+      "customY": 0.1,
+      "color": "#FFFFFFFF",
+      "scale": 0.85,
+      "font": "Inter",
+      "weight": 500,
+      "uppercase": false
+    },
+    "widgets": [],
+    "behavior": {
+      "applyTarget": "ask",
+      "clockEntrance": "none",
+      "clockEntranceMs": 600
+    },
+    "styledPreviewUrl": null
+  },
+  "publishedAt": "2026-09-14T12:28:33.032Z"
+}

@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
@@ -6,6 +8,8 @@ import '../../../../core/router/route_names.dart';
 import '../../../../core/theme/app_colors.dart';
 import '../../../../core/theme/app_shapes.dart';
 import '../../../../core/theme/app_text_styles.dart';
+import '../../../../injection.dart';
+import '../../../review/data/services/review_service.dart';
 
 class SuccessPage extends StatefulWidget {
   const SuccessPage({super.key});
@@ -20,6 +24,31 @@ class _SuccessPageState extends State<SuccessPage>
     vsync: this,
     duration: const Duration(milliseconds: 900),
   )..forward();
+
+  @override
+  void initState() {
+    super.initState();
+    // Reaching this page IS the confirmation that a wallpaper was applied -
+    // the bloc only routes here on ApplyWallpaperSuccess for a non-live
+    // apply, so a cancelled sheet, a failed apply, or a dismissed system
+    // picker never gets here and never counts.
+    unawaited(_recordApplyAndMaybeAskForReview());
+  }
+
+  /// Counts the apply immediately, then lets the success animation finish
+  /// before handing Play a review request. The rating sheet must never
+  /// interrupt or overlap the success moment itself.
+  Future<void> _recordApplyAndMaybeAskForReview() async {
+    final service = sl<ReviewService>();
+    await service.recordSuccessfulApply();
+    if (!service.isEligible) return;
+
+    // Slightly longer than the 900ms checkmark animation, so the user has
+    // actually seen "Wallpaper applied" land before anything else appears.
+    await Future<void>.delayed(const Duration(milliseconds: 1200));
+    if (!mounted) return;
+    await service.maybeRequestReview();
+  }
 
   @override
   void dispose() {

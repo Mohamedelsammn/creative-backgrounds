@@ -17,10 +17,23 @@ class NoParams extends Equatable {
 }
 
 /// Common params for paginated fetches.
+///
+/// The public feed is keyset paginated, so [cursor] is the field that actually
+/// advances a listing; [page] is retained for the fixture-backed datasources,
+/// which paginate by offset.
 class PageParams extends Equatable {
-  const PageParams({this.page = 1});
+  const PageParams({this.page = 1, this.cursor, this.forceRefresh = false});
+
   final int page;
 
+  /// The previous page's `nextCursor`, or null for the first page.
+  final String? cursor;
+
+  /// Bypasses (and then rewrites) a cached first page - set for
+  /// pull-to-refresh so newly published or unpublished content shows up
+  /// without waiting out the cache TTL. Meaningless for a non-first page.
+  final bool forceRefresh;
+
   @override
-  List<Object?> get props => [page];
+  List<Object?> get props => [page, cursor, forceRefresh];
 }

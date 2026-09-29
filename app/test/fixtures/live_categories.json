@@ -1,0 +1,103 @@
+{
+  "data": [
+    {
+      "id": "ce04b8da-a797-41ec-8401-0c33aea0bb32",
+      "slug": "nature",
+      "nameEn": "Nature",
+      "nameAr": "طبيعة",
+      "iconUrl": null,
+      "imageUrl": "https://creative-backgrounds.arabplus4tech.com/cb-public/categories/ce04b8da-a797-41ec-8401-0c33aea0bb32/f154840aa2975f3c.png",
+      "color": null,
+      "coverThumbnailUrl": null,
+      "wallpaperCount": 10
+    },
+    {
+      "id": "29cd3bca-82dd-41e5-8a1d-4b840f31a7ee",
+      "slug": "amoled",
+      "nameEn": "AMOLED",
+      "nameAr": "أموليد",
+      "iconUrl": null,
+      "imageUrl": "https://creative-backgrounds.arabplus4tech.com/cb-public/categories/29cd3bca-82dd-41e5-8a1d-4b840f31a7ee/8966e0f157159382.png",
+      "color": null,
+      "coverThumbnailUrl": null,
+      "wallpaperCount": 6
+    },
+    {
+      "id": "6b93e68f-6193-44c2-bee6-f2ea97222f24",
+      "slug": "space",
+      "nameEn": "Space",
+      "nameAr": "فضاء",
+      "iconUrl": null,
+      "imageUrl": "https://creative-backgrounds.arabplus4tech.com/cb-public/categories/6b93e68f-6193-44c2-bee6-f2ea97222f24/f069f04c161b1956.png",
+      "color": null,
+      "coverThumbnailUrl": null,
+      "wallpaperCount": 5
+    },
+    {
+      "id": "71cce7be-9464-4f72-aa09-0635d5d98feb",
+      "slug": "cars",
+      "nameEn": "Cars",
+      "nameAr": "سيارات",
+      "iconUrl": null,
+      "imageUrl": "https://creative-backgrounds.arabplus4tech.com/cb-public/categories/71cce7be-9464-4f72-aa09-0635d5d98feb/ed2ccbdeba8ebe11.png",
+      "color": null,
+      "coverThumbnailUrl": null,
+      "wallpaperCount": 8
+    },
+    {
+      "id": "accfa179-e7f1-45f5-a6ca-d70fc189b0ea",
+      "slug": "anime",
+      "nameEn": "Anime",
+      "nameAr": "أنمي",
+      "iconUrl": null,
+      "imageUrl": "https://creative-backgrounds.arabplus4tech.com/cb-public/categories/accfa179-e7f1-45f5-a6ca-d70fc189b0ea/025528997b637fed.png",
+      "color": null,
+      "coverThumbnailUrl": null,
+      "wallpaperCount": 7
+    },
+    {
+      "id": "0d00e790-9cfb-4b74-b7f0-4ff4e3ded660",
+      "slug": "minimal",
+      "nameEn": "Minimal",
+      "nameAr": "بسيط",
+      "iconUrl": null,
+      "imageUrl": "https://creative-backgrounds.arabplus4tech.com/cb-public/categories/0d00e790-9cfb-4b74-b7f0-4ff4e3ded660/89918807d4a7b158.png",
+      "color": null,
+      "coverThumbnailUrl": null,
+      "wallpaperCount": 8
+    },
+    {
+      "id": "4a0c5d75-4538-4f89-ba9e-2fc6b10fa3b0",
+      "slug": "abstract",
+      "nameEn": "Abstract",
+      "nameAr": "تجريدي",
+      "iconUrl": null,
+      "imageUrl": "https://creative-backgrounds.arabplus4tech.com/cb-public/categories/4a0c5d75-4538-4f89-ba9e-2fc6b10fa3b0/c92a7572d902418c.png",
+      "color": null,
+      "coverThumbnailUrl": null,
+      "wallpaperCount": 0
+    },
+    {
+      "id": "f5380d6d-a99d-4490-8ee7-7a8d7cdc2ea9",
+      "slug": "cities",
+      "nameEn": "Cities",
+      "nameAr": "مدن",
+      "iconUrl": null,
+      "imageUrl": null,
+      "color": null,
+      "coverThumbnailUrl": null,
+      "wallpaperCount": 0
+    },
+    {
+      "id": "ea02c280-a592-42bc-82eb-5066b6aa6301",
+      "slug": "animals",
+      "nameEn": "Animals",
+      "nameAr": "حيوانات",
+      "iconUrl": null,
+      "imageUrl": "https://creative-backgrounds.arabplus4tech.com/cb-public/categories/ea02c280-a592-42bc-82eb-5066b6aa6301/2ae0651dd801b037.png",
+      "color": null,
+      "coverThumbnailUrl": null,
+      "wallpaperCount": 0
+    }
+  ]
+}

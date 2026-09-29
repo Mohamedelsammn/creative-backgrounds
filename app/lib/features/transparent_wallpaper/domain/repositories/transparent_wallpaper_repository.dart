@@ -25,6 +25,11 @@ abstract class TransparentWallpaperRepository {
 
   Future<Either<Failure, TwRuntimeState>> status();
 
+  /// Reconciles native state with the actual system wallpaper and returns the
+  /// reconciled snapshot. Called whenever the app returns to the foreground -
+  /// the only moment the outcome of the system picker becomes knowable.
+  Future<Either<Failure, TwRuntimeState>> syncWithSystem();
+
   /// Emits every native state change (emits the current state on listen).
   Stream<TwRuntimeState> watchStatus();
 

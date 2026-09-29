@@ -1,0 +1,36 @@
+{
+  "id": "be70d5b1-492a-4a7c-8a03-74eb0d202645",
+  "slug": "chatgpt-image-aug-25-2026-08-07-26-am-a1pjqi",
+  "title": "ChatGPT Image Aug 25, 2026, 08_07_26 AM",
+  "description": null,
+  "type": "standard",
+  "width": 941,
+  "height": 1672,
+  "resolutionLabel": "941x1672",
+  "dominantColor": "#080818",
+  "isPremium": false,
+  "isFeatured": false,
+  "language": "en",
+  "category": {
+    "slug": "nature",
+    "nameEn": "Nature",
+    "nameAr": "طبيعة"
+  },
+  "tags": [],
+  "assets": {
+    "THUMBNAIL": {
+      "url": "https://creative-backgrounds.arabplus4tech.com/storage/wallpapers/be70d5b1-492a-4a7c-8a03-74eb0d202645/v1/thumbnail.webp",
+      "mime": "image/webp",
+      "width": 360,
+      "height": 640,
+      "bytes": 38824
+    }
+  },
+  "thumbnail": "https://creative-backgrounds.arabplus4tech.com/storage/wallpapers/be70d5b1-492a-4a7c-8a03-74eb0d202645/v1/thumbnail.webp",
+  "background": null,
+  "foreground": null,
+  "clockConfig": null,
+  "depthConfig": null,
+  "video": null,
+  "publishedAt": "2026-08-25T21:41:46.797Z"
+}

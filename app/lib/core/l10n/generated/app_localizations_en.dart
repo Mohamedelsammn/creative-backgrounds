@@ -63,10 +63,36 @@ class AppLocalizationsEn extends AppLocalizations {
   String get clearingLabel => 'Clearing…';
 
   @override
+  String get rateApp => 'Rate the app';
+
+  @override
+  String get rateAppSubtitle => 'Enjoying Creative Backgrounds?';
+
+  @override
+  String get shareApp => 'Share app';
+
+  @override
+  String get shareAppSubtitle => 'Tell a friend about Creative Backgrounds';
+
+  @override
+  String shareAppMessage(String url) {
+    return 'Check out Creative Backgrounds - beautiful wallpapers for your phone: $url';
+  }
+
+  @override
+  String get storeUnavailable => 'Could not open the Play Store.';
+
+  @override
   String get about => 'About';
 
   @override
   String get aboutSubtitle => 'Version & credits';
+
+  @override
+  String get privacyOptions => 'Privacy Options';
+
+  @override
+  String get privacyOptionsSubtitle => 'Manage your ad consent choices';
 
   @override
   String get searchWallpapers => 'Search wallpapers…';
@@ -94,7 +120,10 @@ class AppLocalizationsEn extends AppLocalizations {
       'By using Creative Backgrounds you agree to use the wallpapers for personal, non-commercial purposes. Wallpaper content remains the property of its respective creators.\n\nThe app is provided \"as is\" without warranties of any kind. We are not liable for any device-specific issues that arise from applying wallpapers.\n\nThis is placeholder content. Replace it with your finalized terms before release.';
 
   @override
-  String get applyTo => 'Apply to…';
+  String get setAsWallpaperTitle => 'Set as Wallpaper';
+
+  @override
+  String get applyTo => 'Choose where you want to apply this wallpaper';
 
   @override
   String get homeScreen => 'Home Screen';
@@ -103,10 +132,19 @@ class AppLocalizationsEn extends AppLocalizations {
   String get lockScreen => 'Lock Screen';
 
   @override
+  String get bothScreens => 'Both';
+
+  @override
   String get homeAndLockScreen => 'Home + Lock Screen';
 
   @override
   String get setAsLiveWallpaper => 'Set as live wallpaper';
+
+  @override
+  String get withDesign => 'With Design';
+
+  @override
+  String get wallpaperOnly => 'Wallpaper Only';
 
   @override
   String get cancel => 'Cancel';
@@ -126,6 +164,12 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get wallpaperAppliedSubtitle =>
       'Your wallpaper has been set successfully.';
+
+  @override
+  String get liveWallpaperAppliedToast => 'Live wallpaper applied';
+
+  @override
+  String get liveWallpaperNotAppliedToast => 'Wallpaper was not applied';
 
   @override
   String get done => 'Done';
@@ -148,6 +192,9 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get size => 'Size';
+
+  @override
+  String get clockHeight => 'Stretch';
 
   @override
   String get opacity => 'Opacity';
@@ -188,6 +235,15 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get tryAgain => 'Try again';
+
+  @override
+  String get retry => 'Retry';
+
+  @override
+  String get sortBy => 'Sort by';
+
+  @override
+  String get customColor => 'Custom Color';
 
   @override
   String get specialFeatures => 'Special Features';
@@ -328,4 +384,102 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get twRestoreWallpaper => 'Restore previous wallpaper';
+
+  @override
+  String get twMsgIncompatible =>
+      'Your device can’t run the transparent wallpaper.';
+
+  @override
+  String get twMsgStopping => 'Turning off…';
+
+  @override
+  String get twMsgRecovering => 'Reconnecting to the camera…';
+
+  @override
+  String get twMsgPaused => 'Paused while the screen is off.';
+
+  @override
+  String get liveWallpapers => 'Live Wallpapers';
+
+  @override
+  String get depthsAndWallpapers => 'Depths & Wallpapers';
+
+  @override
+  String get newWallpapers => 'New Wallpapers';
+
+  @override
+  String get allWallpapers => 'All';
+
+  @override
+  String get wallpapers => 'Wallpapers';
+
+  @override
+  String get adBlockClear => 'No network filtering detected.';
+
+  @override
+  String get adBlockVpnDetected =>
+      'A VPN is active. This may affect some content.';
+
+  @override
+  String get adBlockDnsSuspicious =>
+      'A filtering DNS service is configured on this device.';
+
+  @override
+  String get adBlockRequestsBlocked =>
+      'Some network requests appear to be blocked.';
+
+  @override
+  String get adBlockUnknown => 'Unable to determine your network status.';
+
+  @override
+  String get removeFromFavorites => 'Remove from favorites';
+
+  @override
+  String get filter => 'Filter';
+
+  @override
+  String get filters => 'Filters';
+
+  @override
+  String get categories => 'CATEGORIES';
+
+  @override
+  String get reset => 'Reset';
+
+  @override
+  String get adsBlockedTitle => 'Ads are required to use this app';
+
+  @override
+  String get adsBlockedBody =>
+      'It looks like an ad blocker, VPN, or DNS filter is preventing ads from loading. Please disable it and try again.';
+
+  @override
+  String get adsBlockedRetry => 'Retry';
+
+  @override
+  String get watchAdToApplyTitle => 'Watch an ad to apply';
+
+  @override
+  String get watchAdToApplyBody =>
+      'This is a PRO wallpaper. Watch a short ad to apply it.';
+
+  @override
+  String get watchAd => 'Watch Ad';
+
+  @override
+  String get rewardedAdUnavailable =>
+      'The ad isn\'t ready yet. Please try again in a moment.';
+
+  @override
+  String get updateRequiredTitle => 'Update Required';
+
+  @override
+  String get updateRequiredBody =>
+      'A new version of Creative Backgrounds is available. Please update to continue.';
+
+  @override
+  String get updateNow => 'Update Now';
+
+  @override
+  String get couldNotOpenStore => 'Could not open the Play Store.';
 }

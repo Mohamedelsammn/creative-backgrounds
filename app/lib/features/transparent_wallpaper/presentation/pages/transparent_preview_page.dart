@@ -1,10 +1,11 @@
 import 'dart:async';
-
+import 'package:flutter/foundation.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
-
 import '../../../../core/l10n/l10n.dart';
 import '../../../../core/router/route_names.dart';
 import '../../../../core/theme/app_shapes.dart';
@@ -14,22 +15,22 @@ import '../../../../injection.dart';
 import '../bloc/transparent_wallpaper_bloc.dart';
 
 /// Native platform-view type for the CameraX live preview.
-const String _kPreviewViewType = 'com.creative.backgrounds/transparent_preview';
-
-/// Minimum seconds the user must preview before Apply is enabled.
-const int _kMinPreviewSeconds = 5;
+const String _kPreviewViewType = 'com.backgrounds.trend4k/transparent_preview';
 
 /// Full-screen live camera preview shown before applying. The camera itself is
-/// rendered natively (PlatformView); Apply is gated for [_kMinPreviewSeconds] so
-/// the user actually sees the effect before committing (never auto-applies).
+/// rendered natively (PlatformView) and fills the whole screen, so what the user
+/// sees here is what the wallpaper will look like. Nothing is ever applied
+/// without an explicit tap on Continue.
 class TransparentPreviewPage extends StatelessWidget {
   const TransparentPreviewPage({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider<TransparentWallpaperBloc>(
-      create: (_) =>
-          sl<TransparentWallpaperBloc>()..add(const TransparentWallpaperStarted()),
+    // `.value`, never `create:` - the bloc is a shared singleton and
+    // BlocProvider would close it when this route pops.
+    return BlocProvider<TransparentWallpaperBloc>.value(
+      value: sl<TransparentWallpaperBloc>()
+        ..add(const TransparentWallpaperStarted()),
       child: const _PreviewView(),
     );
   }
@@ -43,27 +44,14 @@ class _PreviewView extends StatefulWidget {
 }
 
 class _PreviewViewState extends State<_PreviewView> {
-  Timer? _timer;
-  int _remaining = _kMinPreviewSeconds;
-
-  bool get _canApply => _remaining <= 0;
-
   @override
   void initState() {
     super.initState();
     SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge);
-    _timer = Timer.periodic(const Duration(seconds: 1), (t) {
-      if (_remaining <= 0) {
-        t.cancel();
-        return;
-      }
-      setState(() => _remaining--);
-    });
   }
 
   @override
   void dispose() {
-    _timer?.cancel();
     SystemChrome.setEnabledSystemUIMode(
       SystemUiMode.manual,
       overlays: SystemUiOverlay.values,
@@ -71,12 +59,25 @@ class _PreviewViewState extends State<_PreviewView> {
     super.dispose();
   }
 
-  void _onApply() {
-    // Kicks off the native apply flow (foreground service + system picker).
-    // The prominent disclosure is layered in front of this in Phase 10.
-    context.read<TransparentWallpaperBloc>().add(
-          const TransparentActivationRequested(),
+  Future<void> _onApply() async {
+    // Kick off the native apply flow (foreground service + system picker).
+    //
+    // Do NOT pop first. This page owns its bloc, so popping immediately would
+    // dispose it, cancel its EventChannel subscription, and drop every state
+    // transition that happens during the apply - which is how the UI ended up
+    // stuck on "Preparing". Await the request, then leave: by that point the
+    // native side owns the flow and reports its outcome on the activity-resume
+    // sync, which any surviving control surface picks up.
+    final bloc = context.read<TransparentWallpaperBloc>();
+    bloc.add(const TransparentActivationRequested());
+
+    // Give the command a moment to reach native before this route (and its
+    // bloc) goes away.
+    await bloc.stream.firstWhere((s) => !s.busy).timeout(
+          const Duration(seconds: 5),
+          onTimeout: () => bloc.state,
         );
+    if (!mounted) return;
     context.pop();
   }
 
@@ -90,31 +91,44 @@ class _PreviewViewState extends State<_PreviewView> {
         body: Stack(
           fit: StackFit.expand,
           children: [
-            // Native live camera preview.
-            const AndroidView(viewType: _kPreviewViewType),
-
-            // Top + bottom scrims for control legibility.
-            const _Scrim(),
+            // Native live camera preview, full-bleed.
+            // `AndroidViewSurface` + `initExpensiveAndroidView` selects hybrid
+            // composition. The default `AndroidView` uses a virtual display,
+            // which measures the native view independently of the Flutter
+            // widget - that is what left the camera occupying only part of the
+            // screen with black underneath. Hybrid composition puts the real
+            // view in the activity hierarchy at the widget's exact size.
+            const _CameraPreviewSurface(),
 
             // Top controls: Cancel (left) + Settings (right).
-            SafeArea(
-              child: Padding(
-                padding: const EdgeInsets.fromLTRB(16, 8, 16, 0),
-                child: Row(
-                  children: [
-                    FrostedIconButton(
-                      icon: Icons.close,
-                      semanticLabel: l10n.twCancel,
-                      onPressed: () => context.pop(),
-                    ),
-                    const Spacer(),
-                    FrostedIconButton(
-                      icon: Icons.tune,
-                      semanticLabel: l10n.twSettings,
-                      onPressed: () =>
-                          context.push(RouteNames.transparentSettings),
-                    ),
-                  ],
+            // `Positioned` with top/left/right (and no bottom) gives the row its
+            // natural height. A bare child of a `StackFit.expand` Stack is
+            // stretched to the full height instead, and the Row then centres its
+            // children vertically - which is what put the close button in the
+            // middle of the screen.
+            Positioned(
+              top: 0,
+              left: 0,
+              right: 0,
+              child: SafeArea(
+                child: Padding(
+                  padding: const EdgeInsets.fromLTRB(16, 8, 16, 0),
+                  child: Row(
+                    children: [
+                      FrostedIconButton(
+                        icon: Icons.close,
+                        semanticLabel: l10n.twCancel,
+                        onPressed: () => context.pop(),
+                      ),
+                      const Spacer(),
+                      FrostedIconButton(
+                        icon: Icons.tune,
+                        semanticLabel: l10n.twSettings,
+                        onPressed: () =>
+                            context.push(RouteNames.transparentSettings),
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ),
@@ -125,56 +139,20 @@ class _PreviewViewState extends State<_PreviewView> {
               child: SafeArea(
                 child: Padding(
                   padding: const EdgeInsets.fromLTRB(24, 0, 24, 24),
-                  child: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      Text(
-                        l10n.twPreviewHint,
-                        textAlign: TextAlign.center,
-                        style: AppTextStyles.bodyMedium.copyWith(
-                          color: Colors.white,
-                          height: 1.4,
-                        ),
-                      ),
-                      const SizedBox(height: 16),
-                      _ApplyButton(
-                        enabled: _canApply,
-                        label: _canApply
-                            ? l10n.twApply
-                            : l10n.twApplyIn(_remaining),
-                        onTap: _onApply,
-                      ),
-                    ],
+                  child: BlocBuilder<TransparentWallpaperBloc,
+                      TransparentWallpaperState>(
+                    builder: (context, state) => _ApplyButton(
+                      // Disabled only while the request is in flight, so a
+                      // double tap cannot open two pickers.
+                      enabled: !state.busy,
+                      label: l10n.twContinue,
+                      onTap: _onApply,
+                    ),
                   ),
                 ),
               ),
             ),
           ],
-        ),
-      ),
-    );
-  }
-}
-
-class _Scrim extends StatelessWidget {
-  const _Scrim();
-
-  @override
-  Widget build(BuildContext context) {
-    return IgnorePointer(
-      child: DecoratedBox(
-        decoration: const BoxDecoration(
-          gradient: LinearGradient(
-            begin: Alignment.topCenter,
-            end: Alignment.bottomCenter,
-            colors: [
-              Color(0x66000000),
-              Color(0x00000000),
-              Color(0x00000000),
-              Color(0x99000000),
-            ],
-            stops: [0.0, 0.2, 0.6, 1.0],
-          ),
         ),
       ),
     );
@@ -214,6 +192,39 @@ class _ApplyButton extends StatelessWidget {
           ),
         ),
       ),
+    );
+  }
+}
+
+/// Hosts the native CameraX preview using hybrid composition.
+///
+/// Hybrid composition costs more than a virtual display, but it is the only
+/// mode where the platform view is laid out by the real Android view system at
+/// the size Flutter asked for - which is what a full-bleed camera preview
+/// requires.
+class _CameraPreviewSurface extends StatelessWidget {
+  const _CameraPreviewSurface();
+
+  @override
+  Widget build(BuildContext context) {
+    return PlatformViewLink(
+      viewType: _kPreviewViewType,
+      surfaceFactory: (context, controller) => AndroidViewSurface(
+        controller: controller as AndroidViewController,
+        gestureRecognizers: const <Factory<OneSequenceGestureRecognizer>>{},
+        hitTestBehavior: PlatformViewHitTestBehavior.transparent,
+      ),
+      onCreatePlatformView: (params) {
+        return PlatformViewsService.initExpensiveAndroidView(
+          id: params.id,
+          viewType: _kPreviewViewType,
+          layoutDirection: TextDirection.ltr,
+          creationParamsCodec: const StandardMessageCodec(),
+          onFocus: () => params.onFocusChanged(true),
+        )
+          ..addOnPlatformViewCreatedListener(params.onPlatformViewCreated)
+          ..create();
+      },
     );
   }
 }

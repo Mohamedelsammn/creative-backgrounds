@@ -12,12 +12,17 @@ class WallpaperDetailsRepositoryImpl implements WallpaperDetailsRepository {
   final WallpaperDetailsRemoteDatasource _remote;
 
   @override
-  Future<Either<Failure, WallpaperEntity>> getWallpaperDetails(String id) async {
+  Future<Either<Failure, WallpaperEntity>> getWallpaperDetails(
+    String idOrSlug,
+  ) async {
     try {
-      final model = await _remote.getWallpaperDetails(id);
+      final model = await _remote.getWallpaperDetails(idOrSlug);
       return Right(model.toEntity());
     } catch (e) {
       return Left(ErrorHandler.mapExceptionToFailure(e));
     }
   }
+
+  @override
+  Future<void> recordView(String idOrSlug) => _remote.recordView(idOrSlug);
 }

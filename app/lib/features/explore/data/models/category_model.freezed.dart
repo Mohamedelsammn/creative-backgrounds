@@ -23,6 +23,8 @@ CategoryModel _$CategoryModelFromJson(Map<String, dynamic> json) {
 mixin _$CategoryModel {
   String get id => throw _privateConstructorUsedError;
   String get name => throw _privateConstructorUsedError;
+  String get slug => throw _privateConstructorUsedError;
+  String? get nameAr => throw _privateConstructorUsedError;
   String? get color => throw _privateConstructorUsedError;
   String? get thumbnailUrl => throw _privateConstructorUsedError;
   int? get wallpaperCount => throw _privateConstructorUsedError;
@@ -47,6 +49,8 @@ abstract class $CategoryModelCopyWith<$Res> {
   $Res call({
     String id,
     String name,
+    String slug,
+    String? nameAr,
     String? color,
     String? thumbnailUrl,
     int? wallpaperCount,
@@ -70,6 +74,8 @@ class _$CategoryModelCopyWithImpl<$Res, $Val extends CategoryModel>
   $Res call({
     Object? id = null,
     Object? name = null,
+    Object? slug = null,
+    Object? nameAr = freezed,
     Object? color = freezed,
     Object? thumbnailUrl = freezed,
     Object? wallpaperCount = freezed,
@@ -84,6 +90,14 @@ class _$CategoryModelCopyWithImpl<$Res, $Val extends CategoryModel>
                 ? _value.name
                 : name // ignore: cast_nullable_to_non_nullable
                       as String,
+            slug: null == slug
+                ? _value.slug
+                : slug // ignore: cast_nullable_to_non_nullable
+                      as String,
+            nameAr: freezed == nameAr
+                ? _value.nameAr
+                : nameAr // ignore: cast_nullable_to_non_nullable
+                      as String?,
             color: freezed == color
                 ? _value.color
                 : color // ignore: cast_nullable_to_non_nullable
@@ -114,6 +128,8 @@ abstract class _$$CategoryModelImplCopyWith<$Res>
   $Res call({
     String id,
     String name,
+    String slug,
+    String? nameAr,
     String? color,
     String? thumbnailUrl,
     int? wallpaperCount,
@@ -136,6 +152,8 @@ class __$$CategoryModelImplCopyWithImpl<$Res>
   $Res call({
     Object? id = null,
     Object? name = null,
+    Object? slug = null,
+    Object? nameAr = freezed,
     Object? color = freezed,
     Object? thumbnailUrl = freezed,
     Object? wallpaperCount = freezed,
@@ -150,6 +168,14 @@ class __$$CategoryModelImplCopyWithImpl<$Res>
             ? _value.name
             : name // ignore: cast_nullable_to_non_nullable
                   as String,
+        slug: null == slug
+            ? _value.slug
+            : slug // ignore: cast_nullable_to_non_nullable
+                  as String,
+        nameAr: freezed == nameAr
+            ? _value.nameAr
+            : nameAr // ignore: cast_nullable_to_non_nullable
+                  as String?,
         color: freezed == color
             ? _value.color
             : color // ignore: cast_nullable_to_non_nullable
@@ -173,6 +199,8 @@ class _$CategoryModelImpl extends _CategoryModel {
   const _$CategoryModelImpl({
     required this.id,
     required this.name,
+    this.slug = '',
+    this.nameAr,
     this.color,
     this.thumbnailUrl,
     this.wallpaperCount,
@@ -186,6 +214,11 @@ class _$CategoryModelImpl extends _CategoryModel {
   @override
   final String name;
   @override
+  @JsonKey()
+  final String slug;
+  @override
+  final String? nameAr;
+  @override
   final String? color;
   @override
   final String? thumbnailUrl;
@@ -194,7 +227,7 @@ class _$CategoryModelImpl extends _CategoryModel {
 
   @override
   String toString() {
-    return 'CategoryModel(id: $id, name: $name, color: $color, thumbnailUrl: $thumbnailUrl, wallpaperCount: $wallpaperCount)';
+    return 'CategoryModel(id: $id, name: $name, slug: $slug, nameAr: $nameAr, color: $color, thumbnailUrl: $thumbnailUrl, wallpaperCount: $wallpaperCount)';
   }
 
   @override
@@ -204,6 +237,8 @@ class _$CategoryModelImpl extends _CategoryModel {
             other is _$CategoryModelImpl &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.name, name) || other.name == name) &&
+            (identical(other.slug, slug) || other.slug == slug) &&
+            (identical(other.nameAr, nameAr) || other.nameAr == nameAr) &&
             (identical(other.color, color) || other.color == color) &&
             (identical(other.thumbnailUrl, thumbnailUrl) ||
                 other.thumbnailUrl == thumbnailUrl) &&
@@ -213,8 +248,16 @@ class _$CategoryModelImpl extends _CategoryModel {
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, id, name, color, thumbnailUrl, wallpaperCount);
+  int get hashCode => Object.hash(
+    runtimeType,
+    id,
+    name,
+    slug,
+    nameAr,
+    color,
+    thumbnailUrl,
+    wallpaperCount,
+  );
 
   /// Create a copy of CategoryModel
   /// with the given fields replaced by the non-null parameter values.
@@ -234,6 +277,8 @@ abstract class _CategoryModel extends CategoryModel {
   const factory _CategoryModel({
     required final String id,
     required final String name,
+    final String slug,
+    final String? nameAr,
     final String? color,
     final String? thumbnailUrl,
     final int? wallpaperCount,
@@ -247,6 +292,10 @@ abstract class _CategoryModel extends CategoryModel {
   String get id;
   @override
   String get name;
+  @override
+  String get slug;
+  @override
+  String? get nameAr;
   @override
   String? get color;
   @override

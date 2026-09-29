@@ -1,0 +1,11 @@
+# Release (upload key) signing credentials — TEMPLATE ONLY.
+#
+# Copy to `android/key.properties` and fill in real values.
+# `android/key.properties` is gitignored and MUST NEVER be committed.
+#
+# storeFile may be absolute, or relative to the `android/` directory.
+# e.g. ../../credentials/android/keystore.jks  (repo-root/credentials/...)
+storeFile=../../credentials/android/keystore.jks
+storePassword=REPLACE_ME
+keyAlias=REPLACE_ME
+keyPassword=REPLACE_ME

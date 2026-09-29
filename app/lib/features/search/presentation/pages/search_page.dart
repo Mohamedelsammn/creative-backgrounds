@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
+import '../../../../core/l10n/l10n.dart';
 import '../../../../core/router/route_names.dart';
 import '../../../../core/theme/app_colors.dart';
 import '../../../../core/theme/app_spacing.dart';
@@ -116,9 +117,9 @@ class _SearchViewState extends State<_SearchView> {
           heroPrefix: 'search_hero',
           onLoadMore: () =>
               context.read<SearchBloc>().add(const SearchLoadMoreRequested()),
-          onTap: (wallpaper, heroTag) => context.push(
+          onTap: (wallpaper, _) => context.push(
             RouteNames.wallpaperDetailsPath(wallpaper.id),
-            extra: heroTag,
+            extra: wallpaper,
           ),
         );
     }
@@ -153,8 +154,8 @@ class _HistoryView extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text('Recent searches', style: AppTextStyles.sectionTitle),
-              TextButton(onPressed: onClear, child: const Text('Clear')),
+              Text(context.l10n.recentSearches, style: AppTextStyles.sectionTitle),
+              TextButton(onPressed: onClear, child: Text(context.l10n.clear)),
             ],
           ),
           const SizedBox(height: 8),

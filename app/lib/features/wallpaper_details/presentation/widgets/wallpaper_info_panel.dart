@@ -2,23 +2,32 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 
+import '../../../../core/l10n/l10n.dart';
 import '../../../../core/theme/app_shapes.dart';
 import '../../../../core/theme/app_text_styles.dart';
 import '../../../explore/domain/entities/wallpaper_entity.dart';
+import '../../../explore/domain/entities/wallpaper_type.dart';
 
-/// Frosted dark info panel pinned to the bottom of Wallpaper Details.
-/// Shows the title, category · resolution, and Customize / Apply CTAs.
+/// Frosted glass info panel pinned to the bottom of Wallpaper Details,
+/// floating over the full-bleed wallpaper image. Shows the title, category ·
+/// resolution, and the approved white/black Apply CTA - a Live wallpaper
+/// additionally gets a Play/Pause control beside it.
 class WallpaperInfoPanel extends StatelessWidget {
   const WallpaperInfoPanel({
     super.key,
     required this.wallpaper,
-    required this.onCustomize,
     required this.onApply,
+    this.isPlaying,
+    this.onPlayPauseToggle,
   });
 
   final WallpaperEntity wallpaper;
-  final VoidCallback onCustomize;
   final VoidCallback onApply;
+
+  /// Live wallpaper only: current playback state, driving the Play/Pause
+  /// icon. Null (normal/depth wallpapers) hides the control entirely.
+  final bool? isPlaying;
+  final VoidCallback? onPlayPauseToggle;
 
   @override
   Widget build(BuildContext context) {
@@ -33,7 +42,11 @@ class WallpaperInfoPanel extends StatelessWidget {
       decoration: const BoxDecoration(
         borderRadius: radius,
         boxShadow: [
-          BoxShadow(color: Color(0x33000000), blurRadius: 30, offset: Offset(0, -6)),
+          BoxShadow(
+            color: Color(0x33000000),
+            blurRadius: 30,
+            offset: Offset(0, -6),
+          ),
         ],
       ),
       child: ClipRRect(
@@ -49,46 +62,49 @@ class WallpaperInfoPanel extends StatelessWidget {
               borderRadius: radius,
               border: Border.all(color: Colors.white.withValues(alpha: 0.18)),
             ),
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                wallpaper.title,
-                style: AppTextStyles.bodyLarge.copyWith(
-                  color: Colors.white,
-                  fontSize: 22,
-                  fontWeight: FontWeight.w700,
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  wallpaper.title,
+                  maxLines: 2,
+                  overflow: TextOverflow.ellipsis,
+                  style: AppTextStyles.bodyLarge.copyWith(
+                    color: Colors.white,
+                    fontSize: 22,
+                    fontWeight: FontWeight.w700,
+                  ),
                 ),
-              ),
-              const SizedBox(height: 4),
-              Text(
-                '${wallpaper.category.name}  ·  ${wallpaper.resolution}',
-                style: AppTextStyles.bodySmall.copyWith(color: Colors.white70),
-              ),
-              const SizedBox(height: 20),
-              Row(
-                children: [
-                  Expanded(
-                    child: _PanelButton(
-                      label: 'Customize',
-                      icon: Icons.auto_awesome,
-                      filled: true,
-                      onTap: onCustomize,
-                    ),
+                const SizedBox(height: 4),
+                Text(
+                  '${wallpaper.category.displayName(context.languageCode)}'
+                  '  ·  ${wallpaper.resolution}',
+                  style: AppTextStyles.bodySmall.copyWith(
+                    color: Colors.white70,
                   ),
-                  const SizedBox(width: 12),
-                  Expanded(
-                    child: _PanelButton(
-                      label: 'Apply',
-                      dark: true,
-                      onTap: onApply,
+                ),
+                const SizedBox(height: 20),
+                Row(
+                  children: [
+                    if (wallpaper.type == WallpaperType.live &&
+                        isPlaying != null) ...[
+                      _PlayPauseButton(
+                        isPlaying: isPlaying!,
+                        onTap: onPlayPauseToggle,
+                      ),
+                      const SizedBox(width: 12),
+                    ],
+                    Expanded(
+                      child: _PanelButton(
+                        label: context.l10n.apply,
+                        onTap: onApply,
+                      ),
                     ),
-                  ),
-                ],
-              ),
-            ],
-          ),
+                  ],
+                ),
+              ],
+            ),
           ),
         ),
       ),
@@ -96,27 +112,18 @@ class WallpaperInfoPanel extends StatelessWidget {
   }
 }
 
+/// The approved Apply CTA: white pill, black text - never the dark/black
+/// button an earlier pass on this panel used.
 class _PanelButton extends StatelessWidget {
-  const _PanelButton({
-    required this.label,
-    required this.onTap,
-    this.icon,
-    this.filled = false,
-    this.dark = false,
-  });
+  const _PanelButton({required this.label, required this.onTap});
 
   final String label;
-  final VoidCallback onTap;
-  final IconData? icon;
-  final bool filled;
-  final bool dark;
+  final VoidCallback? onTap;
 
   @override
   Widget build(BuildContext context) {
-    final bg = dark ? Colors.black : (filled ? Colors.white : Colors.white24);
-    final fg = dark ? Colors.white : Colors.black;
     return Material(
-      color: bg,
+      color: Colors.white,
       borderRadius: AppShapes.pill,
       child: InkWell(
         onTap: onTap,
@@ -124,18 +131,45 @@ class _PanelButton extends StatelessWidget {
         child: Container(
           height: 52,
           alignment: Alignment.center,
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              if (icon != null) ...[
-                Icon(icon, size: 18, color: fg),
-                const SizedBox(width: 8),
-              ],
-              Text(
-                label,
-                style: AppTextStyles.bodyLarge.copyWith(color: fg),
-              ),
-            ],
+          padding: const EdgeInsets.symmetric(horizontal: 8),
+          child: Text(
+            label,
+            maxLines: 1,
+            overflow: TextOverflow.ellipsis,
+            style: AppTextStyles.bodyLarge.copyWith(color: Colors.black),
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+/// Compact circular Play/Pause control, placed beside Apply for a Live
+/// wallpaper - never overlaid on the video itself.
+class _PlayPauseButton extends StatelessWidget {
+  const _PlayPauseButton({required this.isPlaying, required this.onTap});
+
+  final bool isPlaying;
+  final VoidCallback? onTap;
+
+  @override
+  Widget build(BuildContext context) {
+    return Semantics(
+      button: true,
+      label: isPlaying ? 'Pause' : 'Play',
+      child: Material(
+        color: Colors.white24,
+        shape: const CircleBorder(),
+        child: InkWell(
+          onTap: onTap,
+          customBorder: const CircleBorder(),
+          child: SizedBox(
+            width: 52,
+            height: 52,
+            child: Icon(
+              isPlaying ? Icons.pause : Icons.play_arrow,
+              color: Colors.white,
+            ),
           ),
         ),
       ),

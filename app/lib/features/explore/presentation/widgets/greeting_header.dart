@@ -22,7 +22,10 @@ class GreetingHeader extends StatelessWidget {
     final hour = (now ?? DateTime.now()).hour;
     // Scale the title with screen width so it never crowds the header on small
     // phones (~320dp) while keeping the same size on normal/large phones.
-    final titleSize = (MediaQuery.sizeOf(context).width * 0.088).clamp(27.0, 34.0);
+    final titleSize = (MediaQuery.sizeOf(context).width * 0.088).clamp(
+      27.0,
+      34.0,
+    );
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [

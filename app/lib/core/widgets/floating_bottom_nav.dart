@@ -1,5 +1,3 @@
-import 'dart:ui' show ImageFilter;
-
 import 'package:flutter/material.dart';
 import 'package:flutter/physics.dart';
 
@@ -17,9 +15,14 @@ class BottomNavDestination {
 /// The active black indicator slides between tabs with a spring simulation and
 /// can be dragged directly with a finger (it follows in real time, then snaps
 /// to the nearest tab on release). Navigation is committed only *after* the
-/// indicator settles — never instantly. The glass bar, blur, dimensions and
-/// spacing are unchanged; only the selection behaviour is animated, and only
-/// the indicator/icons subtree rebuilds (never the Scaffold).
+/// indicator settles — never instantly. The glass bar's dimensions and spacing
+/// are unchanged; only the selection behaviour is animated, and only the
+/// indicator/icons subtree rebuilds (never the Scaffold).
+///
+/// The frosted appearance is intentionally an inexpensive translucent surface,
+/// not a live [BackdropFilter]. This bar overlays Home during every scroll;
+/// sampling and blurring the moving content underneath was a sustained raster
+/// cost on physical mid-range devices.
 class FloatingBottomNav extends StatefulWidget {
   const FloatingBottomNav({
     super.key,
@@ -36,8 +39,9 @@ class FloatingBottomNav extends StatefulWidget {
 
   static const List<BottomNavDestination> defaultDestinations = [
     BottomNavDestination(icon: Icons.explore_outlined, label: 'Explore'),
+    BottomNavDestination(icon: Icons.grid_view_outlined, label: 'Categories'),
     BottomNavDestination(icon: Icons.favorite_border, label: 'Favorites'),
-    BottomNavDestination(icon: Icons.wb_sunny_outlined, label: 'Settings'),
+    BottomNavDestination(icon: Icons.settings_outlined, label: 'Settings'),
   ];
 
   @override
@@ -55,8 +59,11 @@ class _FloatingBottomNavState extends State<FloatingBottomNav>
 
   // Premium, slightly heavy spring with a very subtle overshoot (damping ratio
   // ~0.85). Settles in ~320–380ms.
-  static const SpringDescription _spring =
-      SpringDescription(mass: 1, stiffness: 200, damping: 24);
+  static const SpringDescription _spring = SpringDescription(
+    mass: 1,
+    stiffness: 200,
+    damping: 24,
+  );
 
   late final AnimationController _controller;
 
@@ -130,7 +137,11 @@ class _FloatingBottomNavState extends State<FloatingBottomNav>
   /// Springs the indicator to [index]. Navigation is committed by [_onTick] the
   /// moment the indicator is visually at the target — not when the spring's
   /// mathematical tail finally settles (which can take seconds).
-  void _animateAndNavigate(int index, {double velocity = 0, bool commit = true}) {
+  void _animateAndNavigate(
+    int index, {
+    double velocity = 0,
+    bool commit = true,
+  }) {
     final target = index.toDouble();
     _animTarget = target;
     _pendingNavIndex = commit ? index : null;
@@ -138,11 +149,27 @@ class _FloatingBottomNavState extends State<FloatingBottomNav>
     _controller.animateWith(sim);
   }
 
+  /// True when the ambient text direction mirrors this widget's layout - the
+  /// icon `Row` below flips its visual child order in RTL same as any other
+  /// Row (first destination renders on the physical right), but the sliding
+  /// indicator's own position/tap math is all in raw physical-left
+  /// coordinates. Every place that math runs must account for the same
+  /// mirroring the Row already applies, or the indicator lands under the
+  /// wrong icon - the previously selected tab's icon staying white while the
+  /// actually-selected one reads as unselected grey.
+  bool get _isRtl => Directionality.of(context) == TextDirection.rtl;
+
+  /// Converts between a tab's index (0-based, `widget.destinations` order)
+  /// and its visual slot (0 = physically leftmost) - identity in LTR, mirrored
+  /// in RTL. Self-inverse, so the same function converts either direction.
+  double _visualSlot(double index) => _isRtl ? (_count - 1) - index : index;
+
   /// Resolves which tab a tap landed on from its x-offset within the bar. A
   /// single gesture detector owns both taps and drags, so there is no nested
   /// tap/drag arena conflict.
   void _onTapAt(double dx) {
-    final index = (dx / _itemExtent).floor().clamp(0, _count - 1);
+    final slot = (dx / _itemExtent).floor().clamp(0, _count - 1);
+    final index = _visualSlot(slot.toDouble()).round();
     if (index == _controller.value.round() && index == widget.currentIndex) {
       return; // already here
     }
@@ -155,7 +182,11 @@ class _FloatingBottomNavState extends State<FloatingBottomNav>
   }
 
   void _onDragUpdate(DragUpdateDetails details) {
-    final next = _controller.value + details.primaryDelta! / _itemExtent;
+    // A physical-left drag is a visual-slot decrease in LTR but an index
+    // increase in RTL (since slot and index run opposite ways there) -
+    // negate the delta's effect on the index accordingly.
+    final delta = details.primaryDelta! / _itemExtent;
+    final next = _controller.value + (_isRtl ? -delta : delta);
     _controller.value = next.clamp(0.0, (_count - 1).toDouble());
   }
 
@@ -188,9 +219,14 @@ class _FloatingBottomNavState extends State<FloatingBottomNav>
         child: AnimatedOpacity(
           duration: const Duration(milliseconds: 300),
           opacity: widget.visible ? 1 : 0,
-          child: DecoratedBox(
+          child: Container(
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(999),
+              color: Colors.white.withValues(alpha: 0.90),
+              border: Border.all(
+                color: Colors.white.withValues(alpha: 0.35),
+                width: 0.5,
+              ),
               boxShadow: const [
                 BoxShadow(
                   color: Color(0x1F000000),
@@ -199,72 +235,60 @@ class _FloatingBottomNavState extends State<FloatingBottomNav>
                 ),
               ],
             ),
-            child: ClipRRect(
-              borderRadius: BorderRadius.circular(999),
-              child: BackdropFilter(
-                filter: ImageFilter.blur(sigmaX: 20, sigmaY: 20),
-                child: Container(
-                  decoration: BoxDecoration(
-                    // Frosted glass: translucent white over a heavy blur.
-                    color: Colors.white.withValues(alpha: 0.72),
-                    borderRadius: BorderRadius.circular(999),
-                    border: Border.all(
-                      color: Colors.white.withValues(alpha: 0.35),
-                      width: 0.5,
-                    ),
-                  ),
-                  padding: EdgeInsets.symmetric(
-                      horizontal: outerPad, vertical: outerPad),
-                  child: GestureDetector(
-                    behavior: HitTestBehavior.opaque,
-                    onTapUp: (d) => _onTapAt(d.localPosition.dx),
-                    onHorizontalDragStart: _onDragStart,
-                    onHorizontalDragUpdate: _onDragUpdate,
-                    onHorizontalDragEnd: _onDragEnd,
-                    child: SizedBox(
-                      width: rowWidth,
-                      height: rowHeight,
-                      child: AnimatedBuilder(
-                        animation: _controller,
-                        builder: (context, _) {
-                          final pos = _controller.value;
-                          return Stack(
-                            clipBehavior: Clip.none,
-                            children: [
-                              // Sliding black indicator pill.
-                              Positioned(
-                                left: pos * ext + _itemMargin * _scale,
-                                top: 0,
-                                child: Container(
-                                  width: _itemWidth * _scale,
-                                  height: rowHeight,
-                                  decoration: BoxDecoration(
-                                    color: AppColors.activeNav,
-                                    borderRadius: BorderRadius.circular(999),
-                                  ),
+            padding: EdgeInsets.symmetric(
+              horizontal: outerPad,
+              vertical: outerPad,
+            ),
+            child: GestureDetector(
+              behavior: HitTestBehavior.opaque,
+              onTapUp: (d) => _onTapAt(d.localPosition.dx),
+              onHorizontalDragStart: _onDragStart,
+              onHorizontalDragUpdate: _onDragUpdate,
+              onHorizontalDragEnd: _onDragEnd,
+              child: SizedBox(
+                width: rowWidth,
+                height: rowHeight,
+                child: AnimatedBuilder(
+                  animation: _controller,
+                  builder: (context, _) {
+                    final pos = _controller.value;
+                    final visualPos = _visualSlot(pos);
+                    return Stack(
+                      clipBehavior: Clip.none,
+                      children: [
+                        // Sliding black indicator pill.
+                        Positioned(
+                          left: visualPos * ext + _itemMargin * _scale,
+                          top: 0,
+                          child: Container(
+                            width: _itemWidth * _scale,
+                            height: rowHeight,
+                            decoration: BoxDecoration(
+                              color: AppColors.activeNav,
+                              borderRadius: BorderRadius.circular(999),
+                            ),
+                          ),
+                        ),
+                        // Icons — colour/scale interpolate with distance
+                        // from the indicator.
+                        Row(
+                          children: [
+                            for (var i = 0; i < _count; i++)
+                              _NavIcon(
+                                destination: widget.destinations[i],
+                                extent: ext,
+                                scale: _scale,
+                                iconSize: _iconSize * _scale,
+                                selectedness: (1 - (pos - i).abs()).clamp(
+                                  0.0,
+                                  1.0,
                                 ),
                               ),
-                              // Icons — colour/scale interpolate with distance
-                              // from the indicator.
-                              Row(
-                                children: [
-                                  for (var i = 0; i < _count; i++)
-                                    _NavIcon(
-                                      destination: widget.destinations[i],
-                                      extent: ext,
-                                      scale: _scale,
-                                      iconSize: _iconSize * _scale,
-                                      selectedness:
-                                          (1 - (pos - i).abs()).clamp(0.0, 1.0),
-                                    ),
-                                ],
-                              ),
-                            ],
-                          );
-                        },
-                      ),
-                    ),
-                  ),
+                          ],
+                        ),
+                      ],
+                    );
+                  },
                 ),
               ),
             ),

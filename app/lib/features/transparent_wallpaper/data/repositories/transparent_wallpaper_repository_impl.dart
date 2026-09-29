@@ -68,6 +68,10 @@ class TransparentWallpaperRepositoryImpl
       _guard(() async { await _channel.restorePreviousWallpaper(); return unit; });
 
   @override
+  Future<Either<Failure, TwRuntimeState>> syncWithSystem() =>
+      _guard(_channel.syncWithSystem);
+
+  @override
   Future<Either<Failure, TwRuntimeState>> status() => _guard(_channel.status);
 
   @override

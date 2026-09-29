@@ -1,10 +1,6 @@
-import 'package:dio/dio.dart';
-
-import '../../../../core/error/exceptions.dart';
 import '../../../../core/fixtures/mock_catalog.dart';
-import '../../../../core/network/dio_client.dart';
-import '../../../../core/network/paginated_parser.dart';
 import '../../../../core/pagination/paginated.dart';
+import '../../../explore/data/datasources/wallpaper_feed_api.dart';
 import '../../../explore/data/models/wallpaper_model.dart';
 
 abstract class SearchRemoteDatasource {
@@ -13,25 +9,22 @@ abstract class SearchRemoteDatasource {
 }
 
 class SearchRemoteDatasourceImpl implements SearchRemoteDatasource {
-  SearchRemoteDatasourceImpl(this._client);
+  SearchRemoteDatasourceImpl(this._api);
 
-  final DioClient _client;
+  final WallpaperFeedApi _api;
 
+  /// The public search endpoint is **not paginated**: it returns a single
+  /// ranked page capped at 50 results and reports no cursor. Any page beyond
+  /// the first is therefore empty, and the returned page always has
+  /// `hasMore == false` so the grid never asks for one.
   @override
-  Future<Paginated<WallpaperModel>> search(String query,
-      {int page = 1, int limit = 20}) async {
-    try {
-      final res = await _client.dio.get(
-        '/wallpapers/search',
-        queryParameters: {'q': query, 'page': page, 'limit': limit},
-      );
-      return parsePaginatedResponse(
-        res.data as Map<String, dynamic>,
-        WallpaperModel.fromJson,
-      );
-    } on DioException catch (e) {
-      throw e.error is Exception ? e.error as Exception : const ServerException();
-    }
+  Future<Paginated<WallpaperModel>> search(
+    String query, {
+    int page = 1,
+    int limit = 20,
+  }) async {
+    if (page > 1) return const Paginated.empty();
+    return _api.search(query, limit: 50);
   }
 }
 

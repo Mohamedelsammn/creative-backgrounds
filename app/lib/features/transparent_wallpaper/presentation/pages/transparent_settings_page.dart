@@ -17,9 +17,9 @@ class TransparentSettingsPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider<TransparentWallpaperBloc>(
-      create: (_) =>
-          sl<TransparentWallpaperBloc>()..add(const TransparentWallpaperStarted()),
+    return BlocProvider<TransparentWallpaperBloc>.value(
+      value: sl<TransparentWallpaperBloc>()
+        ..add(const TransparentWallpaperStarted()),
       child: const _SettingsView(),
     );
   }
@@ -49,8 +49,15 @@ class _SettingsView extends StatelessWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text(l10n.transparentWallpaper,
-                      style: AppTextStyles.sectionTitle),
+                  Expanded(
+                    child: Text(
+                      l10n.transparentWallpaper,
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                      style: AppTextStyles.sectionTitle,
+                    ),
+                  ),
+                  const SizedBox(width: 8),
                   TransparentStatusPill(state: state),
                 ],
               ),

@@ -45,3 +45,23 @@ app.*.map.json
 app/android/app/debug
 app/android/app/profile
 app/android/app/release
+
+# Android release signing — NEVER commit. Contains store/key passwords.
+app/android/key.properties
+key.properties
+
+# Keystores — private signing material. Keep local/offline backups only.
+*.jks
+*.keystore
+credentials/
+
+# Local reference media — not app source. Third-party sample wallpapers/videos
+# and design screenshots/recordings; kept out of the public repository.
+creative/
+uiux/
+
+# Local diagnostic artifacts (device logs, env backups, build outputs)
+*.aab
+*.apk
+env.backup*
+ad_device_verification*

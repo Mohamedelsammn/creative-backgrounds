@@ -17,6 +17,10 @@ class ErrorHandler {
       NetworkTimeoutException() => const NetworkTimeoutFailure(),
       UnauthorizedException() => const UnauthorizedFailure(),
       NotFoundException() => const NotFoundFailure(),
+      PaymentRequiredException() => const PremiumRequiredFailure(),
+      // A structured API error: 4xx is our request's fault, 5xx is theirs.
+      ApiException(:final statusCode) =>
+        (statusCode ?? 500) >= 500 ? const ServerFailure() : const ApiFailure(),
       ServerException() => const ServerFailure(),
       CacheException() => const CacheFailure(),
       WallpaperApplyException() => const WallpaperApplyFailure(),
@@ -42,6 +46,18 @@ class ErrorHandler {
         return 'We couldn\'t set your wallpaper. Please try again.';
       case DepthNotSupportedFailure():
         return 'Depth effect isn\'t available for this wallpaper.';
+      // Carries its own explanation - distinct from DepthNotSupportedFailure,
+      // this is an apply-time failure to fetch the foreground, not a
+      // capability check.
+      case DepthForegroundMissingFailure():
+        return failure.message;
+      case PremiumRequiredFailure():
+        return 'This wallpaper is available to premium members.';
+      case ApiFailure():
+        return 'We couldn\'t load that right now. Please try again.';
+      // Carries its own explanation of which type is unsupported and why.
+      case UnsupportedWallpaperFailure():
+        return failure.message;
       default:
         return 'Something went wrong. Please try again.';
     }

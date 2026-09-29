@@ -1,36 +1,33 @@
 import 'package:bloc/bloc.dart';
-import 'package:dartz/dartz.dart';
 import 'package:equatable/equatable.dart';
 
 import '../../../../core/error/error_handler.dart';
-import '../../../../core/error/failures.dart';
-import '../../../../core/pagination/paginated.dart';
 import '../../../../core/usecases/usecase.dart';
-import '../../domain/entities/category_entity.dart';
 import '../../domain/entities/wallpaper_entity.dart';
-import '../../domain/usecases/get_categories_usecase.dart';
-import '../../domain/usecases/get_latest_wallpapers_usecase.dart';
-import '../../domain/usecases/get_trending_wallpapers_usecase.dart';
+import '../../domain/usecases/get_new_wallpapers_usecase.dart';
 
 part 'explore_event.dart';
 part 'explore_state.dart';
 
+/// Drives Explore's single mixed feed (normal + depth + live, newest first).
+///
+/// Cursor-paginated, mirroring [ViewAllBloc]'s load-more shape: the first
+/// page loads on [ExploreStarted], [ExploreLoadMoreRequested] appends the
+/// next page, and [ExploreRefreshRequested] bypasses the cache to pick up
+/// newly published/unpublished content.
 class ExploreBloc extends Bloc<ExploreEvent, ExploreState> {
-  ExploreBloc({
-    required GetTrendingWallpapersUseCase getTrending,
-    required GetLatestWallpapersUseCase getLatest,
-    required GetCategoriesUseCase getCategories,
-  })  : _getTrending = getTrending,
-        _getLatest = getLatest,
-        _getCategories = getCategories,
-        super(const ExploreInitial()) {
+  ExploreBloc({required GetNewWallpapersUseCase getNewWallpapers})
+    : _getNewWallpapers = getNewWallpapers,
+      super(const ExploreInitial()) {
     on<ExploreStarted>(_onLoad);
     on<ExploreRefreshRequested>(_onLoad);
+    on<ExploreLoadMoreRequested>(_onLoadMore);
   }
 
-  final GetTrendingWallpapersUseCase _getTrending;
-  final GetLatestWallpapersUseCase _getLatest;
-  final GetCategoriesUseCase _getCategories;
+  final GetNewWallpapersUseCase _getNewWallpapers;
+
+  String? _cursor;
+  bool _isLoadingMore = false;
 
   Future<void> _onLoad(ExploreEvent event, Emitter<ExploreState> emit) async {
     // Keep existing content visible during pull-to-refresh.
@@ -38,35 +35,50 @@ class ExploreBloc extends Bloc<ExploreEvent, ExploreState> {
       emit(const ExploreLoading());
     }
 
-    final results = await Future.wait([
-      _getTrending(const PageParams()),
-      _getLatest(const PageParams()),
-      _getCategories(const NoParams()),
-    ]);
+    final forceRefresh = event is ExploreRefreshRequested;
+    _cursor = null;
 
-    final trending = results[0] as Either<Failure, Paginated<WallpaperEntity>>;
-    final latest = results[1] as Either<Failure, Paginated<WallpaperEntity>>;
-    final categories = results[2] as Either<Failure, List<CategoryEntity>>;
-
-    // Surface the first failure encountered.
-    final failure = _firstFailure([trending, latest, categories]);
-    if (failure != null) {
-      emit(ExploreError(ErrorHandler.mapFailureToMessage(failure)));
-      return;
-    }
-
-    emit(ExploreLoaded(
-      trending: trending.getOrElse(() => const Paginated.empty()).items,
-      latest: latest.getOrElse(() => const Paginated.empty()).items,
-      categories: categories.getOrElse(() => const []),
-    ));
+    final result = await _getNewWallpapers(
+      PageParams(forceRefresh: forceRefresh),
+    );
+    result.fold(
+      (failure) =>
+          emit(ExploreError(ErrorHandler.mapFailureToMessage(failure))),
+      (page) {
+        _cursor = page.nextCursor;
+        emit(ExploreLoaded(wallpapers: page.items, hasMore: page.hasMore));
+      },
+    );
   }
 
-  Failure? _firstFailure(List<Either<Failure, dynamic>> results) {
-    for (final r in results) {
-      final f = r.fold<Failure?>((l) => l, (_) => null);
-      if (f != null) return f;
+  Future<void> _onLoadMore(
+    ExploreLoadMoreRequested event,
+    Emitter<ExploreState> emit,
+  ) async {
+    final current = state;
+    if (current is! ExploreLoaded || !current.hasMore || _isLoadingMore) {
+      return;
     }
-    return null;
+    _isLoadingMore = true;
+    emit(current.copyWith(isLoadingMore: true));
+
+    final result = await _getNewWallpapers(PageParams(cursor: _cursor));
+    result.fold(
+      (failure) {
+        // A failed load-more keeps whatever already loaded on screen - only
+        // the trailing indicator clears, matching ViewAllBloc's behaviour.
+        emit(current.copyWith(isLoadingMore: false));
+      },
+      (page) {
+        _cursor = page.nextCursor;
+        emit(
+          ExploreLoaded(
+            wallpapers: [...current.wallpapers, ...page.items],
+            hasMore: page.hasMore,
+          ),
+        );
+      },
+    );
+    _isLoadingMore = false;
   }
 }

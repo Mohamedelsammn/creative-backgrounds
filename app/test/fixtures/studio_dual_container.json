@@ -1,0 +1,119 @@
+{
+  "clockConfig": {
+    "blur": 0,
+    "colonColor": "hours",
+    "colonColorCustom": null,
+    "color": "#FFFFFFFF",
+    "colorMode": "split",
+    "customX": 0.751,
+    "customY": 0.246,
+    "date": {
+      "color": "#FFFFFFFF",
+      "enabled": false,
+      "position": "below"
+    },
+    "dateScale": 1,
+    "depth": 0,
+    "enabled": true,
+    "fadeAmount": 0,
+    "fadeDirection": "bottom",
+    "fillOpacity": 1,
+    "font": "Oswald",
+    "fontWeightPreset": "regular",
+    "gradientAngleDeg": 180,
+    "gradientFrom": null,
+    "gradientTo": null,
+    "horizontalScale": 1,
+    "hoursColor": null,
+    "hoursFont": null,
+    "is24Hour": false,
+    "lineSpacing": 1,
+    "minuteOffsetX": 0,
+    "minutesColor": "#E65100",
+    "minutesFont": null,
+    "opacity": 1,
+    "position": "custom",
+    "rotation": 0,
+    "scale": 0.9,
+    "schemaVersion": 1,
+    "shadow": {
+      "enabled": false,
+      "strength": 0
+    },
+    "showAmPm": false,
+    "showColon": true,
+    "showGlow": false,
+    "showSeconds": false,
+    "showStroke": false,
+    "sizePx": 183,
+    "stretchY": 1,
+    "strokeColor": "#000000FF",
+    "strokeOrder": "behind",
+    "strokeWidth": 2,
+    "style": "monument",
+    "timeLayout": "stackedCompact",
+    "weight": 700
+  },
+  "slug": "chatgpt-image-14-2026-10-50-02-kgdxy9",
+  "studio": {
+    "behavior": {
+      "applyTarget": "ask",
+      "clockEntrance": "none",
+      "clockEntranceMs": 600
+    },
+    "clock": null,
+    "dateWidget": {
+      "color": "#FFFFFFFF",
+      "customX": null,
+      "customY": null,
+      "enabled": false,
+      "font": "Inter",
+      "format": "medium",
+      "locale": "en",
+      "pattern": null,
+      "position": "bottom",
+      "scale": 1,
+      "uppercase": false,
+      "weight": 400
+    },
+    "scene": {
+      "blur": 0,
+      "brightness": -0.1,
+      "contrast": 0,
+      "duotone": {
+        "enabled": false,
+        "highlight": "#FFFFFFFF",
+        "shadow": "#000000FF"
+      },
+      "exposure": 0,
+      "gradientOverlay": {
+        "angleDeg": 180,
+        "blendMode": "normal",
+        "enabled": false,
+        "from": "#00000000",
+        "opacity": 0.5,
+        "to": "#000000FF"
+      },
+      "grain": {
+        "amount": 0,
+        "size": 1
+      },
+      "saturation": 0,
+      "sharpen": 0,
+      "tint": {
+        "blendMode": "soft-light",
+        "color": "#000000FF",
+        "enabled": false,
+        "opacity": 0.2
+      },
+      "vignette": {
+        "amount": 0.35,
+        "softness": 0.55
+      },
+      "warmth": 0
+    },
+    "styledPreviewUrl": "https://creative-backgrounds.arabplus4tech.com/cb-public/wallpapers/74dfff08-6d21-4317-9f9c-06a69c56d396/v1/styled-preview-7f1b648258f54682-973ff016.webp",
+    "widgets": []
+  },
+  "type": "depth"
+}

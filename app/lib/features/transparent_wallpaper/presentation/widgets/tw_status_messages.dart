@@ -17,6 +17,14 @@ String? twStatusMessage(BuildContext context, TwRuntimeState runtime) {
       return l10n.twMsgApplying;
     case TwStatus.restoring:
       return l10n.twMsgRestoring;
+    case TwStatus.stopping:
+      return l10n.twMsgStopping;
+    case TwStatus.recovering:
+      return l10n.twMsgRecovering;
+    case TwStatus.incompatible:
+      return l10n.twMsgIncompatible;
+    case TwStatus.paused:
+      return l10n.twMsgPaused;
     case TwStatus.stopped:
     case TwStatus.completed:
       return l10n.twMsgStopped;
@@ -34,7 +42,8 @@ String? twStatusMessage(BuildContext context, TwRuntimeState runtime) {
     case TwStatus.checking:
     case TwStatus.permissionNeeded:
     case TwStatus.preview:
-    case TwStatus.paused:
+    // Handled by dedicated UI rather than an explanatory line.
+    case TwStatus.ready:
       return null;
   }
 }

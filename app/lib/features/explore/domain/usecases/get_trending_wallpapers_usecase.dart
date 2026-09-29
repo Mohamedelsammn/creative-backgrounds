@@ -14,6 +14,9 @@ class GetTrendingWallpapersUseCase
 
   @override
   Future<Either<Failure, Paginated<WallpaperEntity>>> call(PageParams params) {
-    return _repository.getTrending(page: params.page);
+    return _repository.getTrending(
+      cursor: params.cursor,
+      forceRefresh: params.forceRefresh,
+    );
   }
 }

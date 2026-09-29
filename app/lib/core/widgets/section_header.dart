@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../l10n/l10n.dart';
 import '../theme/app_colors.dart';
 import '../theme/app_text_styles.dart';
 
@@ -9,23 +10,33 @@ class SectionHeader extends StatelessWidget {
     super.key,
     required this.title,
     this.onViewAll,
-    this.viewAllLabel = 'View All',
+    this.viewAllLabel,
   });
 
   final String title;
   final VoidCallback? onViewAll;
-  final String viewAllLabel;
+
+  /// Overrides the default localized "View All" / "عرض الكل" label. Every
+  /// caller on Home previously hardcoded the English literal as this
+  /// parameter's default, so the Arabic build always showed "View All" here
+  /// regardless of locale even though a translation exists - defaulting to
+  /// `context.l10n.viewAll` instead means no caller has to opt in.
+  final String? viewAllLabel;
 
   @override
   Widget build(BuildContext context) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        Text(
-          title,
-          style: AppTextStyles.sectionTitle.copyWith(
-            fontWeight: FontWeight.w700,
-            letterSpacing: -0.4,
+        Expanded(
+          child: Text(
+            title,
+            maxLines: 1,
+            overflow: TextOverflow.ellipsis,
+            style: AppTextStyles.sectionTitle.copyWith(
+              fontWeight: FontWeight.w700,
+              letterSpacing: -0.4,
+            ),
           ),
         ),
         if (onViewAll != null)
@@ -37,7 +48,7 @@ class SectionHeader extends StatelessWidget {
               child: Row(
                 children: [
                   Text(
-                    viewAllLabel,
+                    viewAllLabel ?? context.l10n.viewAll,
                     style: AppTextStyles.bodySmall.copyWith(
                       color: AppColors.textSecondary,
                       fontWeight: FontWeight.w500,

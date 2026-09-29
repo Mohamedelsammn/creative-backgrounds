@@ -1,4 +1,5 @@
-<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <!-- Required always -->
     <uses-permission android:name="android.permission.INTERNET" />
@@ -16,17 +17,20 @@
     <!-- Keeps camera capture legal in the background on Android 14+ -->
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE_CAMERA" />
 
-    <!-- Auto-change wallpaper (background task) -->
-    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
-    <uses-permission android:name="android.permission.FOREGROUND_SERVICE_DATA_SYNC" />
-    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
-
-    <!-- Notifications (auto-change / download complete) -->
+    <!-- CameraForegroundService's required privacy notification (Android 13+
+         needs this permission for any app notification to actually show). -->
     <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
 
-    <!-- Storage: Android < 10 only (app minSdk is 29, kept for completeness) -->
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"
-        android:maxSdkVersion="28" />
+    <!-- Google Play Photo and Video Permissions policy: the app never reads
+         the user's media library (wallpapers download into app-private
+         storage, sharing sends text). Strip any media/storage permission a
+         library might merge in. -->
+    <uses-permission android:name="android.permission.READ_MEDIA_IMAGES" tools:node="remove" />
+    <uses-permission android:name="android.permission.READ_MEDIA_VIDEO" tools:node="remove" />
+    <uses-permission android:name="android.permission.READ_MEDIA_VISUAL_USER_SELECTED" tools:node="remove" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" tools:node="remove" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" tools:node="remove" />
+    <uses-permission android:name="android.permission.MANAGE_EXTERNAL_STORAGE" tools:node="remove" />
 
     <application
         android:label="Creative Backgrounds"
@@ -36,8 +40,7 @@
         <activity
             android:name=".MainActivity"
             android:exported="true"
-            android:launchMode="singleTop"
-            android:taskAffinity=""
+            android:launchMode="singleTask"
             android:theme="@style/LaunchTheme"
             android:configChanges="orientation|keyboardHidden|keyboard|screenSize|smallestScreenSize|locale|layoutDirection|fontScale|screenLayout|density|uiMode"
             android:hardwareAccelerated="true"
@@ -66,6 +69,20 @@
                 android:resource="@xml/live_wallpaper" />
         </service>
 
+        <!-- Video wallpaper service: loops the backend's `video` wallpapers -->
+        <service
+            android:name=".VideoWallpaperService"
+            android:exported="true"
+            android:label="Creative Backgrounds Video"
+            android:permission="android.permission.BIND_WALLPAPER">
+            <intent-filter>
+                <action android:name="android.service.wallpaper.WallpaperService" />
+            </intent-filter>
+            <meta-data
+                android:name="android.service.wallpaper"
+                android:resource="@xml/video_wallpaper" />
+        </service>
+
         <!-- Transparent wallpaper: renders the rear camera feed behind icons -->
         <service
             android:name=".CameraWallpaperService"
@@ -91,12 +108,32 @@
         <meta-data
             android:name="flutterEmbedding"
             android:value="2" />
+
+        <!-- AdMob App ID. This is Google's OFFICIAL TEST App ID - the safe
+             default for debug/profile builds (matches lib/core/ads/
+             ad_constants.dart's test-vs-real ad-unit-ID switch). The native
+             SDK reads this value before Dart even starts, so it cannot
+             follow AppConfig.useRealAdUnits' runtime switch the way ad unit
+             IDs do - instead, src/release/AndroidManifest.xml overrides this
+             exact meta-data with the real App ID via the Gradle manifest
+             merge, automatically, for every release build. Do not edit this
+             value directly for a release - edit the release overlay instead. -->
+        <meta-data
+            android:name="com.google.android.gms.ads.APPLICATION_ID"
+            android:value="ca-app-pub-3940256099942544~3347511713" />
     </application>
 
     <queries>
         <intent>
             <action android:name="android.intent.action.PROCESS_TEXT"/>
             <data android:mimeType="text/plain"/>
+        </intent>
+        <!-- Lets url_launcher resolve a browser/Play Store handler for an
+             https:// link (e.g. UpdateRequiredScreen's "Update Now") on
+             Android 11+, which hides app-visibility results without this. -->
+        <intent>
+            <action android:name="android.intent.action.VIEW"/>
+            <data android:scheme="https"/>
         </intent>
     </queries>
 </manifest>

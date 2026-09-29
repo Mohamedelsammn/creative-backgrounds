@@ -14,33 +14,64 @@
   "languageSubtitle": "لغة عرض التطبيق",
   "clearCache": "مسح الذاكرة المؤقتة",
   "cacheUsed": "{size} مستخدمة",
-  "@cacheUsed": { "placeholders": { "size": { "type": "String" } } },
+  "@cacheUsed": {
+    "placeholders": {
+      "size": {
+        "type": "String"
+      }
+    }
+  },
   "clearCacheConfirmTitle": "مسح الذاكرة المؤقتة؟",
   "clearCacheConfirmBody": "سيؤدي هذا إلى إزالة بيانات الصور المُنزّلة. ستُعاد الخلفيات إلى التنزيل عند عرضها.",
   "clearingLabel": "جارٍ المسح…",
+  "rateApp": "قيّم التطبيق",
+  "rateAppSubtitle": "هل يعجبك Creative Backgrounds؟",
+  "shareApp": "شارك التطبيق",
+  "shareAppSubtitle": "أخبر صديقًا عن Creative Backgrounds",
+  "shareAppMessage": "جرّب Creative Backgrounds - خلفيات رائعة لهاتفك: {url}",
+  "@shareAppMessage": {
+    "placeholders": {
+      "url": {
+        "type": "String"
+      }
+    }
+  },
+  "storeUnavailable": "تعذّر فتح متجر Play.",
   "about": "حول",
   "aboutSubtitle": "الإصدار والاعتمادات",
+  "privacyOptions": "خيارات الخصوصية",
+  "privacyOptionsSubtitle": "إدارة خيارات موافقتك على الإعلانات",
   "searchWallpapers": "ابحث عن الخلفيات…",
   "privacyPolicy": "سياسة الخصوصية",
   "termsOfService": "شروط الخدمة",
   "madeWithFlutter": "صُنع باستخدام Flutter",
   "appVersion": "الإصدار {version}",
   "@appVersion": {
-    "placeholders": { "version": { "type": "String" } }
+    "placeholders": {
+      "version": {
+        "type": "String"
+      }
+    }
   },
   "privacyBody": "يحترم تطبيق Creative Backgrounds خصوصيتك. تُحفظ الخلفيات المفضّلة لديك وتفضيلات التطبيق على جهازك فقط. نحن لا نجمع أي معلومات شخصية، والخلفيات المطبّقة لا تغادر هاتفك أبداً.\n\nيتم بث الصور من شبكة توصيل المحتوى الخاصة بنا لعرض الخلفيات وتطبيقها. قد تتم معالجة بيانات طلب قياسية غير معرّفة للهوية لتقديم المحتوى.\n\nهذا محتوى مؤقت. استبدله بسياستك النهائية قبل الإصدار.",
   "termsBody": "باستخدامك لتطبيق Creative Backgrounds فإنك توافق على استخدام الخلفيات لأغراض شخصية غير تجارية. يظل محتوى الخلفيات ملكاً لأصحابه المعنيين.\n\nيُقدَّم التطبيق «كما هو» دون أي ضمانات من أي نوع. لسنا مسؤولين عن أي مشكلات خاصة بالجهاز تنشأ عن تطبيق الخلفيات.\n\nهذا محتوى مؤقت. استبدله بشروطك النهائية قبل الإصدار.",
-  "applyTo": "تطبيق على…",
+  "setAsWallpaperTitle": "تعيين كخلفية",
+  "applyTo": "اختر المكان الذي تريد تطبيق الخلفية عليه",
   "homeScreen": "الشاشة الرئيسية",
   "lockScreen": "شاشة القفل",
+  "bothScreens": "الاثنان",
   "homeAndLockScreen": "الرئيسية + القفل",
   "setAsLiveWallpaper": "تعيين كخلفية حية",
+  "withDesign": "مع التصميم",
+  "wallpaperOnly": "الخلفية فقط",
   "cancel": "إلغاء",
   "customize": "تخصيص",
   "apply": "تطبيق",
   "applyWallpaper": "تطبيق الخلفية",
   "wallpaperApplied": "تم تطبيق الخلفية!",
   "wallpaperAppliedSubtitle": "تم تعيين خلفيتك بنجاح.",
+  "liveWallpaperAppliedToast": "تم تطبيق الخلفية المتحركة",
+  "liveWallpaperNotAppliedToast": "لم يتم تطبيق الخلفية",
   "done": "تم",
   "depthEffect": "تأثير العمق",
   "depthEffectDescription": "تظهر الساعة خلف موضوع الخلفية، مثل شاشة قفل iOS.",
@@ -48,6 +79,7 @@
   "font": "الخط",
   "color": "اللون",
   "size": "الحجم",
+  "clockHeight": "التمدد",
   "opacity": "الشفافية",
   "shadow": "الظل",
   "glow": "التوهج",
@@ -61,6 +93,9 @@
   "clear": "مسح",
   "somethingWentWrong": "حدث خطأ ما",
   "tryAgain": "حاول مرة أخرى",
+  "retry": "إعادة المحاولة",
+  "sortBy": "ترتيب حسب",
+  "customColor": "لون مخصص",
   "specialFeatures": "مميزات خاصة",
   "transparentWallpaper": "الخلفية الشفافة",
   "transparentWallpaperSubtitle": "شاهد ما خلف هاتفك عبر الكاميرا الخلفية الحية",
@@ -81,7 +116,9 @@
   "twApplyIn": "التطبيق خلال {seconds} ث",
   "@twApplyIn": {
     "placeholders": {
-      "seconds": { "type": "int" }
+      "seconds": {
+        "type": "int"
+      }
     }
   },
   "twCancel": "إلغاء",
@@ -108,5 +145,35 @@
   "twQualityBalanced": "متوازن",
   "twQualitySaver": "موفّر",
   "twQualityHint": "الجودة الأعلى تبدو أكثر سلاسة لكنها تستهلك بطارية أكثر.",
-  "twRestoreWallpaper": "استعادة الخلفية السابقة"
+  "twRestoreWallpaper": "استعادة الخلفية السابقة",
+  "twMsgIncompatible": "جهازك لا يدعم الخلفية الشفافة.",
+  "twMsgStopping": "جارٍ إيقاف التشغيل…",
+  "twMsgRecovering": "جارٍ إعادة الاتصال بالكاميرا…",
+  "twMsgPaused": "موقوفة مؤقتًا أثناء إطفاء الشاشة.",
+  "liveWallpapers": "خلفيات حية",
+  "depthsAndWallpapers": "الأعماق والخلفيات",
+  "newWallpapers": "خلفيات جديدة",
+  "allWallpapers": "الكل",
+  "wallpapers": "خلفيات",
+  "adBlockClear": "لم يتم رصد أي تصفية للشبكة.",
+  "adBlockVpnDetected": "يوجد VPN نشط. قد يؤثر ذلك على بعض المحتوى.",
+  "adBlockDnsSuspicious": "يوجد خادم DNS للتصفية مُعدّ على هذا الجهاز.",
+  "adBlockRequestsBlocked": "يبدو أن بعض طلبات الشبكة محجوبة.",
+  "adBlockUnknown": "تعذّر تحديد حالة الشبكة.",
+  "removeFromFavorites": "إزالة من المفضلة",
+  "filter": "تصفية",
+  "filters": "التصفية",
+  "categories": "الفئات",
+  "reset": "إعادة تعيين",
+  "adsBlockedTitle": "الإعلانات مطلوبة لاستخدام هذا التطبيق",
+  "adsBlockedBody": "يبدو أن مانع إعلانات أو VPN أو مُصفّي DNS يمنع تحميل الإعلانات. من فضلك أوقفه وحاول مرة أخرى.",
+  "adsBlockedRetry": "إعادة المحاولة",
+  "watchAdToApplyTitle": "شاهد إعلانًا للتطبيق",
+  "watchAdToApplyBody": "هذه خلفية PRO. شاهد إعلانًا قصيرًا لتطبيقها.",
+  "watchAd": "مشاهدة الإعلان",
+  "rewardedAdUnavailable": "الإعلان غير جاهز بعد. من فضلك حاول مرة أخرى بعد لحظات.",
+  "updateRequiredTitle": "التحديث مطلوب",
+  "updateRequiredBody": "يتوفر إصدار جديد من Creative Backgrounds. من فضلك حدّث التطبيق للمتابعة.",
+  "updateNow": "تحديث الآن",
+  "couldNotOpenStore": "تعذّر فتح متجر Play."
 }

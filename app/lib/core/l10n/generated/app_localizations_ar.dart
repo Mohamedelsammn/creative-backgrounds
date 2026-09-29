@@ -63,10 +63,36 @@ class AppLocalizationsAr extends AppLocalizations {
   String get clearingLabel => 'جارٍ المسح…';
 
   @override
+  String get rateApp => 'قيّم التطبيق';
+
+  @override
+  String get rateAppSubtitle => 'هل يعجبك Creative Backgrounds؟';
+
+  @override
+  String get shareApp => 'شارك التطبيق';
+
+  @override
+  String get shareAppSubtitle => 'أخبر صديقًا عن Creative Backgrounds';
+
+  @override
+  String shareAppMessage(String url) {
+    return 'جرّب Creative Backgrounds - خلفيات رائعة لهاتفك: $url';
+  }
+
+  @override
+  String get storeUnavailable => 'تعذّر فتح متجر Play.';
+
+  @override
   String get about => 'حول';
 
   @override
   String get aboutSubtitle => 'الإصدار والاعتمادات';
+
+  @override
+  String get privacyOptions => 'خيارات الخصوصية';
+
+  @override
+  String get privacyOptionsSubtitle => 'إدارة خيارات موافقتك على الإعلانات';
 
   @override
   String get searchWallpapers => 'ابحث عن الخلفيات…';
@@ -94,7 +120,10 @@ class AppLocalizationsAr extends AppLocalizations {
       'باستخدامك لتطبيق Creative Backgrounds فإنك توافق على استخدام الخلفيات لأغراض شخصية غير تجارية. يظل محتوى الخلفيات ملكاً لأصحابه المعنيين.\n\nيُقدَّم التطبيق «كما هو» دون أي ضمانات من أي نوع. لسنا مسؤولين عن أي مشكلات خاصة بالجهاز تنشأ عن تطبيق الخلفيات.\n\nهذا محتوى مؤقت. استبدله بشروطك النهائية قبل الإصدار.';
 
   @override
-  String get applyTo => 'تطبيق على…';
+  String get setAsWallpaperTitle => 'تعيين كخلفية';
+
+  @override
+  String get applyTo => 'اختر المكان الذي تريد تطبيق الخلفية عليه';
 
   @override
   String get homeScreen => 'الشاشة الرئيسية';
@@ -103,10 +132,19 @@ class AppLocalizationsAr extends AppLocalizations {
   String get lockScreen => 'شاشة القفل';
 
   @override
+  String get bothScreens => 'الاثنان';
+
+  @override
   String get homeAndLockScreen => 'الرئيسية + القفل';
 
   @override
   String get setAsLiveWallpaper => 'تعيين كخلفية حية';
+
+  @override
+  String get withDesign => 'مع التصميم';
+
+  @override
+  String get wallpaperOnly => 'الخلفية فقط';
 
   @override
   String get cancel => 'إلغاء';
@@ -125,6 +163,12 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get wallpaperAppliedSubtitle => 'تم تعيين خلفيتك بنجاح.';
+
+  @override
+  String get liveWallpaperAppliedToast => 'تم تطبيق الخلفية المتحركة';
+
+  @override
+  String get liveWallpaperNotAppliedToast => 'لم يتم تطبيق الخلفية';
 
   @override
   String get done => 'تم';
@@ -147,6 +191,9 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get size => 'الحجم';
+
+  @override
+  String get clockHeight => 'التمدد';
 
   @override
   String get opacity => 'الشفافية';
@@ -187,6 +234,15 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get tryAgain => 'حاول مرة أخرى';
+
+  @override
+  String get retry => 'إعادة المحاولة';
+
+  @override
+  String get sortBy => 'ترتيب حسب';
+
+  @override
+  String get customColor => 'لون مخصص';
 
   @override
   String get specialFeatures => 'مميزات خاصة';
@@ -325,4 +381,99 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get twRestoreWallpaper => 'استعادة الخلفية السابقة';
+
+  @override
+  String get twMsgIncompatible => 'جهازك لا يدعم الخلفية الشفافة.';
+
+  @override
+  String get twMsgStopping => 'جارٍ إيقاف التشغيل…';
+
+  @override
+  String get twMsgRecovering => 'جارٍ إعادة الاتصال بالكاميرا…';
+
+  @override
+  String get twMsgPaused => 'موقوفة مؤقتًا أثناء إطفاء الشاشة.';
+
+  @override
+  String get liveWallpapers => 'خلفيات حية';
+
+  @override
+  String get depthsAndWallpapers => 'الأعماق والخلفيات';
+
+  @override
+  String get newWallpapers => 'خلفيات جديدة';
+
+  @override
+  String get allWallpapers => 'الكل';
+
+  @override
+  String get wallpapers => 'خلفيات';
+
+  @override
+  String get adBlockClear => 'لم يتم رصد أي تصفية للشبكة.';
+
+  @override
+  String get adBlockVpnDetected => 'يوجد VPN نشط. قد يؤثر ذلك على بعض المحتوى.';
+
+  @override
+  String get adBlockDnsSuspicious =>
+      'يوجد خادم DNS للتصفية مُعدّ على هذا الجهاز.';
+
+  @override
+  String get adBlockRequestsBlocked => 'يبدو أن بعض طلبات الشبكة محجوبة.';
+
+  @override
+  String get adBlockUnknown => 'تعذّر تحديد حالة الشبكة.';
+
+  @override
+  String get removeFromFavorites => 'إزالة من المفضلة';
+
+  @override
+  String get filter => 'تصفية';
+
+  @override
+  String get filters => 'التصفية';
+
+  @override
+  String get categories => 'الفئات';
+
+  @override
+  String get reset => 'إعادة تعيين';
+
+  @override
+  String get adsBlockedTitle => 'الإعلانات مطلوبة لاستخدام هذا التطبيق';
+
+  @override
+  String get adsBlockedBody =>
+      'يبدو أن مانع إعلانات أو VPN أو مُصفّي DNS يمنع تحميل الإعلانات. من فضلك أوقفه وحاول مرة أخرى.';
+
+  @override
+  String get adsBlockedRetry => 'إعادة المحاولة';
+
+  @override
+  String get watchAdToApplyTitle => 'شاهد إعلانًا للتطبيق';
+
+  @override
+  String get watchAdToApplyBody =>
+      'هذه خلفية PRO. شاهد إعلانًا قصيرًا لتطبيقها.';
+
+  @override
+  String get watchAd => 'مشاهدة الإعلان';
+
+  @override
+  String get rewardedAdUnavailable =>
+      'الإعلان غير جاهز بعد. من فضلك حاول مرة أخرى بعد لحظات.';
+
+  @override
+  String get updateRequiredTitle => 'التحديث مطلوب';
+
+  @override
+  String get updateRequiredBody =>
+      'يتوفر إصدار جديد من Creative Backgrounds. من فضلك حدّث التطبيق للمتابعة.';
+
+  @override
+  String get updateNow => 'تحديث الآن';
+
+  @override
+  String get couldNotOpenStore => 'تعذّر فتح متجر Play.';
 }

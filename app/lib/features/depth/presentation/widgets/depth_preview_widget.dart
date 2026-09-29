@@ -1,11 +1,14 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 
 import '../../../clock/domain/entities/clock_config_entity.dart';
-import '../../../clock/presentation/widgets/clock_renderer_widget.dart';
+import '../../../explore/domain/entities/wallpaper_assets.dart';
+import 'depth_layer_stack.dart';
 
-/// Layered depth preview card: background → clock → foreground mask.
-/// When depth is off or no mask exists, the clock simply renders on top.
+/// Small layered depth preview card shown inside the Customize sheet.
+///
+/// Delegates the actual compositing to [DepthLayerStack] so the preview and the
+/// full-screen render cannot drift apart - there is exactly one implementation
+/// of the background -> clock -> foreground order.
 class DepthPreviewWidget extends StatelessWidget {
   const DepthPreviewWidget({
     super.key,
@@ -13,12 +16,14 @@ class DepthPreviewWidget extends StatelessWidget {
     required this.clockConfig,
     required this.depthEnabled,
     this.foregroundMaskUrl,
+    this.depthConfig,
   });
 
   final String backgroundUrl;
   final ClockConfigEntity clockConfig;
   final bool depthEnabled;
   final String? foregroundMaskUrl;
+  final DepthRenderConfig? depthConfig;
 
   @override
   Widget build(BuildContext context) {
@@ -33,31 +38,12 @@ class DepthPreviewWidget extends StatelessWidget {
         child: Stack(
           fit: StackFit.expand,
           children: [
-            CachedNetworkImage(
-              imageUrl: backgroundUrl,
-              fit: BoxFit.cover,
-              placeholder: (context, url) =>
-                  Container(color: const Color(0xFF15151A)),
-              errorWidget: (context, url, error) =>
-                  Container(color: const Color(0xFF15151A)),
+            DepthLayerStack(
+              backgroundUrl: backgroundUrl,
+              foregroundUrl: showForeground ? foregroundMaskUrl : null,
+              clockConfig: _previewConfig(),
+              depthConfig: depthConfig,
             ),
-            // Clock layer (scaled down for the small preview).
-            Positioned.fill(
-              child: FittedBox(
-                fit: BoxFit.none,
-                child: SizedBox(
-                  width: 360,
-                  height: 220,
-                  child: ClockRendererWidget(config: _previewConfig()),
-                ),
-              ),
-            ),
-            if (showForeground)
-              CachedNetworkImage(
-                imageUrl: foregroundMaskUrl!,
-                fit: BoxFit.cover,
-                errorWidget: (context, url, error) => const SizedBox.shrink(),
-              ),
             const Positioned(
               left: 0,
               right: 0,
@@ -80,7 +66,9 @@ class DepthPreviewWidget extends StatelessWidget {
     );
   }
 
-  // Scale the clock down for the small preview card.
+  // Scale the clock down for the small preview card. Only the size changes -
+  // position, rotation and every other authored property render as configured,
+  // so the preview stays a faithful miniature of the final composite.
   ClockConfigEntity _previewConfig() =>
       clockConfig.copyWith(sizePx: (clockConfig.sizePx * 0.5).clamp(20, 60));
 }

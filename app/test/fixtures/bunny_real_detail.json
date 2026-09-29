@@ -1,0 +1,119 @@
+{
+  "id": "3ccb8250-67f7-447e-ae38-96fa94122efc",
+  "slug": "bunny-25m3g7",
+  "title": "Bunny",
+  "description": null,
+  "type": "depth",
+  "width": 941,
+  "height": 1672,
+  "resolutionLabel": "941x1672",
+  "dominantColor": "#080808",
+  "isPremium": false,
+  "isFeatured": false,
+  "language": "en",
+  "category": {
+    "slug": "minimal",
+    "nameEn": "Minimal",
+    "nameAr": "بسيط"
+  },
+  "tags": [],
+  "assets": {
+    "FOREGROUND": {
+      "url": "https://creative-backgrounds.arabplus4tech.com/cb-public/wallpapers/3ccb8250-67f7-447e-ae38-96fa94122efc/v1/foreground.webp",
+      "mime": "image/webp",
+      "width": 941,
+      "height": 1672,
+      "bytes": 97348
+    },
+    "BACKGROUND": {
+      "url": "https://creative-backgrounds.arabplus4tech.com/cb-public/wallpapers/3ccb8250-67f7-447e-ae38-96fa94122efc/v1/background.webp",
+      "mime": "image/webp",
+      "width": 941,
+      "height": 1672,
+      "bytes": 2884
+    },
+    "THUMBNAIL": {
+      "url": "https://creative-backgrounds.arabplus4tech.com/cb-public/wallpapers/3ccb8250-67f7-447e-ae38-96fa94122efc/v1/thumbnail.webp",
+      "mime": "image/webp",
+      "width": 360,
+      "height": 640,
+      "bytes": 14420
+    },
+    "PREVIEW": {
+      "url": "https://creative-backgrounds.arabplus4tech.com/cb-public/wallpapers/3ccb8250-67f7-447e-ae38-96fa94122efc/v1/preview.webp",
+      "mime": "image/webp",
+      "width": 941,
+      "height": 1672,
+      "bytes": 139000
+    }
+  },
+  "thumbnail": "https://creative-backgrounds.arabplus4tech.com/cb-public/wallpapers/3ccb8250-67f7-447e-ae38-96fa94122efc/v1/thumbnail.webp",
+  "background": "https://creative-backgrounds.arabplus4tech.com/cb-public/wallpapers/3ccb8250-67f7-447e-ae38-96fa94122efc/v1/background.webp",
+  "foreground": "https://creative-backgrounds.arabplus4tech.com/cb-public/wallpapers/3ccb8250-67f7-447e-ae38-96fa94122efc/v1/foreground.webp",
+  "clockConfig": {
+    "enabled": true,
+    "style": "monument",
+    "position": "custom",
+    "customX": 0.348,
+    "customY": 0.274,
+    "font": "Oswald",
+    "weight": 700,
+    "scale": 1,
+    "rotation": 0,
+    "color": "#FFFFFFFF",
+    "opacity": 1,
+    "depth": 0.45,
+    "shadow": {
+      "enabled": true,
+      "strength": 0.4
+    },
+    "date": {
+      "enabled": false,
+      "position": "below",
+      "color": "#FFFFFFCC"
+    },
+    "sizePx": 208,
+    "horizontalScale": 1,
+    "stretchY": 1,
+    "fontWeightPreset": "regular",
+    "colorMode": "split",
+    "hoursColor": null,
+    "minutesColor": "#E65100",
+    "colonColor": "hours",
+    "colonColorCustom": null,
+    "timeLayout": "stackedCompact",
+    "showColon": true,
+    "lineSpacing": 1,
+    "minuteOffsetX": 0,
+    "is24Hour": false,
+    "showSeconds": false,
+    "showAmPm": false,
+    "dateScale": 1,
+    "showGlow": false,
+    "showStroke": false,
+    "strokeWidth": 2,
+    "gradientFrom": null,
+    "gradientTo": null,
+    "gradientAngleDeg": 180,
+    "hoursFont": null,
+    "minutesFont": null,
+    "strokeColor": "#000000FF",
+    "strokeOrder": "behind",
+    "fillOpacity": 1,
+    "fadeAmount": 0.35,
+    "fadeDirection": "both",
+    "blur": 0,
+    "schemaVersion": 1
+  },
+  "depthConfig": {
+    "foregroundScale": 1,
+    "foregroundOffsetX": 0,
+    "foregroundOffsetY": 0,
+    "blurRadius": 0,
+    "shadowStrength": 0.35,
+    "parallaxStrength": 0
+  },
+  "video": null,
+  "studio": null,
+  "publishedAt": "2026-09-14T13:09:19.061Z"
+}

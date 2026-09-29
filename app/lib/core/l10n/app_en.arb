@@ -14,33 +14,64 @@
   "languageSubtitle": "App display language",
   "clearCache": "Clear cache",
   "cacheUsed": "{size} used",
-  "@cacheUsed": { "placeholders": { "size": { "type": "String" } } },
+  "@cacheUsed": {
+    "placeholders": {
+      "size": {
+        "type": "String"
+      }
+    }
+  },
   "clearCacheConfirmTitle": "Clear cache?",
   "clearCacheConfirmBody": "This removes downloaded image data. Wallpapers will re-download when viewed.",
   "clearingLabel": "Clearing…",
+  "rateApp": "Rate the app",
+  "rateAppSubtitle": "Enjoying Creative Backgrounds?",
+  "shareApp": "Share app",
+  "shareAppSubtitle": "Tell a friend about Creative Backgrounds",
+  "shareAppMessage": "Check out Creative Backgrounds - beautiful wallpapers for your phone: {url}",
+  "@shareAppMessage": {
+    "placeholders": {
+      "url": {
+        "type": "String"
+      }
+    }
+  },
+  "storeUnavailable": "Could not open the Play Store.",
   "about": "About",
   "aboutSubtitle": "Version & credits",
+  "privacyOptions": "Privacy Options",
+  "privacyOptionsSubtitle": "Manage your ad consent choices",
   "searchWallpapers": "Search wallpapers…",
   "privacyPolicy": "Privacy Policy",
   "termsOfService": "Terms of Service",
   "madeWithFlutter": "Made with Flutter",
   "appVersion": "Version {version}",
   "@appVersion": {
-    "placeholders": { "version": { "type": "String" } }
+    "placeholders": {
+      "version": {
+        "type": "String"
+      }
+    }
   },
   "privacyBody": "Creative Backgrounds respects your privacy. Wallpapers you favorite and your app preferences are stored only on your device. We do not collect personal information, and applied wallpapers never leave your phone.\n\nImages are streamed from our content delivery network to display and apply wallpapers. Standard, non-identifying request metadata may be processed to serve content.\n\nThis is placeholder content. Replace it with your finalized policy before release.",
   "termsBody": "By using Creative Backgrounds you agree to use the wallpapers for personal, non-commercial purposes. Wallpaper content remains the property of its respective creators.\n\nThe app is provided \"as is\" without warranties of any kind. We are not liable for any device-specific issues that arise from applying wallpapers.\n\nThis is placeholder content. Replace it with your finalized terms before release.",
-  "applyTo": "Apply to…",
+  "setAsWallpaperTitle": "Set as Wallpaper",
+  "applyTo": "Choose where you want to apply this wallpaper",
   "homeScreen": "Home Screen",
   "lockScreen": "Lock Screen",
+  "bothScreens": "Both",
   "homeAndLockScreen": "Home + Lock Screen",
   "setAsLiveWallpaper": "Set as live wallpaper",
+  "withDesign": "With Design",
+  "wallpaperOnly": "Wallpaper Only",
   "cancel": "Cancel",
   "customize": "Customize",
   "apply": "Apply",
   "applyWallpaper": "Apply Wallpaper",
   "wallpaperApplied": "Wallpaper Applied!",
   "wallpaperAppliedSubtitle": "Your wallpaper has been set successfully.",
+  "liveWallpaperAppliedToast": "Live wallpaper applied",
+  "liveWallpaperNotAppliedToast": "Wallpaper was not applied",
   "done": "Done",
   "depthEffect": "Depth Effect",
   "depthEffectDescription": "The clock sits behind the subject of the wallpaper, like the iOS lock screen.",
@@ -48,6 +79,7 @@
   "font": "FONT",
   "color": "COLOR",
   "size": "Size",
+  "clockHeight": "Stretch",
   "opacity": "Opacity",
   "shadow": "Shadow",
   "glow": "Glow",
@@ -61,6 +93,9 @@
   "clear": "Clear",
   "somethingWentWrong": "Something went wrong",
   "tryAgain": "Try again",
+  "retry": "Retry",
+  "sortBy": "Sort by",
+  "customColor": "Custom Color",
   "specialFeatures": "Special Features",
   "transparentWallpaper": "Transparent Wallpaper",
   "transparentWallpaperSubtitle": "See through your phone with the live rear camera",
@@ -81,7 +116,9 @@
   "twApplyIn": "Apply in {seconds}s",
   "@twApplyIn": {
     "placeholders": {
-      "seconds": { "type": "int" }
+      "seconds": {
+        "type": "int"
+      }
     }
   },
   "twCancel": "Cancel",
@@ -108,5 +145,35 @@
   "twQualityBalanced": "Balanced",
   "twQualitySaver": "Saver",
   "twQualityHint": "Higher quality looks smoother but uses more battery.",
-  "twRestoreWallpaper": "Restore previous wallpaper"
+  "twRestoreWallpaper": "Restore previous wallpaper",
+  "twMsgIncompatible": "Your device can’t run the transparent wallpaper.",
+  "twMsgStopping": "Turning off…",
+  "twMsgRecovering": "Reconnecting to the camera…",
+  "twMsgPaused": "Paused while the screen is off.",
+  "liveWallpapers": "Live Wallpapers",
+  "depthsAndWallpapers": "Depths & Wallpapers",
+  "newWallpapers": "New Wallpapers",
+  "allWallpapers": "All",
+  "wallpapers": "Wallpapers",
+  "adBlockClear": "No network filtering detected.",
+  "adBlockVpnDetected": "A VPN is active. This may affect some content.",
+  "adBlockDnsSuspicious": "A filtering DNS service is configured on this device.",
+  "adBlockRequestsBlocked": "Some network requests appear to be blocked.",
+  "adBlockUnknown": "Unable to determine your network status.",
+  "removeFromFavorites": "Remove from favorites",
+  "filter": "Filter",
+  "filters": "Filters",
+  "categories": "CATEGORIES",
+  "reset": "Reset",
+  "adsBlockedTitle": "Ads are required to use this app",
+  "adsBlockedBody": "It looks like an ad blocker, VPN, or DNS filter is preventing ads from loading. Please disable it and try again.",
+  "adsBlockedRetry": "Retry",
+  "watchAdToApplyTitle": "Watch an ad to apply",
+  "watchAdToApplyBody": "This is a PRO wallpaper. Watch a short ad to apply it.",
+  "watchAd": "Watch Ad",
+  "rewardedAdUnavailable": "The ad isn't ready yet. Please try again in a moment.",
+  "updateRequiredTitle": "Update Required",
+  "updateRequiredBody": "A new version of Creative Backgrounds is available. Please update to continue.",
+  "updateNow": "Update Now",
+  "couldNotOpenStore": "Could not open the Play Store."
 }

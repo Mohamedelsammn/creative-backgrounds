@@ -17,17 +17,34 @@ class ExploreLoading extends ExploreState {
 
 class ExploreLoaded extends ExploreState {
   const ExploreLoaded({
-    required this.trending,
-    required this.latest,
-    required this.categories,
+    required this.wallpapers,
+    required this.hasMore,
+    this.isLoadingMore = false,
   });
 
-  final List<WallpaperEntity> trending;
-  final List<WallpaperEntity> latest;
-  final List<CategoryEntity> categories;
+  /// The single mixed feed (normal + depth + live), newest first.
+  final List<WallpaperEntity> wallpapers;
+  final bool hasMore;
+
+  /// True while a next-page request is in flight - lets the feed sliver show
+  /// a trailing loading indicator without re-entering [ExploreLoading] and
+  /// discarding what has already loaded.
+  final bool isLoadingMore;
+
+  ExploreLoaded copyWith({
+    List<WallpaperEntity>? wallpapers,
+    bool? hasMore,
+    bool? isLoadingMore,
+  }) {
+    return ExploreLoaded(
+      wallpapers: wallpapers ?? this.wallpapers,
+      hasMore: hasMore ?? this.hasMore,
+      isLoadingMore: isLoadingMore ?? this.isLoadingMore,
+    );
+  }
 
   @override
-  List<Object?> get props => [trending, latest, categories];
+  List<Object?> get props => [wallpapers, hasMore, isLoadingMore];
 }
 
 class ExploreError extends ExploreState {

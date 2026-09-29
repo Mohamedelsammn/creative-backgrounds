@@ -100,7 +100,10 @@ class _Body extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Align(alignment: Alignment.centerLeft, child: TransparentStatusPill(state: state)),
+        Align(
+          alignment: AlignmentDirectional.centerStart,
+          child: TransparentStatusPill(state: state),
+        ),
         const SizedBox(height: 16),
         Text(context.l10n.twPermissionRationale,
             style: AppTextStyles.bodyMedium.copyWith(height: 1.4)),

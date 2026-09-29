@@ -58,6 +58,11 @@ class TransparentRestoreRequested extends TransparentWallpaperEvent {
 }
 
 /// Internal: a native state change arrived on the status stream.
+/// The app returned to the foreground; reconcile with the system.
+class TransparentResumed extends TransparentWallpaperEvent {
+  const TransparentResumed();
+}
+
 class TransparentStatusChanged extends TransparentWallpaperEvent {
   const TransparentStatusChanged(this.runtime);
 

@@ -1,26 +1,193 @@
 {
-  "categories": [
-    { "id": "cat_neon", "name": "Neon", "color": "#F5A623", "thumbnailUrl": "https://picsum.photos/seed/tokyo-dusk/600/900", "wallpaperCount": 24 },
-    { "id": "cat_nature", "name": "Nature", "color": "#4CAF50", "thumbnailUrl": "https://picsum.photos/seed/golden-shore/600/900", "wallpaperCount": 42 },
-    { "id": "cat_dark", "name": "Dark", "color": "#3A7BD5", "thumbnailUrl": "https://picsum.photos/seed/ember/600/900", "wallpaperCount": 31 },
-    { "id": "cat_mountains", "name": "Mountains", "color": "#6B8CAE", "thumbnailUrl": "https://picsum.photos/seed/alpine-mist/600/900", "wallpaperCount": 18 },
-    { "id": "cat_space", "name": "Space", "color": "#7B61FF", "thumbnailUrl": "https://picsum.photos/seed/aurora/600/900", "wallpaperCount": 27 },
-    { "id": "cat_amoled", "name": "AMOLED", "color": "#9C6ADE", "thumbnailUrl": "https://picsum.photos/seed/void/600/900", "wallpaperCount": 15 }
-  ],
-  "wallpapers": [
-    { "id": "wp_tokyo_dusk", "title": "Tokyo Dusk", "category": { "id": "cat_neon", "name": "Neon", "color": "#F5A623" }, "thumbnailUrl": "https://picsum.photos/seed/tokyo-dusk/600/900", "fullUrl": "https://picsum.photos/seed/tokyo-dusk/1080/1920", "resolution": "2160x3840", "isPremium": true, "hasForegroundMask": false, "foregroundMaskUrl": null, "downloadCount": 14200, "fileSizeBytes": 8400000, "tags": ["city","neon","night"], "createdAt": "2026-06-20T00:00:00Z" },
-    { "id": "wp_golden_shore", "title": "Golden Shore", "category": { "id": "cat_nature", "name": "Nature", "color": "#4CAF50" }, "thumbnailUrl": "https://picsum.photos/seed/golden-shore/600/900", "fullUrl": "https://picsum.photos/seed/golden-shore/1080/1920", "resolution": "2160x3840", "isPremium": false, "hasForegroundMask": false, "foregroundMaskUrl": null, "downloadCount": 9800, "fileSizeBytes": 7200000, "tags": ["beach","sunset","sea"], "createdAt": "2026-06-18T00:00:00Z" },
-    { "id": "wp_ember", "title": "Ember", "category": { "id": "cat_dark", "name": "Dark", "color": "#3A7BD5" }, "thumbnailUrl": "https://picsum.photos/seed/ember/600/900", "fullUrl": "https://picsum.photos/seed/ember/1080/1920", "resolution": "2160x3840", "isPremium": false, "hasForegroundMask": false, "foregroundMaskUrl": null, "downloadCount": 6100, "fileSizeBytes": 5100000, "tags": ["dark","smoke"], "createdAt": "2026-06-15T00:00:00Z" },
-    { "id": "wp_alpine_mist", "title": "Alpine Mist", "category": { "id": "cat_mountains", "name": "Mountains", "color": "#6B8CAE" }, "thumbnailUrl": "https://picsum.photos/seed/alpine-mist/600/900", "fullUrl": "https://picsum.photos/seed/alpine-mist/1080/1920", "resolution": "2160x3840", "isPremium": false, "hasForegroundMask": true, "foregroundMaskUrl": "https://picsum.photos/seed/alpine-mist-mask/1080/1920", "downloadCount": 11300, "fileSizeBytes": 9100000, "tags": ["mountain","fog","peak"], "createdAt": "2026-06-12T00:00:00Z" },
-    { "id": "wp_sakura", "title": "Sakura", "category": { "id": "cat_nature", "name": "Nature", "color": "#4CAF50" }, "thumbnailUrl": "https://picsum.photos/seed/sakura/600/900", "fullUrl": "https://picsum.photos/seed/sakura/1080/1920", "resolution": "2160x3840", "isPremium": true, "hasForegroundMask": false, "foregroundMaskUrl": null, "downloadCount": 15400, "fileSizeBytes": 6800000, "tags": ["blossom","spring","pink"], "createdAt": "2026-06-10T00:00:00Z" },
-    { "id": "wp_dune_light", "title": "Dune Light", "category": { "id": "cat_nature", "name": "Nature", "color": "#4CAF50" }, "thumbnailUrl": "https://picsum.photos/seed/dune-light/600/900", "fullUrl": "https://picsum.photos/seed/dune-light/1080/1920", "resolution": "2160x3840", "isPremium": false, "hasForegroundMask": false, "foregroundMaskUrl": null, "downloadCount": 4300, "fileSizeBytes": 5600000, "tags": ["desert","sand","warm"], "createdAt": "2026-06-08T00:00:00Z" },
-    { "id": "wp_aurora", "title": "Aurora", "category": { "id": "cat_space", "name": "Space", "color": "#7B61FF" }, "thumbnailUrl": "https://picsum.photos/seed/aurora/600/900", "fullUrl": "https://picsum.photos/seed/aurora/1080/1920", "resolution": "2160x3840", "isPremium": false, "hasForegroundMask": true, "foregroundMaskUrl": "https://picsum.photos/seed/aurora-mask/1080/1920", "downloadCount": 20100, "fileSizeBytes": 8800000, "tags": ["aurora","night","sky","nature"], "createdAt": "2026-07-05T00:00:00Z" },
-    { "id": "wp_void", "title": "Void", "category": { "id": "cat_amoled", "name": "AMOLED", "color": "#9C6ADE" }, "thumbnailUrl": "https://picsum.photos/seed/void/600/900", "fullUrl": "https://picsum.photos/seed/void/1080/1920", "resolution": "2160x3840", "isPremium": false, "hasForegroundMask": false, "foregroundMaskUrl": null, "downloadCount": 7700, "fileSizeBytes": 3200000, "tags": ["amoled","black","minimal"], "createdAt": "2026-07-03T00:00:00Z" },
-    { "id": "wp_midnight_city", "title": "Midnight City", "category": { "id": "cat_neon", "name": "Neon", "color": "#F5A623" }, "thumbnailUrl": "https://picsum.photos/seed/midnight-city/600/900", "fullUrl": "https://picsum.photos/seed/midnight-city/1080/1920", "resolution": "2160x3840", "isPremium": false, "hasForegroundMask": false, "foregroundMaskUrl": null, "downloadCount": 5200, "fileSizeBytes": 7000000, "tags": ["city","lights"], "createdAt": "2026-07-01T00:00:00Z" },
-    { "id": "wp_coastline", "title": "Coastline", "category": { "id": "cat_nature", "name": "Nature", "color": "#4CAF50" }, "thumbnailUrl": "https://picsum.photos/seed/coastline/600/900", "fullUrl": "https://picsum.photos/seed/coastline/1080/1920", "resolution": "2160x3840", "isPremium": false, "hasForegroundMask": false, "foregroundMaskUrl": null, "downloadCount": 3900, "fileSizeBytes": 6400000, "tags": ["coast","cliff","sea"], "createdAt": "2026-06-28T00:00:00Z" },
-    { "id": "wp_nebula", "title": "Nebula", "category": { "id": "cat_space", "name": "Space", "color": "#7B61FF" }, "thumbnailUrl": "https://picsum.photos/seed/nebula/600/900", "fullUrl": "https://picsum.photos/seed/nebula/1080/1920", "resolution": "2160x3840", "isPremium": true, "hasForegroundMask": false, "foregroundMaskUrl": null, "downloadCount": 18800, "fileSizeBytes": 9400000, "tags": ["nebula","galaxy","stars"], "createdAt": "2026-06-26T00:00:00Z" },
-    { "id": "wp_basalt", "title": "Basalt", "category": { "id": "cat_dark", "name": "Dark", "color": "#3A7BD5" }, "thumbnailUrl": "https://picsum.photos/seed/basalt/600/900", "fullUrl": "https://picsum.photos/seed/basalt/1080/1920", "resolution": "2160x3840", "isPremium": false, "hasForegroundMask": false, "foregroundMaskUrl": null, "downloadCount": 2600, "fileSizeBytes": 4800000, "tags": ["rock","texture","dark"], "createdAt": "2026-06-24T00:00:00Z" },
-    { "id": "wp_peaks", "title": "Peaks", "category": { "id": "cat_mountains", "name": "Mountains", "color": "#6B8CAE" }, "thumbnailUrl": "https://picsum.photos/seed/peaks/600/900", "fullUrl": "https://picsum.photos/seed/peaks/1080/1920", "resolution": "2160x3840", "isPremium": false, "hasForegroundMask": false, "foregroundMaskUrl": null, "downloadCount": 8400, "fileSizeBytes": 8000000, "tags": ["mountain","snow","range"], "createdAt": "2026-06-22T00:00:00Z" },
-    { "id": "wp_obsidian", "title": "Obsidian", "category": { "id": "cat_amoled", "name": "AMOLED", "color": "#9C6ADE" }, "thumbnailUrl": "https://picsum.photos/seed/obsidian/600/900", "fullUrl": "https://picsum.photos/seed/obsidian/1080/1920", "resolution": "2160x3840", "isPremium": false, "hasForegroundMask": false, "foregroundMaskUrl": null, "downloadCount": 3300, "fileSizeBytes": 2900000, "tags": ["amoled","gradient"], "createdAt": "2026-06-19T00:00:00Z" }
-  ]
+  "_comment": "Fixture catalog in the real public-API shape (see /api/v1/public/wallpapers). Parsed through the same WallpaperModel.fromApiFeedItem path as live data, so MOCK_API exercises production parsing. Covers all three types plus an unknown one.",
+  "categories": {
+    "data": [
+      { "id": "01a03116-d23e-77e1-83f2-34d95a841644", "slug": "nature", "nameEn": "Nature", "nameAr": "طبيعة", "iconUrl": null, "color": "#4CAF50", "coverThumbnailUrl": "https://picsum.photos/seed/golden-shore/600/900", "wallpaperCount": 4 },
+      { "id": "01a03116-d259-7a71-b9f4-40f4351231c2", "slug": "amoled", "nameEn": "AMOLED", "nameAr": "أموليد", "iconUrl": null, "color": "#9C6ADE", "coverThumbnailUrl": "https://picsum.photos/seed/void/600/900", "wallpaperCount": 2 },
+      { "id": "01a03116-d262-7c03-8cf0-61ccd52daff3", "slug": "space", "nameEn": "Space", "nameAr": "فضاء", "iconUrl": null, "color": "#7B61FF", "coverThumbnailUrl": "https://picsum.photos/seed/aurora/600/900", "wallpaperCount": 2 },
+      { "id": "01a03116-d26a-79a1-b2b3-5dd39696e2d5", "slug": "cars", "nameEn": "Cars", "nameAr": "سيارات", "iconUrl": null, "color": "#E4572E", "coverThumbnailUrl": "https://picsum.photos/seed/jet-sky/600/900", "wallpaperCount": 1 },
+      { "id": "01a03116-d271-7fb3-b179-aff4cd8af471", "slug": "anime", "nameEn": "Anime", "nameAr": "أنمي", "iconUrl": null, "color": "#F5A623", "coverThumbnailUrl": "https://picsum.photos/seed/sakura/600/900", "wallpaperCount": 1 },
+      { "id": "01a03116-d277-7793-81e5-c6c21aaf27e3", "slug": "minimal", "nameEn": "Minimal", "nameAr": "بسيط", "iconUrl": null, "color": "#6B8CAE", "coverThumbnailUrl": "https://picsum.photos/seed/dune-light/600/900", "wallpaperCount": 1 },
+      { "id": "01a03116-d27d-78d0-b607-fb78f477ad7e", "slug": "abstract", "nameEn": "Abstract", "nameAr": "تجريدي", "iconUrl": null, "color": "#3A7BD5", "coverThumbnailUrl": "https://picsum.photos/seed/ember/600/900", "wallpaperCount": 1 },
+      { "id": "01a03116-d282-70d2-a4d1-6e26926c4429", "slug": "animals", "nameEn": "Animals", "nameAr": "حيوانات", "iconUrl": null, "color": "#8D6E63", "coverThumbnailUrl": "https://picsum.photos/seed/peaks/600/900", "wallpaperCount": 0 }
+    ]
+  },
+  "wallpapers": {
+    "data": [
+      {
+        "id": "01a03200-0001-7000-8000-000000000001", "slug": "tokyo-dusk", "title": "Tokyo Dusk", "type": "standard",
+        "width": 2160, "height": 3840, "resolutionLabel": "2160x3840", "dominantColor": "#1B1033",
+        "isPremium": true, "isFeatured": true, "categorySlug": "cities",
+        "thumbnailUrl": "https://picsum.photos/seed/tokyo-dusk/600/900",
+        "tags": [{ "slug": "city", "name": "City" }, { "slug": "neon", "name": "Neon" }, { "slug": "night", "name": "Night" }],
+        "downloads": 14200, "fileSizeBytes": 8400000, "blurhash": "LEHV6nWB2yk8pyo0adR*.7kCMdnj",
+        "publishedAt": "2026-06-20T00:00:00Z"
+      },
+      {
+        "id": "01a03200-0001-7000-8000-000000000002", "slug": "golden-shore", "title": "Golden Shore", "type": "standard",
+        "width": 2160, "height": 3840, "resolutionLabel": "2160x3840", "dominantColor": "#C98B3A",
+        "isPremium": false, "isFeatured": false, "categorySlug": "nature",
+        "thumbnailUrl": "https://picsum.photos/seed/golden-shore/600/900",
+        "tags": [{ "slug": "beach", "name": "Beach" }, { "slug": "sunset", "name": "Sunset" }],
+        "downloads": 9800, "fileSizeBytes": 7200000, "blurhash": null,
+        "publishedAt": "2026-06-18T00:00:00Z"
+      },
+      {
+        "id": "01a03200-0001-7000-8000-000000000003", "slug": "ember", "title": "Ember", "type": "standard",
+        "width": 2160, "height": 3840, "resolutionLabel": "2160x3840", "dominantColor": "#2B1416",
+        "isPremium": false, "isFeatured": false, "categorySlug": "abstract",
+        "thumbnailUrl": "https://picsum.photos/seed/ember/600/900",
+        "tags": [{ "slug": "dark", "name": "Dark" }, { "slug": "smoke", "name": "Smoke" }],
+        "downloads": 6100, "fileSizeBytes": 5100000, "blurhash": null,
+        "publishedAt": "2026-06-15T00:00:00Z"
+      },
+      {
+        "id": "01a03200-0002-7000-8000-000000000004", "slug": "alpine-mist", "title": "Alpine Mist", "type": "depth",
+        "width": 2160, "height": 3840, "resolutionLabel": "2160x3840", "dominantColor": "#7C8FA3",
+        "isPremium": false, "isFeatured": true, "categorySlug": "nature",
+        "thumbnailUrl": "https://picsum.photos/seed/alpine-mist/600/900",
+        "background": "https://picsum.photos/seed/alpine-mist-bg/1080/1920",
+        "foreground": "https://picsum.photos/seed/alpine-mist-fg/1080/1920",
+        "clockConfig": {
+          "enabled": true, "style": "outlined", "position": "center", "customX": null, "customY": null,
+          "font": "BebasNeue", "weight": 700, "scale": 1.2, "rotation": 0,
+          "color": "#FFFFFF", "opacity": 1, "depth": 0.45,
+          "shadow": { "enabled": true, "strength": 0.6 },
+          "date": { "enabled": true, "position": "below", "color": "#E8E8E8" },
+          "schemaVersion": 1
+        },
+        "depthConfig": { "foregroundScale": 1.0, "foregroundOffsetX": 0, "foregroundOffsetY": 0.05, "blurRadius": 0, "shadowStrength": 0.4 },
+        "tags": [{ "slug": "mountain", "name": "Mountain" }, { "slug": "fog", "name": "Fog" }],
+        "downloads": 11300, "fileSizeBytes": 9100000, "blurhash": null,
+        "publishedAt": "2026-06-12T00:00:00Z"
+      },
+      {
+        "id": "01a03200-0002-7000-8000-000000000005", "slug": "jet-sky", "title": "Jet Sky", "type": "depth",
+        "width": 2160, "height": 3840, "resolutionLabel": "2160x3840", "dominantColor": "#2E4A6B",
+        "isPremium": true, "isFeatured": true, "categorySlug": "cars",
+        "thumbnailUrl": "https://picsum.photos/seed/jet-sky/600/900",
+        "background": "https://picsum.photos/seed/jet-sky-bg/1080/1920",
+        "foreground": "https://picsum.photos/seed/jet-sky-fg/1080/1920",
+        "clockConfig": {
+          "enabled": true, "style": "thin", "position": "custom", "customX": 0.5, "customY": 0.22,
+          "font": "PlayfairDisplay", "weight": 300, "scale": 1.6, "rotation": -4,
+          "color": "#FFFFFFCC", "opacity": 0.95, "depth": 0.7,
+          "shadow": { "enabled": false, "strength": 0 },
+          "date": { "enabled": false, "position": "above", "color": "#FFFFFF" },
+          "schemaVersion": 1
+        },
+        "depthConfig": { "foregroundScale": 1.15, "foregroundOffsetX": -0.04, "foregroundOffsetY": 0.08, "blurRadius": 12, "shadowStrength": 0.7 },
+        "tags": [{ "slug": "sky", "name": "Sky" }, { "slug": "speed", "name": "Speed" }],
+        "downloads": 20100, "fileSizeBytes": 8800000, "blurhash": null,
+        "publishedAt": "2026-07-05T00:00:00Z"
+      },
+      {
+        "id": "01a03200-0002-7000-8000-000000000006", "slug": "sakura", "title": "Sakura", "type": "depth",
+        "width": 2160, "height": 3840, "resolutionLabel": "2160x3840", "dominantColor": "#D98CA6",
+        "isPremium": true, "isFeatured": false, "categorySlug": "anime",
+        "thumbnailUrl": "https://picsum.photos/seed/sakura/600/900",
+        "background": "https://picsum.photos/seed/sakura-bg/1080/1920",
+        "foreground": "https://picsum.photos/seed/sakura-fg/1080/1920",
+        "clockConfig": null,
+        "depthConfig": null,
+        "tags": [{ "slug": "blossom", "name": "Blossom" }, { "slug": "spring", "name": "Spring" }],
+        "downloads": 15400, "fileSizeBytes": 6800000, "blurhash": null,
+        "publishedAt": "2026-06-10T00:00:00Z"
+      },
+      {
+        "id": "01a03200-0003-7000-8000-000000000007", "slug": "aurora-drift", "title": "Aurora Drift", "type": "video",
+        "width": 1080, "height": 1920, "resolutionLabel": "1080x1920", "dominantColor": "#123B4A",
+        "isPremium": false, "isFeatured": true, "categorySlug": "space",
+        "thumbnailUrl": "https://picsum.photos/seed/aurora/600/900",
+        "video": {
+          "url": "https://cdn.example.invalid/aurora-drift/loop.mp4", "mime": "video/mp4",
+          "width": 1080, "height": 1920, "durationMs": 8000, "fps": 30,
+          "sizeBytes": 4200000, "codec": "h264"
+        },
+        "tags": [{ "slug": "aurora", "name": "Aurora" }, { "slug": "loop", "name": "Loop" }],
+        "downloads": 18800, "fileSizeBytes": 4200000, "blurhash": null,
+        "publishedAt": "2026-07-08T00:00:00Z"
+      },
+      {
+        "id": "01a03200-0003-7000-8000-000000000008", "slug": "nebula-flow", "title": "Nebula Flow", "type": "video",
+        "width": 1080, "height": 1920, "resolutionLabel": "1080x1920", "dominantColor": "#3B1F5E",
+        "isPremium": true, "isFeatured": false, "categorySlug": "space",
+        "thumbnailUrl": "https://picsum.photos/seed/nebula/600/900",
+        "video": {
+          "url": "https://cdn.example.invalid/nebula-flow/loop.mp4", "mime": "video/mp4",
+          "width": 1080, "height": 1920, "durationMs": 12000, "fps": 24,
+          "sizeBytes": 6100000, "codec": "h264"
+        },
+        "tags": [{ "slug": "nebula", "name": "Nebula" }, { "slug": "galaxy", "name": "Galaxy" }],
+        "downloads": 12400, "fileSizeBytes": 6100000, "blurhash": null,
+        "publishedAt": "2026-06-26T00:00:00Z"
+      },
+      {
+        "id": "01a03200-0004-7000-8000-000000000009", "slug": "future-format", "title": "Future Format", "type": "parallax",
+        "width": 1080, "height": 1920, "resolutionLabel": "1080x1920", "dominantColor": "#444444",
+        "isPremium": false, "isFeatured": false, "categorySlug": "minimal",
+        "thumbnailUrl": "https://picsum.photos/seed/dune-light/600/900",
+        "tags": [],
+        "downloads": 100, "fileSizeBytes": null, "blurhash": null,
+        "publishedAt": "2026-07-10T00:00:00Z"
+      },
+      {
+        "id": "01a03200-0001-7000-8000-000000000010", "slug": "void", "title": "Void", "type": "standard",
+        "width": 2160, "height": 3840, "resolutionLabel": "2160x3840", "dominantColor": "#000000",
+        "isPremium": false, "isFeatured": false, "categorySlug": "amoled",
+        "thumbnailUrl": "https://picsum.photos/seed/void/600/900",
+        "tags": [{ "slug": "amoled", "name": "AMOLED" }, { "slug": "black", "name": "Black" }],
+        "downloads": 7700, "fileSizeBytes": 3200000, "blurhash": null,
+        "publishedAt": "2026-07-03T00:00:00Z"
+      },
+      {
+        "id": "01a03200-0001-7000-8000-000000000011", "slug": "midnight-city", "title": "Midnight City", "type": "standard",
+        "width": 2160, "height": 3840, "resolutionLabel": "2160x3840", "dominantColor": "#101828",
+        "isPremium": false, "isFeatured": false, "categorySlug": "cities",
+        "thumbnailUrl": "https://picsum.photos/seed/midnight-city/600/900",
+        "tags": [{ "slug": "city", "name": "City" }, { "slug": "lights", "name": "Lights" }],
+        "downloads": 5200, "fileSizeBytes": 7000000, "blurhash": null,
+        "publishedAt": "2026-07-01T00:00:00Z"
+      },
+      {
+        "id": "01a03200-0001-7000-8000-000000000012", "slug": "coastline", "title": "Coastline", "type": "standard",
+        "width": 2160, "height": 3840, "resolutionLabel": "2160x3840", "dominantColor": "#2F6B7A",
+        "isPremium": false, "isFeatured": false, "categorySlug": "nature",
+        "thumbnailUrl": "https://picsum.photos/seed/coastline/600/900",
+        "tags": [{ "slug": "coast", "name": "Coast" }, { "slug": "sea", "name": "Sea" }],
+        "downloads": 3900, "fileSizeBytes": 6400000, "blurhash": null,
+        "publishedAt": "2026-06-28T00:00:00Z"
+      },
+      {
+        "id": "01a03200-0001-7000-8000-000000000013", "slug": "dune-light", "title": "Dune Light", "type": "standard",
+        "width": 2160, "height": 3840, "resolutionLabel": "2160x3840", "dominantColor": "#D9B889",
+        "isPremium": false, "isFeatured": false, "categorySlug": "minimal",
+        "thumbnailUrl": "https://picsum.photos/seed/dune-light/600/900",
+        "tags": [{ "slug": "desert", "name": "Desert" }, { "slug": "sand", "name": "Sand" }],
+        "downloads": 4300, "fileSizeBytes": 5600000, "blurhash": null,
+        "publishedAt": "2026-06-08T00:00:00Z"
+      },
+      {
+        "id": "01a03200-0001-7000-8000-000000000014", "slug": "obsidian", "title": "Obsidian", "type": "standard",
+        "width": 2160, "height": 3840, "resolutionLabel": "2160x3840", "dominantColor": "#0A0A0C",
+        "isPremium": false, "isFeatured": false, "categorySlug": "amoled",
+        "thumbnailUrl": "https://picsum.photos/seed/obsidian/600/900",
+        "tags": [{ "slug": "amoled", "name": "AMOLED" }, { "slug": "gradient", "name": "Gradient" }],
+        "downloads": 3300, "fileSizeBytes": 2900000, "blurhash": null,
+        "publishedAt": "2026-06-19T00:00:00Z"
+      }
+    ],
+    "meta": { "hasMore": false, "nextCursor": null }
+  },
+  "details": {
+    "01a03200-0002-7000-8000-000000000004": {
+      "assets": {
+        "ORIGINAL": { "url": "https://picsum.photos/seed/alpine-mist/1080/1920", "mime": "image/webp", "width": 2160, "height": 3840, "bytes": 9100000 },
+        "BACKGROUND": { "url": "https://picsum.photos/seed/alpine-mist-bg/1080/1920", "mime": "image/webp", "width": 2160, "height": 3840, "bytes": 7400000 },
+        "FOREGROUND": { "url": "https://picsum.photos/seed/alpine-mist-fg/1080/1920", "mime": "image/png", "width": 2160, "height": 3840, "bytes": 3100000 },
+        "THUMBNAIL": { "url": "https://picsum.photos/seed/alpine-mist/600/900", "mime": "image/webp", "width": 360, "height": 640, "bytes": 48000 }
+      },
+      "description": "Fog rolling between two ridgelines at first light."
+    }
+  }
 }

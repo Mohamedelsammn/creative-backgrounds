@@ -1,7 +1,7 @@
 name: creativebackground
 description: "Creative Backgrounds — a premium Android wallpaper app with live clock and depth effects."
 publish_to: 'none'
-version: 1.0.0+1
+version: 5.0.3+47
 
 environment:
   sdk: ^3.10.1
@@ -32,6 +32,10 @@ dependencies:
 
   # Image loading
   cached_network_image: ^3.4.1
+  # Disk cache for looping video clips, so the in-app preview plays a local
+  # file (already resolved transitively via cached_network_image, so this
+  # adds no new package to the dependency tree).
+  flutter_cache_manager: ^3.4.1
 
   # Local storage
   hive: ^2.2.3
@@ -56,6 +60,27 @@ dependencies:
   share_plus: ^10.1.4
   package_info_plus: ^8.1.2
   webview_flutter: ^4.10.0
+  url_launcher: ^6.3.1
+
+  # Google Play In-App Review (Feature 2). Play may legitimately choose not
+  # to surface the sheet (quota/eligibility) - ReviewService treats that as
+  # a normal outcome, never a retry trigger.
+  in_app_review: ^2.0.9
+
+  # Google Play In-App Updates (Feature 1). Used for the immediate-update
+  # flow when Play has the new build staged; UpdateRequiredScreen always
+  # keeps the Play-listing deep link as its fallback.
+  in_app_update: ^4.2.3
+
+  # Ads (AdMob)
+  google_mobile_ads: ^5.3.1
+
+  # Video playback for LIVE (video) wallpapers, in-app preview only.
+  # The wallpaper itself is played natively by VideoWallpaperService.
+  video_player: ^2.9.2
+  # Gates playback on actual on-screen visibility so a scrolling list never
+  # holds a hardware decoder per card.
+  visibility_detector: ^0.4.0+2
 
   # UI helpers
   flutter_staggered_grid_view: ^0.7.0
@@ -73,6 +98,8 @@ dev_dependencies:
   build_runner: ^2.4.13
   freezed: ^2.5.7
   json_serializable: ^6.8.0
+  path_provider_platform_interface: ^2.1.2
+  plugin_platform_interface: ^2.1.8
 
 flutter:
   uses-material-design: true
@@ -98,3 +125,19 @@ flutter:
     - family: JetBrainsMono
       fonts:
         - asset: assets/fonts/JetBrainsMono-Variable.ttf
+    # Added for the Condensed/Monument/Poster/Editorial/Futuristic/Stencil
+    # clock styles - SIL Open Font License 1.1, downloaded from Google's own
+    # google/fonts repo (license text kept alongside for reference under
+    # assets/fonts/LICENSES/).
+    - family: Oswald
+      fonts:
+        - asset: assets/fonts/Oswald-Variable.ttf
+    - family: ArchivoBlack
+      fonts:
+        - asset: assets/fonts/ArchivoBlack-Regular.ttf
+          # The face IS Archivo Black (900). Declared as such so asking for
+          # 900 matches it instead of synthesizing bold on top.
+          weight: 900
+    - family: Anton
+      fonts:
+        - asset: assets/fonts/Anton-Regular.ttf

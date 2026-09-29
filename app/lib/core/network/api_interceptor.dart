@@ -10,6 +10,8 @@ import '../error/exceptions.dart';
 class ApiInterceptor extends Interceptor {
   @override
   void onRequest(RequestOptions options, RequestInterceptorHandler handler) {
+    // The public feed needs no auth; only send a bearer token if one is
+    // actually configured (the admin API is the only consumer that needs it).
     if (AppConfig.apiKey.isNotEmpty) {
       options.headers['Authorization'] = 'Bearer ${AppConfig.apiKey}';
     }
@@ -60,8 +62,24 @@ class ApiInterceptor extends Interceptor {
         return const NoInternetException();
       case DioExceptionType.badResponse:
         final status = err.response?.statusCode ?? 0;
+        final envelope = _readErrorEnvelope(err.response?.data);
         if (status == 401 || status == 403) return const UnauthorizedException();
         if (status == 404) return const NotFoundException();
+        if (status == 402) {
+          return PaymentRequiredException(
+            envelope?.message ?? 'This wallpaper is premium',
+          );
+        }
+        // A structured envelope tells us far more than the status alone
+        // (e.g. VALIDATION_FAILED on a query param we built wrong).
+        if (envelope != null) {
+          return ApiException(
+            code: envelope.code,
+            message: envelope.message,
+            statusCode: status,
+            traceId: envelope.traceId,
+          );
+        }
         if (status >= 500) return ServerException('Server error', status);
         return ServerException('Request failed', status);
       case DioExceptionType.cancel:
@@ -75,4 +93,32 @@ class ApiInterceptor extends Interceptor {
         return const ServerException('Unexpected network error');
     }
   }
+
+  /// Extracts the API's `{ error: { code, message, traceId } }` envelope.
+  /// Returns null when the body is not that shape.
+  static _ErrorEnvelope? _readErrorEnvelope(Object? data) {
+    if (data is! Map) return null;
+    final error = data['error'];
+    if (error is! Map) return null;
+    final code = error['code'];
+    final message = error['message'];
+    if (code is! String || message is! String) return null;
+    return _ErrorEnvelope(
+      code: code,
+      message: message,
+      traceId: error['traceId'] as String?,
+    );
+  }
+}
+
+class _ErrorEnvelope {
+  const _ErrorEnvelope({
+    required this.code,
+    required this.message,
+    this.traceId,
+  });
+
+  final String code;
+  final String message;
+  final String? traceId;
 }

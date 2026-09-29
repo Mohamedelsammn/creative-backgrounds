@@ -1,0 +1,19 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <application>
+        <!-- Overrides main/AndroidManifest.xml's AdMob APPLICATION_ID (which
+             deliberately holds Google's test App ID as the safe default for
+             debug/profile builds) with the real, revenue-generating App ID -
+             ONLY for release builds. This mirrors AdConstants.useRealAdUnits'
+             own kReleaseMode-driven ad-unit-ID switch (lib/core/ads/
+             ad_constants.dart), extended to the one AdMob value Dart cannot
+             control at runtime: the native SDK reads this meta-data before
+             Dart even starts, so it can only be swapped via the Gradle
+             manifest merge, never via AppConfig. -->
+        <meta-data
+            android:name="com.google.android.gms.ads.APPLICATION_ID"
+            android:value="ca-app-pub-6633902647647422~4498366369"
+            tools:replace="android:value" />
+    </application>
+</manifest>

@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:dartz/dartz.dart';
 
 import '../../../../core/error/failures.dart';
@@ -17,12 +19,18 @@ class InitializeAppUseCase implements UseCase<void, NoParams> {
 
   @override
   Future<Either<Failure, void>> call(NoParams params) async {
-    try {
-      // A connectivity probe (non-fatal): offline is a valid state.
-      await _networkInfo.isConnected;
-      return const Right(null);
-    } catch (_) {
-      return const Right(null);
-    }
+    // Connectivity is advisory and must not extend the branding minimum.
+    // Run it independently so a slow/broken platform network probe cannot
+    // hold Splash after its animation has completed. Offline remains valid.
+    unawaited(
+      Future<void>(() async {
+        try {
+          await _networkInfo.isConnected;
+        } catch (_) {
+          // Best-effort warm-up only.
+        }
+      }),
+    );
+    return const Right(null);
   }
 }

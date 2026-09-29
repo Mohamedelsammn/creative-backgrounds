@@ -89,6 +89,10 @@ class SettingsLocalDatasourceImpl implements SettingsLocalDatasource {
     if (!dir.existsSync()) return 0;
     for (final entity in dir.listSync(recursive: true, followLinks: false)) {
       if (entity is File) {
+        // A file can vanish (or become unreadable) between listSync()
+        // enumerating it and lengthSync() reading it - this is only a
+        // best-effort cache-size estimate for a settings screen, so skip
+        // that one file rather than failing the whole size calculation.
         try {
           total += entity.lengthSync();
         } catch (_) {}

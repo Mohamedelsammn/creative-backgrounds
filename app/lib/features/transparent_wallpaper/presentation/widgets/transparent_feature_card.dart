@@ -17,9 +17,9 @@ class TransparentFeatureCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider<TransparentWallpaperBloc>(
-      create: (_) =>
-          sl<TransparentWallpaperBloc>()..add(const TransparentWallpaperStarted()),
+    return BlocProvider<TransparentWallpaperBloc>.value(
+      value: sl<TransparentWallpaperBloc>()
+        ..add(const TransparentWallpaperStarted()),
       child: const _CardBody(),
     );
   }

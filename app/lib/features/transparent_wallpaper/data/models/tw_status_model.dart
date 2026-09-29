@@ -12,6 +12,7 @@ class TwStatusModel {
       error: map['error'] as String?,
       running: map['running'] as bool? ?? false,
       enabled: map['enabled'] as bool? ?? false,
+      pendingApply: map['pendingApply'] as bool? ?? false,
     );
   }
 
@@ -21,6 +22,14 @@ class TwStatusModel {
         return TwStatus.idle;
       case 'checking':
         return TwStatus.checking;
+      case 'incompatible':
+        return TwStatus.incompatible;
+      case 'ready':
+        return TwStatus.ready;
+      case 'stopping':
+        return TwStatus.stopping;
+      case 'recovering':
+        return TwStatus.recovering;
       case 'permission_needed':
         return TwStatus.permissionNeeded;
       case 'preparing':

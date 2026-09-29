@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../l10n/l10n.dart';
 import '../theme/app_colors.dart';
 import '../theme/app_text_styles.dart';
 
@@ -63,7 +64,7 @@ class FilterPill extends StatelessWidget {
   @override
   Widget build(BuildContext context) => IconPillChip(
         icon: Icons.tune_rounded,
-        label: 'Filters',
+        label: context.l10n.filter,
         onTap: onTap,
         active: active,
       );

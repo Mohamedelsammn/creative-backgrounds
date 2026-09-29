@@ -1,0 +1,131 @@
+{
+  "clockConfig": null,
+  "slug": "porshe-ob91x0",
+  "studio": {
+    "behavior": {
+      "applyTarget": "ask",
+      "clockEntrance": "none",
+      "clockEntranceMs": 600
+    },
+    "clock": {
+      "blur": 0,
+      "colonColor": "hours",
+      "colonColorCustom": null,
+      "color": "#FFFFFFFF",
+      "colorMode": "single",
+      "customX": 0.3,
+      "customY": 0.16,
+      "date": {
+        "color": "#FFFFFFFF",
+        "enabled": false,
+        "position": "below"
+      },
+      "dateScale": 1,
+      "depth": 0,
+      "enabled": true,
+      "fadeAmount": 0,
+      "fadeDirection": "bottom",
+      "fillOpacity": 1,
+      "font": "Inter",
+      "fontWeightPreset": "regular",
+      "gradientAngleDeg": 180,
+      "gradientFrom": null,
+      "gradientTo": null,
+      "horizontalScale": 1,
+      "hourFormat": "auto",
+      "hoursColor": null,
+      "hoursFont": null,
+      "is24Hour": false,
+      "lineSpacing": 1,
+      "minuteOffsetX": 0,
+      "minutesColor": null,
+      "minutesFont": null,
+      "opacity": 1,
+      "position": "custom",
+      "rotation": 0,
+      "scale": 1.1,
+      "separatorBlink": false,
+      "shadow": {
+        "enabled": false,
+        "strength": 0
+      },
+      "showAmPm": true,
+      "showColon": true,
+      "showGlow": false,
+      "showSeconds": false,
+      "showStroke": false,
+      "sizePx": 65,
+      "stretchY": 1,
+      "strokeColor": "#000000FF",
+      "strokeOrder": "behind",
+      "strokeWidth": 2,
+      "style": "modern",
+      "timeLayout": "inline",
+      "weight": 600
+    },
+    "dateWidget": {
+      "color": "#FFFFFFFF",
+      "customX": 0.3,
+      "customY": 0.24,
+      "enabled": true,
+      "font": "Inter",
+      "format": "short",
+      "locale": "en",
+      "pattern": null,
+      "position": "custom",
+      "scale": 0.8,
+      "uppercase": false,
+      "weight": 400
+    },
+    "scene": {
+      "blur": 0,
+      "brightness": 0,
+      "contrast": 0,
+      "duotone": {
+        "enabled": false,
+        "highlight": "#FFFFFFFF",
+        "shadow": "#000000FF"
+      },
+      "exposure": 0,
+      "gradientOverlay": {
+        "angleDeg": 180,
+        "blendMode": "normal",
+        "enabled": false,
+        "from": "#00000000",
+        "opacity": 0.5,
+        "to": "#000000FF"
+      },
+      "grain": {
+        "amount": 0,
+        "size": 1
+      },
+      "saturation": 0,
+      "sharpen": 0,
+      "tint": {
+        "blendMode": "soft-light",
+        "color": "#000000FF",
+        "enabled": false,
+        "opacity": 0.2
+      },
+      "vignette": {
+        "amount": 0,
+        "softness": 0.5
+      },
+      "warmth": 0
+    },
+    "styledPreviewUrl": null,
+    "widgets": [
+      {
+        "anchor": "top",
+        "color": "#FFFFFFFF",
+        "customX": 0.8,
+        "customY": 0.13,
+        "kind": "batteryRing",
+        "rotation": 0,
+        "scale": 1.1,
+        "showPercentage": true
+      }
+    ]
+  },
+  "type": "standard"
+}

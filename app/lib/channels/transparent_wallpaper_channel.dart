@@ -14,9 +14,9 @@ import '../features/transparent_wallpaper/domain/entities/tw_status.dart';
 /// compatibility check.
 class TransparentWallpaperChannel {
   static const MethodChannel _channel =
-      MethodChannel('com.creative.backgrounds/transparent');
+      MethodChannel('com.backgrounds.trend4k/transparent');
   static const EventChannel _events =
-      EventChannel('com.creative.backgrounds/transparent_events');
+      EventChannel('com.backgrounds.trend4k/transparent_events');
 
   /// Asks the native `CompatibilityChecker` whether this device can run the
   /// feature. Never guessed on the Flutter side.
@@ -68,6 +68,18 @@ class TransparentWallpaperChannel {
   /// Restores the saved wallpaper without changing the enabled flag.
   Future<void> restorePreviousWallpaper() =>
       _channel.invokeMethod<void>('restorePreviousWallpaper');
+
+  /// Reconciles native state with the actual system wallpaper and returns the
+  /// reconciled snapshot.
+  ///
+  /// Native already does this on every activity resume; this lets Flutter force
+  /// it too (e.g. when a control surface becomes visible), so the UI can never
+  /// disagree with the system about whether the wallpaper is applied.
+  Future<TwRuntimeState> syncWithSystem() async {
+    final raw =
+        await _channel.invokeMapMethod<dynamic, dynamic>('syncWithSystem');
+    return TwStatusModel.fromMap(raw ?? const {});
+  }
 
   /// One-shot current native state (used on resume / cold start).
   Future<TwRuntimeState> status() async {

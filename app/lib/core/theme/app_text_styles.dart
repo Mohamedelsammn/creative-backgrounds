@@ -13,7 +13,7 @@ class AppTextStyles {
   /// Page titles: "Discover Wallpapers", "Favorites", "Settings".
   static const TextStyle displayLarge = TextStyle(
     fontFamily: fontFamily,
-    fontSize: 32,
+    fontSize: 25,
     fontWeight: FontWeight.w700,
     height: 1.1,
     letterSpacing: -0.5,

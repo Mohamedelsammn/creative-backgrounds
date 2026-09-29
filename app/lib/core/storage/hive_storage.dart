@@ -17,6 +17,25 @@ class HiveStorage {
 
   Box _box(String name) => Hive.box(name);
 
+  /// Drops cached API pages when the data source changed since last launch
+  /// (fixtures <-> live backend).
+  ///
+  /// Without this, switching `MOCK_API` shows stale content from the previous
+  /// source until each TTL expires, which looks exactly like the new source
+  /// being broken.
+  Future<void> invalidateCacheIfSourceChanged({required bool mockApi}) async {
+    final current = mockApi ? 'mock' : 'live';
+    final previous =
+        read<String>(HiveBoxes.cacheMetadata, StorageKeys.cacheSourceStamp);
+    if (previous == current) return;
+    await clearBox(HiveBoxes.cacheMetadata);
+    await write(
+      HiveBoxes.cacheMetadata,
+      StorageKeys.cacheSourceStamp,
+      current,
+    );
+  }
+
   T? read<T>(String box, String key, {T? defaultValue}) {
     return _box(box).get(key, defaultValue: defaultValue) as T?;
   }

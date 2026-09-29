@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../features/apply_wallpaper/presentation/pages/success_page.dart';
-import '../../features/customize/presentation/pages/customize_page.dart';
+import '../../features/categories/presentation/pages/categories_page.dart';
+import '../../features/categories/presentation/pages/category_details_page.dart';
+import '../../features/explore/domain/entities/category_entity.dart';
 import '../../features/explore/presentation/pages/explore_page.dart';
 import '../../features/favorites/presentation/pages/favorites_page.dart';
 import '../../features/search/presentation/pages/search_page.dart';
@@ -13,19 +15,16 @@ import '../../features/settings/presentation/pages/terms_page.dart';
 import '../../features/splash/presentation/pages/splash_page.dart';
 import '../../features/transparent_wallpaper/presentation/pages/transparent_preview_page.dart';
 import '../../features/transparent_wallpaper/presentation/pages/transparent_settings_page.dart';
-import '../../features/view_all/presentation/pages/view_all_page.dart';
+import '../../features/explore/domain/entities/wallpaper_entity.dart';
 import '../../features/wallpaper_details/presentation/pages/wallpaper_details_page.dart';
 import 'main_shell.dart';
 import 'route_names.dart';
 
 /// Central GoRouter configuration.
 ///
-/// The three primary tabs live in a [StatefulShellRoute] so the floating bottom
-/// nav persists across them. Details / Customize / Search / Success are
-/// full-screen pushes outside the shell (no bottom nav).
-///
-/// Pages not yet implemented render a [_PlaceholderPage]; each is swapped for
-/// the real page as its feature is built.
+/// The four primary tabs live in a [StatefulShellRoute] so the floating bottom
+/// nav persists across them. Details / Category Details / Search / Success
+/// are full-screen pushes outside the shell (no bottom nav).
 class AppRouter {
   const AppRouter._();
 
@@ -52,6 +51,14 @@ class AppRouter {
             StatefulShellBranch(
               routes: [
                 GoRoute(
+                  path: RouteNames.categories,
+                  builder: (context, state) => const CategoriesPage(),
+                ),
+              ],
+            ),
+            StatefulShellBranch(
+              routes: [
+                GoRoute(
                   path: RouteNames.favorites,
                   builder: (context, state) => const FavoritesPage(),
                 ),
@@ -72,33 +79,55 @@ class AppRouter {
           builder: (context, state) => const SearchPage(),
         ),
         GoRoute(
-          path: RouteNames.viewAll,
-          builder: (context, state) =>
-              ViewAllPage(section: state.pathParameters['section']!),
-        ),
-        GoRoute(
           path: RouteNames.wallpaperDetails,
           pageBuilder: (context, state) => CustomTransitionPage<void>(
             key: state.pageKey,
             child: WallpaperDetailsPage(
               id: state.pathParameters['id']!,
-              heroTag: state.extra as String?,
+              knownWallpaper: state.extra is WallpaperEntity
+                  ? state.extra as WallpaperEntity
+                  : null,
             ),
-            // Pure Hero: the image grows seamlessly from the tapped card into the
-            // Details page. No page-level fade or slide — the destination paints
-            // immediately and the shared-element Hero flight is the only motion.
-            // The route duration drives the Hero flight timing.
+            // A short fade + subtle scale, replacing the previous shared-element
+            // Hero. The Hero flight lifted the image into the route overlay,
+            // leaving the destination's black Scaffold visible for the whole
+            // flight; the Trending carousel also loops infinitely and rendered
+            // duplicate Hero tags in one tree. This transition keeps both
+            // screens painted throughout, so there is no black frame in either
+            // direction, and the destination's cached thumbnail is already on
+            // screen when the fade begins.
+            // Details is visually opaque. Marking the route accordingly lets
+            // Flutter stop painting Home (images, banners and any live poster)
+            // underneath it as soon as the transition completes.
             opaque: true,
-            transitionDuration: const Duration(milliseconds: 380),
-            reverseTransitionDuration: const Duration(milliseconds: 320),
-            transitionsBuilder: (context, animation, secondaryAnimation, child) =>
-                child,
+            transitionDuration: const Duration(milliseconds: 220),
+            reverseTransitionDuration: const Duration(milliseconds: 200),
+            transitionsBuilder: (context, animation, secondaryAnimation, child) {
+              final curved = CurvedAnimation(
+                parent: animation,
+                curve: Curves.easeOutCubic,
+                reverseCurve: Curves.easeInCubic,
+              );
+              return FadeTransition(
+                opacity: curved,
+                child: ScaleTransition(
+                  // Starts fractionally small so it reads as the card growing
+                  // into place, without the cost of a real shared element.
+                  scale: Tween<double>(begin: 0.96, end: 1.0).animate(curved),
+                  child: child,
+                ),
+              );
+            },
           ),
         ),
         GoRoute(
-          path: RouteNames.customize,
-          builder: (context, state) => CustomizePage(
-              wallpaperId: state.pathParameters['wallpaperId']!),
+          path: RouteNames.categoryDetails,
+          builder: (context, state) => CategoryDetailsPage(
+            slug: state.pathParameters['slug']!,
+            knownCategory: state.extra is CategoryEntity
+                ? state.extra as CategoryEntity
+                : null,
+          ),
         ),
         GoRoute(
           path: RouteNames.success,

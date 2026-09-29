@@ -27,13 +27,42 @@ mixin _$WallpaperModel {
   String get thumbnailUrl => throw _privateConstructorUsedError;
   String get fullUrl => throw _privateConstructorUsedError;
   String get resolution => throw _privateConstructorUsedError;
+
+  /// The backend's `type` string (`standard` / `depth` / `video`).
+  String get type => throw _privateConstructorUsedError;
+  String get slug => throw _privateConstructorUsedError;
+  String? get description => throw _privateConstructorUsedError;
   bool get isPremium => throw _privateConstructorUsedError;
+  bool get isFeatured => throw _privateConstructorUsedError;
   bool get hasForegroundMask => throw _privateConstructorUsedError;
   String? get foregroundMaskUrl => throw _privateConstructorUsedError;
+  String? get backgroundUrl => throw _privateConstructorUsedError;
+
+  /// Backend `clockConfig`, stored exactly as received.
+  Map<String, dynamic>? get clockConfig => throw _privateConstructorUsedError;
+
+  /// Backend `depthConfig`, stored exactly as received.
+  Map<String, dynamic>? get depthConfig => throw _privateConstructorUsedError;
+
+  /// Backend `studio` (the current design generation), stored exactly as
+  /// received. May coexist with [clockConfig]; see [StudioDesignMapper] for
+  /// which one supplies the clock.
+  Map<String, dynamic>? get studio => throw _privateConstructorUsedError;
+
+  /// Backend `video`, stored exactly as received.
+  Map<String, dynamic>? get video => throw _privateConstructorUsedError;
+
+  /// Detail-only `assets` map, keyed by asset kind.
+  Map<String, dynamic>? get assets => throw _privateConstructorUsedError;
+  int get width => throw _privateConstructorUsedError;
+  int get height => throw _privateConstructorUsedError;
+  String? get dominantColor => throw _privateConstructorUsedError;
+  String? get blurhash => throw _privateConstructorUsedError;
   int get downloadCount => throw _privateConstructorUsedError;
   int? get fileSizeBytes => throw _privateConstructorUsedError;
   List<String> get tags => throw _privateConstructorUsedError;
   DateTime? get createdAt => throw _privateConstructorUsedError;
+  bool get isDetailed => throw _privateConstructorUsedError;
 
   /// Serializes this WallpaperModel to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -59,13 +88,28 @@ abstract class $WallpaperModelCopyWith<$Res> {
     String thumbnailUrl,
     String fullUrl,
     String resolution,
+    String type,
+    String slug,
+    String? description,
     bool isPremium,
+    bool isFeatured,
     bool hasForegroundMask,
     String? foregroundMaskUrl,
+    String? backgroundUrl,
+    Map<String, dynamic>? clockConfig,
+    Map<String, dynamic>? depthConfig,
+    Map<String, dynamic>? studio,
+    Map<String, dynamic>? video,
+    Map<String, dynamic>? assets,
+    int width,
+    int height,
+    String? dominantColor,
+    String? blurhash,
     int downloadCount,
     int? fileSizeBytes,
     List<String> tags,
     DateTime? createdAt,
+    bool isDetailed,
   });
 
   $CategoryModelCopyWith<$Res> get category;
@@ -92,13 +136,28 @@ class _$WallpaperModelCopyWithImpl<$Res, $Val extends WallpaperModel>
     Object? thumbnailUrl = null,
     Object? fullUrl = null,
     Object? resolution = null,
+    Object? type = null,
+    Object? slug = null,
+    Object? description = freezed,
     Object? isPremium = null,
+    Object? isFeatured = null,
     Object? hasForegroundMask = null,
     Object? foregroundMaskUrl = freezed,
+    Object? backgroundUrl = freezed,
+    Object? clockConfig = freezed,
+    Object? depthConfig = freezed,
+    Object? studio = freezed,
+    Object? video = freezed,
+    Object? assets = freezed,
+    Object? width = null,
+    Object? height = null,
+    Object? dominantColor = freezed,
+    Object? blurhash = freezed,
     Object? downloadCount = null,
     Object? fileSizeBytes = freezed,
     Object? tags = null,
     Object? createdAt = freezed,
+    Object? isDetailed = null,
   }) {
     return _then(
       _value.copyWith(
@@ -126,9 +185,25 @@ class _$WallpaperModelCopyWithImpl<$Res, $Val extends WallpaperModel>
                 ? _value.resolution
                 : resolution // ignore: cast_nullable_to_non_nullable
                       as String,
+            type: null == type
+                ? _value.type
+                : type // ignore: cast_nullable_to_non_nullable
+                      as String,
+            slug: null == slug
+                ? _value.slug
+                : slug // ignore: cast_nullable_to_non_nullable
+                      as String,
+            description: freezed == description
+                ? _value.description
+                : description // ignore: cast_nullable_to_non_nullable
+                      as String?,
             isPremium: null == isPremium
                 ? _value.isPremium
                 : isPremium // ignore: cast_nullable_to_non_nullable
+                      as bool,
+            isFeatured: null == isFeatured
+                ? _value.isFeatured
+                : isFeatured // ignore: cast_nullable_to_non_nullable
                       as bool,
             hasForegroundMask: null == hasForegroundMask
                 ? _value.hasForegroundMask
@@ -137,6 +212,46 @@ class _$WallpaperModelCopyWithImpl<$Res, $Val extends WallpaperModel>
             foregroundMaskUrl: freezed == foregroundMaskUrl
                 ? _value.foregroundMaskUrl
                 : foregroundMaskUrl // ignore: cast_nullable_to_non_nullable
+                      as String?,
+            backgroundUrl: freezed == backgroundUrl
+                ? _value.backgroundUrl
+                : backgroundUrl // ignore: cast_nullable_to_non_nullable
+                      as String?,
+            clockConfig: freezed == clockConfig
+                ? _value.clockConfig
+                : clockConfig // ignore: cast_nullable_to_non_nullable
+                      as Map<String, dynamic>?,
+            depthConfig: freezed == depthConfig
+                ? _value.depthConfig
+                : depthConfig // ignore: cast_nullable_to_non_nullable
+                      as Map<String, dynamic>?,
+            studio: freezed == studio
+                ? _value.studio
+                : studio // ignore: cast_nullable_to_non_nullable
+                      as Map<String, dynamic>?,
+            video: freezed == video
+                ? _value.video
+                : video // ignore: cast_nullable_to_non_nullable
+                      as Map<String, dynamic>?,
+            assets: freezed == assets
+                ? _value.assets
+                : assets // ignore: cast_nullable_to_non_nullable
+                      as Map<String, dynamic>?,
+            width: null == width
+                ? _value.width
+                : width // ignore: cast_nullable_to_non_nullable
+                      as int,
+            height: null == height
+                ? _value.height
+                : height // ignore: cast_nullable_to_non_nullable
+                      as int,
+            dominantColor: freezed == dominantColor
+                ? _value.dominantColor
+                : dominantColor // ignore: cast_nullable_to_non_nullable
+                      as String?,
+            blurhash: freezed == blurhash
+                ? _value.blurhash
+                : blurhash // ignore: cast_nullable_to_non_nullable
                       as String?,
             downloadCount: null == downloadCount
                 ? _value.downloadCount
@@ -154,6 +269,10 @@ class _$WallpaperModelCopyWithImpl<$Res, $Val extends WallpaperModel>
                 ? _value.createdAt
                 : createdAt // ignore: cast_nullable_to_non_nullable
                       as DateTime?,
+            isDetailed: null == isDetailed
+                ? _value.isDetailed
+                : isDetailed // ignore: cast_nullable_to_non_nullable
+                      as bool,
           )
           as $Val,
     );
@@ -186,13 +305,28 @@ abstract class _$$WallpaperModelImplCopyWith<$Res>
     String thumbnailUrl,
     String fullUrl,
     String resolution,
+    String type,
+    String slug,
+    String? description,
     bool isPremium,
+    bool isFeatured,
     bool hasForegroundMask,
     String? foregroundMaskUrl,
+    String? backgroundUrl,
+    Map<String, dynamic>? clockConfig,
+    Map<String, dynamic>? depthConfig,
+    Map<String, dynamic>? studio,
+    Map<String, dynamic>? video,
+    Map<String, dynamic>? assets,
+    int width,
+    int height,
+    String? dominantColor,
+    String? blurhash,
     int downloadCount,
     int? fileSizeBytes,
     List<String> tags,
     DateTime? createdAt,
+    bool isDetailed,
   });
 
   @override
@@ -219,13 +353,28 @@ class __$$WallpaperModelImplCopyWithImpl<$Res>
     Object? thumbnailUrl = null,
     Object? fullUrl = null,
     Object? resolution = null,
+    Object? type = null,
+    Object? slug = null,
+    Object? description = freezed,
     Object? isPremium = null,
+    Object? isFeatured = null,
     Object? hasForegroundMask = null,
     Object? foregroundMaskUrl = freezed,
+    Object? backgroundUrl = freezed,
+    Object? clockConfig = freezed,
+    Object? depthConfig = freezed,
+    Object? studio = freezed,
+    Object? video = freezed,
+    Object? assets = freezed,
+    Object? width = null,
+    Object? height = null,
+    Object? dominantColor = freezed,
+    Object? blurhash = freezed,
     Object? downloadCount = null,
     Object? fileSizeBytes = freezed,
     Object? tags = null,
     Object? createdAt = freezed,
+    Object? isDetailed = null,
   }) {
     return _then(
       _$WallpaperModelImpl(
@@ -253,9 +402,25 @@ class __$$WallpaperModelImplCopyWithImpl<$Res>
             ? _value.resolution
             : resolution // ignore: cast_nullable_to_non_nullable
                   as String,
+        type: null == type
+            ? _value.type
+            : type // ignore: cast_nullable_to_non_nullable
+                  as String,
+        slug: null == slug
+            ? _value.slug
+            : slug // ignore: cast_nullable_to_non_nullable
+                  as String,
+        description: freezed == description
+            ? _value.description
+            : description // ignore: cast_nullable_to_non_nullable
+                  as String?,
         isPremium: null == isPremium
             ? _value.isPremium
             : isPremium // ignore: cast_nullable_to_non_nullable
+                  as bool,
+        isFeatured: null == isFeatured
+            ? _value.isFeatured
+            : isFeatured // ignore: cast_nullable_to_non_nullable
                   as bool,
         hasForegroundMask: null == hasForegroundMask
             ? _value.hasForegroundMask
@@ -264,6 +429,46 @@ class __$$WallpaperModelImplCopyWithImpl<$Res>
         foregroundMaskUrl: freezed == foregroundMaskUrl
             ? _value.foregroundMaskUrl
             : foregroundMaskUrl // ignore: cast_nullable_to_non_nullable
+                  as String?,
+        backgroundUrl: freezed == backgroundUrl
+            ? _value.backgroundUrl
+            : backgroundUrl // ignore: cast_nullable_to_non_nullable
+                  as String?,
+        clockConfig: freezed == clockConfig
+            ? _value._clockConfig
+            : clockConfig // ignore: cast_nullable_to_non_nullable
+                  as Map<String, dynamic>?,
+        depthConfig: freezed == depthConfig
+            ? _value._depthConfig
+            : depthConfig // ignore: cast_nullable_to_non_nullable
+                  as Map<String, dynamic>?,
+        studio: freezed == studio
+            ? _value._studio
+            : studio // ignore: cast_nullable_to_non_nullable
+                  as Map<String, dynamic>?,
+        video: freezed == video
+            ? _value._video
+            : video // ignore: cast_nullable_to_non_nullable
+                  as Map<String, dynamic>?,
+        assets: freezed == assets
+            ? _value._assets
+            : assets // ignore: cast_nullable_to_non_nullable
+                  as Map<String, dynamic>?,
+        width: null == width
+            ? _value.width
+            : width // ignore: cast_nullable_to_non_nullable
+                  as int,
+        height: null == height
+            ? _value.height
+            : height // ignore: cast_nullable_to_non_nullable
+                  as int,
+        dominantColor: freezed == dominantColor
+            ? _value.dominantColor
+            : dominantColor // ignore: cast_nullable_to_non_nullable
+                  as String?,
+        blurhash: freezed == blurhash
+            ? _value.blurhash
+            : blurhash // ignore: cast_nullable_to_non_nullable
                   as String?,
         downloadCount: null == downloadCount
             ? _value.downloadCount
@@ -281,6 +486,10 @@ class __$$WallpaperModelImplCopyWithImpl<$Res>
             ? _value.createdAt
             : createdAt // ignore: cast_nullable_to_non_nullable
                   as DateTime?,
+        isDetailed: null == isDetailed
+            ? _value.isDetailed
+            : isDetailed // ignore: cast_nullable_to_non_nullable
+                  as bool,
       ),
     );
   }
@@ -296,14 +505,34 @@ class _$WallpaperModelImpl extends _WallpaperModel {
     required this.thumbnailUrl,
     required this.fullUrl,
     required this.resolution,
+    this.type = 'standard',
+    this.slug = '',
+    this.description,
     this.isPremium = false,
+    this.isFeatured = false,
     this.hasForegroundMask = false,
     this.foregroundMaskUrl,
+    this.backgroundUrl,
+    final Map<String, dynamic>? clockConfig,
+    final Map<String, dynamic>? depthConfig,
+    final Map<String, dynamic>? studio,
+    final Map<String, dynamic>? video,
+    final Map<String, dynamic>? assets,
+    this.width = 0,
+    this.height = 0,
+    this.dominantColor,
+    this.blurhash,
     this.downloadCount = 0,
     this.fileSizeBytes,
     final List<String> tags = const <String>[],
     this.createdAt,
-  }) : _tags = tags,
+    this.isDetailed = false,
+  }) : _clockConfig = clockConfig,
+       _depthConfig = depthConfig,
+       _studio = studio,
+       _video = video,
+       _assets = assets,
+       _tags = tags,
        super._();
 
   factory _$WallpaperModelImpl.fromJson(Map<String, dynamic> json) =>
@@ -321,14 +550,109 @@ class _$WallpaperModelImpl extends _WallpaperModel {
   final String fullUrl;
   @override
   final String resolution;
+
+  /// The backend's `type` string (`standard` / `depth` / `video`).
+  @override
+  @JsonKey()
+  final String type;
+  @override
+  @JsonKey()
+  final String slug;
+  @override
+  final String? description;
   @override
   @JsonKey()
   final bool isPremium;
   @override
   @JsonKey()
+  final bool isFeatured;
+  @override
+  @JsonKey()
   final bool hasForegroundMask;
   @override
   final String? foregroundMaskUrl;
+  @override
+  final String? backgroundUrl;
+
+  /// Backend `clockConfig`, stored exactly as received.
+  final Map<String, dynamic>? _clockConfig;
+
+  /// Backend `clockConfig`, stored exactly as received.
+  @override
+  Map<String, dynamic>? get clockConfig {
+    final value = _clockConfig;
+    if (value == null) return null;
+    if (_clockConfig is EqualUnmodifiableMapView) return _clockConfig;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableMapView(value);
+  }
+
+  /// Backend `depthConfig`, stored exactly as received.
+  final Map<String, dynamic>? _depthConfig;
+
+  /// Backend `depthConfig`, stored exactly as received.
+  @override
+  Map<String, dynamic>? get depthConfig {
+    final value = _depthConfig;
+    if (value == null) return null;
+    if (_depthConfig is EqualUnmodifiableMapView) return _depthConfig;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableMapView(value);
+  }
+
+  /// Backend `studio` (the current design generation), stored exactly as
+  /// received. May coexist with [clockConfig]; see [StudioDesignMapper] for
+  /// which one supplies the clock.
+  final Map<String, dynamic>? _studio;
+
+  /// Backend `studio` (the current design generation), stored exactly as
+  /// received. May coexist with [clockConfig]; see [StudioDesignMapper] for
+  /// which one supplies the clock.
+  @override
+  Map<String, dynamic>? get studio {
+    final value = _studio;
+    if (value == null) return null;
+    if (_studio is EqualUnmodifiableMapView) return _studio;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableMapView(value);
+  }
+
+  /// Backend `video`, stored exactly as received.
+  final Map<String, dynamic>? _video;
+
+  /// Backend `video`, stored exactly as received.
+  @override
+  Map<String, dynamic>? get video {
+    final value = _video;
+    if (value == null) return null;
+    if (_video is EqualUnmodifiableMapView) return _video;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableMapView(value);
+  }
+
+  /// Detail-only `assets` map, keyed by asset kind.
+  final Map<String, dynamic>? _assets;
+
+  /// Detail-only `assets` map, keyed by asset kind.
+  @override
+  Map<String, dynamic>? get assets {
+    final value = _assets;
+    if (value == null) return null;
+    if (_assets is EqualUnmodifiableMapView) return _assets;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableMapView(value);
+  }
+
+  @override
+  @JsonKey()
+  final int width;
+  @override
+  @JsonKey()
+  final int height;
+  @override
+  final String? dominantColor;
+  @override
+  final String? blurhash;
   @override
   @JsonKey()
   final int downloadCount;
@@ -345,10 +669,13 @@ class _$WallpaperModelImpl extends _WallpaperModel {
 
   @override
   final DateTime? createdAt;
+  @override
+  @JsonKey()
+  final bool isDetailed;
 
   @override
   String toString() {
-    return 'WallpaperModel(id: $id, title: $title, category: $category, thumbnailUrl: $thumbnailUrl, fullUrl: $fullUrl, resolution: $resolution, isPremium: $isPremium, hasForegroundMask: $hasForegroundMask, foregroundMaskUrl: $foregroundMaskUrl, downloadCount: $downloadCount, fileSizeBytes: $fileSizeBytes, tags: $tags, createdAt: $createdAt)';
+    return 'WallpaperModel(id: $id, title: $title, category: $category, thumbnailUrl: $thumbnailUrl, fullUrl: $fullUrl, resolution: $resolution, type: $type, slug: $slug, description: $description, isPremium: $isPremium, isFeatured: $isFeatured, hasForegroundMask: $hasForegroundMask, foregroundMaskUrl: $foregroundMaskUrl, backgroundUrl: $backgroundUrl, clockConfig: $clockConfig, depthConfig: $depthConfig, studio: $studio, video: $video, assets: $assets, width: $width, height: $height, dominantColor: $dominantColor, blurhash: $blurhash, downloadCount: $downloadCount, fileSizeBytes: $fileSizeBytes, tags: $tags, createdAt: $createdAt, isDetailed: $isDetailed)';
   }
 
   @override
@@ -365,24 +692,51 @@ class _$WallpaperModelImpl extends _WallpaperModel {
             (identical(other.fullUrl, fullUrl) || other.fullUrl == fullUrl) &&
             (identical(other.resolution, resolution) ||
                 other.resolution == resolution) &&
+            (identical(other.type, type) || other.type == type) &&
+            (identical(other.slug, slug) || other.slug == slug) &&
+            (identical(other.description, description) ||
+                other.description == description) &&
             (identical(other.isPremium, isPremium) ||
                 other.isPremium == isPremium) &&
+            (identical(other.isFeatured, isFeatured) ||
+                other.isFeatured == isFeatured) &&
             (identical(other.hasForegroundMask, hasForegroundMask) ||
                 other.hasForegroundMask == hasForegroundMask) &&
             (identical(other.foregroundMaskUrl, foregroundMaskUrl) ||
                 other.foregroundMaskUrl == foregroundMaskUrl) &&
+            (identical(other.backgroundUrl, backgroundUrl) ||
+                other.backgroundUrl == backgroundUrl) &&
+            const DeepCollectionEquality().equals(
+              other._clockConfig,
+              _clockConfig,
+            ) &&
+            const DeepCollectionEquality().equals(
+              other._depthConfig,
+              _depthConfig,
+            ) &&
+            const DeepCollectionEquality().equals(other._studio, _studio) &&
+            const DeepCollectionEquality().equals(other._video, _video) &&
+            const DeepCollectionEquality().equals(other._assets, _assets) &&
+            (identical(other.width, width) || other.width == width) &&
+            (identical(other.height, height) || other.height == height) &&
+            (identical(other.dominantColor, dominantColor) ||
+                other.dominantColor == dominantColor) &&
+            (identical(other.blurhash, blurhash) ||
+                other.blurhash == blurhash) &&
             (identical(other.downloadCount, downloadCount) ||
                 other.downloadCount == downloadCount) &&
             (identical(other.fileSizeBytes, fileSizeBytes) ||
                 other.fileSizeBytes == fileSizeBytes) &&
             const DeepCollectionEquality().equals(other._tags, _tags) &&
             (identical(other.createdAt, createdAt) ||
-                other.createdAt == createdAt));
+                other.createdAt == createdAt) &&
+            (identical(other.isDetailed, isDetailed) ||
+                other.isDetailed == isDetailed));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(
+  int get hashCode => Object.hashAll([
     runtimeType,
     id,
     title,
@@ -390,14 +744,29 @@ class _$WallpaperModelImpl extends _WallpaperModel {
     thumbnailUrl,
     fullUrl,
     resolution,
+    type,
+    slug,
+    description,
     isPremium,
+    isFeatured,
     hasForegroundMask,
     foregroundMaskUrl,
+    backgroundUrl,
+    const DeepCollectionEquality().hash(_clockConfig),
+    const DeepCollectionEquality().hash(_depthConfig),
+    const DeepCollectionEquality().hash(_studio),
+    const DeepCollectionEquality().hash(_video),
+    const DeepCollectionEquality().hash(_assets),
+    width,
+    height,
+    dominantColor,
+    blurhash,
     downloadCount,
     fileSizeBytes,
     const DeepCollectionEquality().hash(_tags),
     createdAt,
-  );
+    isDetailed,
+  ]);
 
   /// Create a copy of WallpaperModel
   /// with the given fields replaced by the non-null parameter values.
@@ -424,13 +793,28 @@ abstract class _WallpaperModel extends WallpaperModel {
     required final String thumbnailUrl,
     required final String fullUrl,
     required final String resolution,
+    final String type,
+    final String slug,
+    final String? description,
     final bool isPremium,
+    final bool isFeatured,
     final bool hasForegroundMask,
     final String? foregroundMaskUrl,
+    final String? backgroundUrl,
+    final Map<String, dynamic>? clockConfig,
+    final Map<String, dynamic>? depthConfig,
+    final Map<String, dynamic>? studio,
+    final Map<String, dynamic>? video,
+    final Map<String, dynamic>? assets,
+    final int width,
+    final int height,
+    final String? dominantColor,
+    final String? blurhash,
     final int downloadCount,
     final int? fileSizeBytes,
     final List<String> tags,
     final DateTime? createdAt,
+    final bool isDetailed,
   }) = _$WallpaperModelImpl;
   const _WallpaperModel._() : super._();
 
@@ -449,12 +833,54 @@ abstract class _WallpaperModel extends WallpaperModel {
   String get fullUrl;
   @override
   String get resolution;
+
+  /// The backend's `type` string (`standard` / `depth` / `video`).
+  @override
+  String get type;
+  @override
+  String get slug;
+  @override
+  String? get description;
   @override
   bool get isPremium;
+  @override
+  bool get isFeatured;
   @override
   bool get hasForegroundMask;
   @override
   String? get foregroundMaskUrl;
+  @override
+  String? get backgroundUrl;
+
+  /// Backend `clockConfig`, stored exactly as received.
+  @override
+  Map<String, dynamic>? get clockConfig;
+
+  /// Backend `depthConfig`, stored exactly as received.
+  @override
+  Map<String, dynamic>? get depthConfig;
+
+  /// Backend `studio` (the current design generation), stored exactly as
+  /// received. May coexist with [clockConfig]; see [StudioDesignMapper] for
+  /// which one supplies the clock.
+  @override
+  Map<String, dynamic>? get studio;
+
+  /// Backend `video`, stored exactly as received.
+  @override
+  Map<String, dynamic>? get video;
+
+  /// Detail-only `assets` map, keyed by asset kind.
+  @override
+  Map<String, dynamic>? get assets;
+  @override
+  int get width;
+  @override
+  int get height;
+  @override
+  String? get dominantColor;
+  @override
+  String? get blurhash;
   @override
   int get downloadCount;
   @override
@@ -463,6 +889,8 @@ abstract class _WallpaperModel extends WallpaperModel {
   List<String> get tags;
   @override
   DateTime? get createdAt;
+  @override
+  bool get isDetailed;
 
   /// Create a copy of WallpaperModel
   /// with the given fields replaced by the non-null parameter values.

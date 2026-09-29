@@ -10,6 +10,8 @@ _$CategoryModelImpl _$$CategoryModelImplFromJson(Map<String, dynamic> json) =>
     _$CategoryModelImpl(
       id: json['id'] as String,
       name: json['name'] as String,
+      slug: json['slug'] as String? ?? '',
+      nameAr: json['nameAr'] as String?,
       color: json['color'] as String?,
       thumbnailUrl: json['thumbnailUrl'] as String?,
       wallpaperCount: (json['wallpaperCount'] as num?)?.toInt(),
@@ -19,6 +21,8 @@ Map<String, dynamic> _$$CategoryModelImplToJson(_$CategoryModelImpl instance) =>
     <String, dynamic>{
       'id': instance.id,
       'name': instance.name,
+      'slug': instance.slug,
+      'nameAr': instance.nameAr,
       'color': instance.color,
       'thumbnailUrl': instance.thumbnailUrl,
       'wallpaperCount': instance.wallpaperCount,

@@ -49,3 +49,38 @@ class DepthNotSupportedFailure extends Failure {
     super.message = 'Depth effect is not available for this wallpaper.',
   ]);
 }
+
+/// The user enabled the depth effect, but its cut-out foreground could not be
+/// downloaded (or is missing). Distinct from [DepthNotSupportedFailure] -
+/// that is a capability check made before the user can even turn depth on;
+/// this is a failure of the apply itself, after they asked for it. The apply
+/// must not silently degrade to a flat wallpaper here, or the user has no way
+/// to know the effect they explicitly chose never actually applied.
+class DepthForegroundMissingFailure extends Failure {
+  const DepthForegroundMissingFailure([
+    super.message =
+        "Couldn't apply the depth effect - the cut-out image is missing. Try again.",
+  ]);
+}
+
+/// A premium wallpaper was requested without entitlement (HTTP 402).
+class PremiumRequiredFailure extends Failure {
+  const PremiumRequiredFailure([
+    super.message = 'This wallpaper requires premium.',
+  ]);
+}
+
+/// A structured 4xx from the API (see `ApiException.code`). Distinct from
+/// [ServerFailure] so retry-vs-report decisions can differ.
+class ApiFailure extends Failure {
+  const ApiFailure([super.message = 'The request could not be completed.']);
+}
+
+/// The wallpaper is a type this build cannot render or apply - either a
+/// future content type the backend added, or one applied through a different
+/// native path.
+class UnsupportedWallpaperFailure extends Failure {
+  const UnsupportedWallpaperFailure([
+    super.message = 'This wallpaper type is not supported on your device yet.',
+  ]);
+}

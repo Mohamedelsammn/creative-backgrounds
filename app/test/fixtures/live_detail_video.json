@@ -1,0 +1,66 @@
+{
+  "id": "dd755c36-545e-4fe9-849a-ad60e7303fcc",
+  "slug": "hevc-krpopq",
+  "title": "hevc",
+  "description": null,
+  "type": "video",
+  "width": 1080,
+  "height": 1920,
+  "resolutionLabel": "1080x1920",
+  "dominantColor": "#083828",
+  "isPremium": false,
+  "isFeatured": false,
+  "language": "en",
+  "category": {
+    "slug": "nature",
+    "nameEn": "Nature",
+    "nameAr": "طبيعة"
+  },
+  "tags": [],
+  "assets": {
+    "THUMBNAIL": {
+      "url": "https://creative-backgrounds.arabplus4tech.com/storage/wallpapers/dd755c36-545e-4fe9-849a-ad60e7303fcc/v1/thumbnail.webp",
+      "mime": "image/webp",
+      "width": 360,
+      "height": 640,
+      "bytes": 3916
+    },
+    "VIDEO_SOURCE": {
+      "url": "https://creative-backgrounds.arabplus4tech.com/storage/wallpapers/dd755c36-545e-4fe9-849a-ad60e7303fcc/source.mp4",
+      "mime": "video/mp4",
+      "width": 1080,
+      "height": 1920,
+      "bytes": 586284
+    },
+    "VIDEO_LOOP": {
+      "url": "https://creative-backgrounds.arabplus4tech.com/storage/wallpapers/dd755c36-545e-4fe9-849a-ad60e7303fcc/v1/loop.mp4",
+      "mime": "video/mp4",
+      "width": 1080,
+      "height": 1920,
+      "bytes": 1290640
+    },
+    "POSTER": {
+      "url": "https://creative-backgrounds.arabplus4tech.com/storage/wallpapers/dd755c36-545e-4fe9-849a-ad60e7303fcc/v1/poster.webp",
+      "mime": "image/webp",
+      "width": 1080,
+      "height": 1920,
+      "bytes": 35674
+    }
+  },
+  "thumbnail": "https://creative-backgrounds.arabplus4tech.com/storage/wallpapers/dd755c36-545e-4fe9-849a-ad60e7303fcc/v1/thumbnail.webp",
+  "background": null,
+  "foreground": null,
+  "clockConfig": null,
+  "depthConfig": null,
+  "video": {
+    "mime": "video/mp4",
+    "width": 1080,
+    "height": 1920,
+    "durationMs": 5000,
+    "fps": 30,
+    "sizeBytes": 1290640,
+    "codec": "h264",
+    "url": "https://creative-backgrounds.arabplus4tech.com/storage/wallpapers/dd755c36-545e-4fe9-849a-ad60e7303fcc/v1/loop.mp4"
+  },
+  "publishedAt": "2026-08-25T21:43:57.703Z"
+}
